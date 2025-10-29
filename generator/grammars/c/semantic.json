@@ -1,0 +1,238 @@
+{
+    "InitFileDir": "",
+    "IsWeakType": 0,
+    "FixIRType": [
+        "kAssignmentExpression"
+    ],
+    "FunctionArgumentUnit": "kParameterDeclaration",
+    "IRHandlers": [
+        {
+            "IRType": "Program",
+            "PreHandler": [
+                {
+                    "Function": "enter_scope",
+                    "Args": [
+                        "kScopeGlobal"
+                    ]
+                }
+            ],
+            "PostHandler": [
+                {
+                    "Function": "exit_scope",
+                    "Args": []
+                }
+            ]
+        },
+        {
+            "IRType": "CompoundStatement",
+            "PreHandler": [
+                {
+                    "Function": "enter_scope",
+                    "Args": [
+                        "kScopeStatement"
+                    ]
+                }
+            ],
+            "PostHandler": [
+                {
+                    "Function": "exit_scope",
+                    "Args": []
+                }
+            ]
+        },
+        {
+            "IRType": "ExtraStructDeclarationList",
+            "PreHandler": [
+                {
+                    "Function": "enter_scope",
+                    "Args": [
+                        "kScopeStatement"
+                    ]
+                }
+            ],
+            "PostHandler": [
+                {
+                    "Function": "exit_scope",
+                    "Args": []
+                }
+            ]
+        }
+    ],
+    "BasicUnit": [
+        "kExternalDeclaration",
+        "kStructDeclaration",
+        "kDeclaration",
+        "kStatement"
+    ],
+    "BasicTypes": [
+        "void",
+        "signed",
+        "unsigned",
+        "int",
+        "short int",
+        "short",
+        "char",
+        "long int",
+        "float",
+        "double",
+        "long"
+    ],
+    "BasicIntTypes": [
+        "short",
+        "short int",
+        "unsigned short int",
+        "int",
+        "long int",
+        "unsigned long int",
+        "long long int",
+        "unsigned long long int"
+    ],
+    "BasicFloatTypes": [
+        "float",
+        "double"
+    ],
+    "OPRule": [
+        {
+            "OperandNum": 2,
+            "OperandRightType": "ALLTYPES",
+            "OperandLeftType": "ALLCOMPOUNDTYPE",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "",
+                ".",
+                ""
+            ],
+            "Property": [],
+            "InferDirection": "LEFT"
+        },
+        {
+            "OperandNum": 1,
+            "OperandRightType": "",
+            "OperandLeftType": "ALLFUNCTION",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "",
+                "( )",
+                ""
+            ],
+            "Property": [
+                "FUNCTIONCALL"
+            ],
+            "InferDirection": "NORMAL"
+        },
+        {
+            "OperandNum": 1,
+            "OperandRightType": "",
+            "OperandLeftType": "ALLTYPES",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "(",
+                ")",
+                ""
+            ],
+            "Property": [],
+            "InferDirection": "NORMAL"
+        },
+        {
+            "OperandNum": 2,
+            "OperandRightType": "ALLTYPES",
+            "OperandLeftType": "ALLFUNCTION",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "",
+                "(",
+                ")"
+            ],
+            "Property": [
+                "FUNCTIONCALL"
+            ],
+            "InferDirection": "NORMAL"
+        },
+        {
+            "OperandNum": 1,
+            "OperandRightType": "",
+            "OperandLeftType": "ALLTYPES",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "*",
+                "",
+                ""
+            ],
+            "Property": [
+                "DEREFERENCE"
+            ],
+            "InferDirection": "NORMAL"
+        },
+        {
+            "OperandNum": 1,
+            "OperandRightType": "",
+            "OperandLeftType": "ALLTYPES",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "&",
+                "",
+                ""
+            ],
+            "Property": [
+                "REFERENCE"
+            ],
+            "InferDirection": "NORMAL"
+        },
+        {
+            "OperandNum": 2,
+            "OperandRightType": "ALLTYPES",
+            "OperandLeftType": "ALLTYPES",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "",
+                "->",
+                ""
+            ],
+            "Property": [
+                "DEREFERENCE"
+            ],
+            "InferDirection": "LEFT"
+        },
+        {
+            "OperandNum": 2,
+            "OperandRightType": "ALLTYPES",
+            "OperandLeftType": "ALLTYPES",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "",
+                ",",
+                ""
+            ],
+            "Property": [],
+            "InferDirection": "NORMAL"
+        },
+        {
+            "OperandNum": 2,
+            "OperandRightType": "ALLTYPES",
+            "OperandLeftType": "ALLTYPES",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "",
+                "[",
+                "]"
+            ],
+            "Property": [
+                "ARRAY_REFERENCE"
+            ],
+            "InferDirection": "LEFT"
+        },
+        {
+            "OperandNum": 1,
+            "OperandRightType": "",
+            "OperandLeftType": "ALLTYPES",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "[",
+                "]",
+                ""
+            ],
+            "Property": [],
+            "InferDirection": "NORMAL"
+        }
+    ]
+}

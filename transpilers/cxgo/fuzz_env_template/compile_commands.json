@@ -1,0 +1,11 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/clang",
+      "-O3",
+      "$CAMPAIGN_OUT_DIR/fuzz_env/runner.c"
+    ],
+    "directory": "$CAMPAIGN_OUT_DIR/fuzz_env",
+    "file": "$CAMPAIGN_OUT_DIR/fuzz_env/runner.c"
+  }
+]

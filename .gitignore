@@ -1,0 +1,7 @@
+Config.pyc
+Utils.pyc
+src/
+include/
+parser/
+.vscode/
+**/**/.DS_Store

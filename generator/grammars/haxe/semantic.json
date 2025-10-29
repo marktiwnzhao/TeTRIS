@@ -1,0 +1,214 @@
+{
+    "InitFileDir": "",
+    "IsWeakType": 0,
+    "FixIRType": [
+        "kAssignmentExpr",
+        "kExpr"
+    ],
+    "FunctionArgumentUnit": "kParamDecl",
+    "IRHandlers": [
+        {
+            "IRType": "Program",
+            "PreHandler": [
+                {
+                    "Function": "enter_scope",
+                    "Args": [
+                        "kScopeGlobal"
+                    ]
+                }
+            ],
+            "PostHandler": [
+                {
+                    "Function": "exit_scope",
+                    "Args": []
+                }
+            ]
+        },
+        {
+            "IRType": "ClassDecl",
+            "PreHandler": [
+                {
+                    "Function": "enter_scope",
+                    "Args": [
+                        "kScopeClass"
+                    ]
+                }
+            ],
+            "PostHandler": [
+                {
+                    "Function": "exit_scope",
+                    "Args": []
+                }
+            ]
+        },
+        {
+            "IRType": "InterfaceDecl",
+            "PreHandler": [
+                {
+                    "Function": "enter_scope",
+                    "Args": [
+                        "kScopeInterface"
+                    ]
+                }
+            ],
+            "PostHandler": [
+                {
+                    "Function": "exit_scope",
+                    "Args": []
+                }
+            ]
+        },
+        {
+            "IRType": "StructDecl",
+            "PreHandler": [
+                {
+                    "Function": "enter_scope",
+                    "Args": [
+                        "kScopeClass"
+                    ]
+                }
+            ],
+            "PostHandler": [
+                {
+                    "Function": "exit_scope",
+                    "Args": []
+                }
+            ]
+        },
+        {
+            "IRType": "FunctionDefinition",
+            "PreHandler": [
+                {
+                    "Function": "enter_scope",
+                    "Args": [
+                        "kScopeFunction"
+                    ]
+                }
+            ],
+            "PostHandler": [
+                {
+                    "Function": "exit_scope",
+                    "Args": []
+                }
+            ]
+        },
+        {
+            "IRType": "BlockStmt",
+            "PreHandler": [
+                {
+                    "Function": "enter_scope",
+                    "Args": [
+                        "kScopeStatement"
+                    ]
+                }
+            ],
+            "PostHandler": [
+                {
+                    "Function": "exit_scope",
+                    "Args": []
+                }
+            ]
+        }
+    ],
+    "BasicUnit": [
+        "kVariableIdDecl,kClassMember,kStructDecl,kBlockStmtItem"
+    ],
+    "BasicTypes": [
+        "Int",
+        "Bool",
+        "String",
+        "Float"
+    ],
+    "BasicIntTypes": [
+        "Int"
+    ],
+    "BasicFloatTypes": [
+        "Float"
+    ],
+    "OPRule": [
+        {
+            "OperandNum": 2,
+            "OperandRightType": "ALLTYPES",
+            "OperandLeftType": "ALLCOMPOUNDTYPE",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "",
+                ".",
+                ""
+            ],
+            "Property": [],
+            "InferDirection": "LEFT"
+        },
+        {
+            "OperandNum": 1,
+            "OperandRightType": "",
+            "OperandLeftType": "ALLFUNCTION",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "",
+                "( )",
+                ""
+            ],
+            "Property": [
+                "FUNCTIONCALL"
+            ],
+            "InferDirection": "NORMAL"
+        },
+        {
+            "OperandNum": 1,
+            "OperandRightType": "",
+            "OperandLeftType": "ALLTYPES",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "(",
+                ")",
+                ""
+            ],
+            "Property": [],
+            "InferDirection": "NORMAL"
+        },
+        {
+            "OperandNum": 2,
+            "OperandRightType": "ALLTYPES",
+            "OperandLeftType": "ALLFUNCTION",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "",
+                "(",
+                ")"
+            ],
+            "Property": [
+                "FUNCTIONCALL"
+            ],
+            "InferDirection": "NORMAL"
+        },
+        {
+            "OperandNum": 2,
+            "OperandRightType": "ALLTYPES",
+            "OperandLeftType": "ALLTYPES",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "",
+                "[",
+                "]"
+            ],
+            "Property": [
+                "ARRAY_REFERENCE"
+            ],
+            "InferDirection": "LEFT"
+        },
+        {
+            "OperandNum": 1,
+            "OperandRightType": "",
+            "OperandLeftType": "ALLTYPES",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "[",
+                "]",
+                ""
+            ],
+            "Property": [],
+            "InferDirection": "NORMAL"
+        }
+    ]
+}

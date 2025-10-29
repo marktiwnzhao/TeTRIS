@@ -1,0 +1,84 @@
+[0-9]+"."[0-9]*(e-?[0-9]*)? |
+"."[0-9]*
+-----
+//printf("Matching float: %s\n", yytext);
+yylval->fval = atof(yytext);
+return PREFIX_FLOATLITERAL;
++++++
+"0"[xX][0-9A-Fa-f]+ 
+-----
+//printf("Matching hex: %s\n", yytext);
+yylval->ival = strtol(yytext, NULL, 16);
+return PREFIX_INTLITERAL;
++++++
+"0"[bB][01]+
+-----
+//printf("Matched Binary: %s\n", yytext);
+bool isNegative = (yytext[0] == '-');
+const char* numericPart = yytext + (isNegative ? 3 : 2);  // Skip "-0o" or "0o"
+
+int number = strtol(numericPart, NULL, 2);
+if (isNegative) {
+    number = -number;
+}
+yylval->ival = number;
+return PREFIX_INTLITERAL;
++++++
+0[0-7]+
+-----
+//printf("Matching octal: %s\n", yytext);
+yylval->ival = strtol(yytext, NULL, 8);
+return PREFIX_INTLITERAL;
++++++
+[1-9][0-9]* |
+0
+-----
+yylval->ival = atol(yytext);
+return PREFIX_INTLITERAL;
++++++
+\"[^\"\n]+\"
+-----
+std::string s(yytext);
+yylval->sval = strdup(s.substr(0, s.size()).c_str());
+return PREFIX_STRINGLITERAL;
++++++
+[A-Za-z_][A-Za-z0-9_]*
+-----
+yylval->sval = strdup(yytext);
+return PREFIX_IDENTIFIER;
++++++
+\'
+-----
+BEGIN singlequotedstring; strbuf = std::stringstream{}; strbuf << '\'';
++++++
+<singlequotedstring>\'\'
+-----
+strbuf << '\'';
++++++
+<singlequotedstring>[^']*
+-----
+strbuf << yytext;
++++++
+<singlequotedstring>\'
+-----
+BEGIN 0; 
+strbuf << '\'';
+yylval->sval = strdup(strbuf.str().c_str());
+return PREFIX_STRINGLITERAL;
++++++
+<singlequotedstring><<EOF>>
+-----
+return 0;
++++++
+[ \t\n]+
+-----
++++++
+"/*"([^*]|(\*+[^*/]))*\*+\/
+-----
++++++
+"//".*$
+-----
++++++
+.
+-----
+return 0;

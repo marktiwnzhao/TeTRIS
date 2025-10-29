@@ -1,0 +1,76 @@
+"0"[xX][0-9A-Fa-f]+ 
+-----
+//printf("Matching hex: %s\n", yytext);
+yylval->ival = strtol(yytext, NULL, 16);
+return PREFIX_INTLITERAL;
++++++
+"0"[oO][0-7]+
+-----
+//printf("Matching octal: %s\n", yytext);
+yylval->ival = strtol(yytext + 2, NULL, 8);
+return PREFIX_INTLITERAL;
++++++
+"0"[bB][01]+
+-----
+//printf("Matched Binary: %s\n", yytext);
+yylval->ival = strtol(yytext + 2, NULL, 2);
+return PREFIX_INTLITERAL;
++++++
+[0-9]+
+-----
+yylval->ival = atol(yytext);
+//printf("Matching int: %s\n", yytext);
+return PREFIX_INTLITERAL;
++++++
+(([0-9]+\.[0-9]+)|(\.[0-9]+))([eE][+-]?[0-9]+)?
+-----
+yylval->fval = atof(yytext);
+return PREFIX_FLOATLITERAL;
++++++
+\"(\\.|[^"\\])*\"
+-----
+std::string s(yytext);
+yylval->sval = strdup(s.substr(1, s.size() - 2).c_str());
+return PREFIX_STRINGLITERAL;
++++++
+[A-Za-z_][A-Za-z0-9_]*
+-----
+yylval->sval = strdup(yytext);
+return PREFIX_IDENTIFIER;
++++++
+\'
+-----
+BEGIN singlequotedstring; strbuf = std::stringstream{}; strbuf << '\'';
++++++
+<singlequotedstring>\'\'
+-----
+strbuf << '\'';
++++++
+<singlequotedstring>[^']*
+-----
+strbuf << yytext;
++++++
+<singlequotedstring>\'
+-----
+BEGIN 0; 
+strbuf << '\'';
+yylval->sval = strdup(strbuf.str().c_str());
+return PREFIX_STRINGLITERAL;
++++++
+<singlequotedstring><<EOF>>
+-----
+return 0;
++++++
+[ \t\n]+
+-----
++++++
+"/*"([^*]|(\*+[^*/]))*\*+\/
+-----
++++++
+"//".*$
+-----
++++++
+.
+-----
+//printf("DID I COME HERE WITH: %s\n", yytext);
+return 0;

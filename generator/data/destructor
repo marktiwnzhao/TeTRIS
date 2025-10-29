@@ -1,0 +1,5 @@
+sval:
+     free( ($$) );
+---
+fval, ival:
+    EMPTY

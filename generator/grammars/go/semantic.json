@@ -1,0 +1,247 @@
+{
+    "InitFileDir": "",
+    "IsWeakType": 0,
+    "FixIRType": [
+        "kAssignmentExpression",
+        "kExpression"
+    ],
+    "FunctionArgumentUnit": "kParameterDecl",
+    "IRHandlers": [
+        {
+            "IRType": "Program",
+            "PreHandler": [
+                {
+                    "Function": "enter_scope",
+                    "Args": [
+                        "kScopeGlobal"
+                    ]
+                }
+            ],
+            "PostHandler": [
+                {
+                    "Function": "exit_scope",
+                    "Args": []
+                }
+            ]
+        },
+        {
+            "IRType": "StructDef",
+            "PreHandler": [
+                {
+                    "Function": "enter_scope",
+                    "Args": [
+                        "kScopeClass"
+                    ]
+                }
+            ],
+            "PostHandler": [
+                {
+                    "Function": "exit_scope",
+                    "Args": []
+                }
+            ]
+        },
+        {
+            "IRType": "FunctionDefinition",
+            "PreHandler": [
+                {
+                    "Function": "enter_scope",
+                    "Args": [
+                        "kScopeFunction"
+                    ]
+                }
+            ],
+            "PostHandler": [
+                {
+                    "Function": "exit_scope",
+                    "Args": []
+                }
+            ]
+        },
+        {
+            "IRType": "Block",
+            "PreHandler": [
+                {
+                    "Function": "enter_scope",
+                    "Args": [
+                        "kScopeStatement"
+                    ]
+                }
+            ],
+            "PostHandler": [
+                {
+                    "Function": "exit_scope",
+                    "Args": []
+                }
+            ]
+        }
+    ],
+    "BasicUnit": [
+        "kToplevelDeclist",
+        "kDeclaration",
+        "kStatement"
+    ],
+    "BasicTypes": [
+        "int8",
+        "uint8",
+        "int16",
+        "uint16",
+        "int32",
+        "uint32",
+        "int64",
+        "uint64",
+        "int",
+        "uint",
+        "bool",
+        "string",
+        "float32",
+        "float64"
+    ],
+    "BasicIntTypes": [
+        "int8",
+        "uint8",
+        "int16",
+        "uint16",
+        "int32",
+        "uint32",
+        "int64",
+        "uint64",
+        "int",
+        "uint"
+    ],
+    "BasicFloatTypes": [
+        "float32",
+        "float64"
+    ],
+    "OPRule": [
+        {
+            "OperandNum": 2,
+            "OperandRightType": "ALLTYPES",
+            "OperandLeftType": "ALLCOMPOUNDTYPE",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "",
+                ".",
+                ""
+            ],
+            "Property": [],
+            "InferDirection": "LEFT"
+        },
+        {
+            "OperandNum": 1,
+            "OperandRightType": "",
+            "OperandLeftType": "ALLFUNCTION",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "",
+                "( )",
+                ""
+            ],
+            "Property": [
+                "FUNCTIONCALL"
+            ],
+            "InferDirection": "NORMAL"
+        },
+        {
+            "OperandNum": 1,
+            "OperandRightType": "",
+            "OperandLeftType": "ALLTYPES",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "(",
+                ")",
+                ""
+            ],
+            "Property": [],
+            "InferDirection": "NORMAL"
+        },
+        {
+            "OperandNum": 2,
+            "OperandRightType": "ALLTYPES",
+            "OperandLeftType": "ALLFUNCTION",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "",
+                "(",
+                ")"
+            ],
+            "Property": [
+                "FUNCTIONCALL"
+            ],
+            "InferDirection": "NORMAL"
+        },
+        {
+            "OperandNum": 1,
+            "OperandRightType": "",
+            "OperandLeftType": "ALLTYPES",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "*",
+                "",
+                ""
+            ],
+            "Property": [
+                "DEREFERENCE"
+            ],
+            "InferDirection": "NORMAL"
+        },
+        {
+            "OperandNum": 1,
+            "OperandRightType": "",
+            "OperandLeftType": "ALLTYPES",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "&",
+                "",
+                ""
+            ],
+            "Property": [
+                "REFERENCE"
+            ],
+            "InferDirection": "NORMAL"
+        },
+        {
+            "OperandNum": 2,
+            "OperandRightType": "ALLTYPES",
+            "OperandLeftType": "ALLTYPES",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "",
+                "->",
+                ""
+            ],
+            "Property": [
+                "DEREFERENCE"
+            ],
+            "InferDirection": "LEFT"
+        },
+        {
+            "OperandNum": 2,
+            "OperandRightType": "ALLTYPES",
+            "OperandLeftType": "ALLTYPES",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "",
+                "[",
+                "]"
+            ],
+            "Property": [
+                "ARRAY_REFERENCE"
+            ],
+            "InferDirection": "LEFT"
+        },
+        {
+            "OperandNum": 1,
+            "OperandRightType": "",
+            "OperandLeftType": "ALLTYPES",
+            "ResultType": "ALLTYPES",
+            "Operator": [
+                "[",
+                "]",
+                ""
+            ],
+            "Property": [],
+            "InferDirection": "NORMAL"
+        }
+    ]
+}

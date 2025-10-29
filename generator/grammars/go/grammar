@@ -1,0 +1,348 @@
+program:
+package_clause toplevel_declist
+package_clause
+---
+package_clause:
+'package' identifier ';'
+---
+toplevel_declist:
+toplevel_decl **fixme=kDataWhatever:1:Insertable;toplevel_decl=kDataVarDefine:1:Define;**
+toplevel_declist toplevel_decl **fixme=kDataWhatever:1:Insertable;toplevel_decl=kDataVarDefine:1:Define;**
+---
+toplevel_decl:
+declaration ';'
+function_definition **function_definition=kDataFunctionType:1:Define**
+---
+declaration:
+type_decl
+var_decl
+---
+type_decl:
+'type' type_spec_list
+---
+type_spec_list:
+type_spec **type_spec=kDataVarDefine:1:Define**
+'(' type_specs ')'
+---
+type_specs:
+
+type_specs type_spec ';'
+---
+type_spec:
+type_def
+---
+type_def:
+identifier type_name
+identifier go_array_type
+identifier go_pointer_type
+struct_def **struct_def=kDataClassType:1:Define**
+---
+struct_def:
+identifier struct_type **identifier=kDataClassName:1:Define**
+---
+var_spec:
+identifier_list type_optional_assign
+---
+type_optional_assign:
+type optional_initialization
+---
+optional_initialization:
+'=' expression_list **expression_list=kDataWhatever:1:Define**
+
+---
+expression_list:
+expression **expression=kDataWhatever:1:Define**
+expression_list ',' expression **expression=kDataWhatever:1:Define**
+---
+var_decl:
+'var' var_spec_list
+---
+var_spec_list:
+var_spec **var_spec=kDataVarDefine:1:Define;**
+'(' var_specs ')'
+---
+var_specs:
+
+var_specs var_spec ';' **var_spec=kDataVarDefine:1:Define;**
+---
+identifier_list:
+direct_declarator **direct_declarator=kDataDeclarator:1:Define**
+identifier_list ',' direct_declarator **direct_declarator=kDataDeclarator:1:Define**
+---
+direct_declarator:
+identifier **identifier=kDataVarName:1:Define**
+---
+type:
+type_name **type_name=kDataVarType:1:Use**
+type_literal **type_literal=kDataTypeDef:1:Use**
+'(' type ')'
+---
+type_literal:
+struct_type
+go_array_type
+go_pointer_type 
+---
+go_pointer_type:
+'*' base_type **base_type=kDataPointer:1:Define**
+---
+base_type:
+type
+---
+go_array_type:
+'[' array_length ']' element_type **array_length=kDataArraySize:1:Define**
+---
+array_length:
+expression
+---
+element_type:
+type
+---
+struct_type:
+'struct' '{' field_decls '}' **fixme=kDataStructBody:1:Insertable**
+---
+field_decls:
+
+field_decls field_decl ';'
+---
+field_decl:
+identifier_list type **fixme=kDataVarDefine:1:Define**
+---
+type_name:
+identifier
+---
+function_definition:
+'func' function_name signature function_body **function_name=kDataFunctionName:1:Define;function_body=kDataFunctionBody:1:Insertable**
+---
+function_name:
+identifier
+---
+signature:
+parameters **parameters=kDataFunctionArg:1:Define**
+parameters result **parameters=kDataFunctionArg:1:Define;result=kDataFunctionReturnValue:1:Use**
+---
+result:
+parameters
+type
+---
+parameters:
+'(' opt_parameter_list ')'
+---
+function_body:
+block
+---
+opt_parameter_list:
+
+parameter_list
+---
+parameter_list:
+parameter_decl
+parameter_list ',' parameter_decl
+---
+parameter_decl:
+identifier_list type
+---
+block:
+'{' statement_list '}'
+---
+statement_list:
+statement
+statement_list statement
+---
+statement:
+block
+declaration ';'
+simple_stmt ';'
+return_statement ';'
+if_statement
+for_statement
+label_statement
+break_statement ';'
+continue_statement ';'
+goto_statement ';'
+---
+goto_statement:
+'goto' label **label->identifier=kDataGoToLabel:1:Define**
+---
+continue_statement:
+'continue'
+'continue' label
+---
+break_statement:
+'break'
+'break' label
+---
+label_statement:
+label ':' statement **label->identifier=kDataLabel:1:Define**
+---
+label:
+identifier
+---
+for_statement:
+'for' expression block
+'for' for_clause block
+---
+for_clause:
+opt_init_stmt ';' opt_condition ';' opt_post_stmt
+---
+opt_condition:
+
+expression
+---
+opt_init_stmt:
+simple_stmt
+---
+opt_post_stmt:
+simple_stmt
+---
+if_statement:
+'if' expression block
+'if' expression block 'else' block
+'if' expression block 'else' if_statement
+'if' simple_stmt ';' expression block
+'if' simple_stmt ';' expression block 'else' block
+'if' simple_stmt ';' expression block 'else' if_statement
+---
+simple_stmt:
+empty_statement
+expression_statement
+inc_dec_statement
+assignment_expression
+---
+empty_statement:
+
+---
+inc_dec_statement:
+expression '++' **fixme=kDataFixUnit:1:Use**
+expression '--' **fixme=kDataFixUnit:1:Use**
+---
+expression_statement:
+expression
+---
+return_statement: 
+'return' expression_list
+'return'
+---
+assignment_expression:
+expression_list '=' expression_list **expression_list_1=kDataFixUnit:1:Use;expression_list_2=kDataFixUnit:1:Use**
+expression_list '+=' expression_list **expression_list_1=kDataFixUnit:1:Use;expression_list_2=kDataFixUnit:1:Use**
+expression_list '-=' expression_list **expression_list_1=kDataFixUnit:1:Use;expression_list_2=kDataFixUnit:1:Use**
+expression_list '|=' expression_list **expression_list_1=kDataFixUnit:1:Use;expression_list_2=kDataFixUnit:1:Use**
+expression_list '^=' expression_list **expression_list_1=kDataFixUnit:1:Use;expression_list_2=kDataFixUnit:1:Use**
+expression_list '&=' expression_list **expression_list_1=kDataFixUnit:1:Use;expression_list_2=kDataFixUnit:1:Use**
+expression_list '/=' expression_list **expression_list_1=kDataFixUnit:1:Use;expression_list_2=kDataFixUnit:1:Use**
+expression_list '<<=' expression_list **expression_list_1=kDataFixUnit:1:Use;expression_list_2=kDataFixUnit:1:Use**
+expression_list '>>=' expression_list **expression_list_1=kDataFixUnit:1:Use;expression_list_2=kDataFixUnit:1:Use**
+expression_list '%=' expression_list **expression_list_1=kDataFixUnit:1:Use;expression_list_2=kDataFixUnit:1:Use**
+---
+expression:
+unary_expression
+expression binary_operator expression **fixme=kDataFixUnit:1:Use** %prec UNARY
+---
+unary_expression:
+primary_expression
+'*' unary_expression **fixme=kDataFixUnit:1:Use** %prec UNARY
+unary_operator unary_expression **fixme=kDataFixUnit:1:Use** %prec UNARY
+---
+primary_expression:
+operand
+primary_expression '[' expression ']' **fixme=kDataFixUnit:1:Use**
+primary_expression '.' identifier **fixme=kDataFixUnit:1:Use**
+primary_expression arguments **fixme=kDataFixUnit:1:Use**
+---
+arguments:
+'(' ')'
+'(' expression_list ')'
+---
+operand:
+literal
+operand_name
+'(' expression ')'
+---
+literal:
+basic_literal
+composite_literal
+---
+composite_literal:
+literal_type literal_value
+---
+literal_type:
+struct_type
+go_array_type
+---
+literal_value:
+'{' element_list opt_trail_comma '}'
+---
+element_list:
+keyed_element
+element_list ',' keyed_element
+---
+keyed_element:
+key ':' element
+element
+---
+key:
+expression
+literal_value
+---
+element:
+expression
+literal_value
+---
+opt_trail_comma:
+
+','
+---
+basic_literal:
+int_literal
+float_literal
+string_literal
+boolean_literal
+---
+operand_name:
+identifier **fixme=kDataFixUnit:1:Use** %prec LOWEST
+identifier literal_value **fixme=kDataFixUnit:1:Use**
+---
+binary_operator:
+'+'
+'-'
+'*'
+'/'
+'%'
+'>>'
+'<<'
+'&'
+'^'
+'|'
+'>'
+'<'
+'=='
+'!='
+'&&'
+'||'
+'<='
+'>='
+---
+unary_operator:
+'!'
+'~'
+'-'
+'+'
+'^'
+'&'
+---
+boolean_literal:
+'true'
+'false'
+---
+identifier:
+IDENTIFIER
+---
+string_literal:
+STRINGLITERAL
+---
+float_literal:
+FLOATLITERAL
+---
+int_literal:
+INTLITERAL
+---

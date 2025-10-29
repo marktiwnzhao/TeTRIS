@@ -1,0 +1,339 @@
+program:
+stmt_list
+---
+stmt_list:
+stmt
+stmt_list stmt
+---
+stmt:
+variable_id_decl **fixme=kDataWhatever:1:Insertable;variable_id_decl=kDataVarDefine:1:Define**
+class_decl
+interface_decl
+struct_decl **fixme=kDataWhatever:1:Insertable;struct_decl=kDataVarDefine:1:Define**
+---
+struct_decl:
+structure_type **structure_type=kDataClassType:1:Define**
+---
+structure_type:
+'typedef' identifier opt_type_parameter '=' struct_type_def  **identifier=kDataClassName:1:Define**
+---
+struct_type_def:
+'{' struct_type_inheritance_opt struct_type_member_list '}' **fixme=kDataStructBody:1:Insertable**
+identifier '&' '{' struct_type_member_list '}'
+identifier opt_type_parameter
+function_id_decl
+---
+struct_type_inheritance_opt:
+'>' identifier ','
+
+---
+struct_type_member_list:
+struct_type_member_list struct_type_member ';'
+struct_type_member ';'
+---
+struct_type_member:
+'var' opt_nullable direct_declarator ':' type **fixme=kDataVarDefine:1:Define;direct_declarator=kDataDeclarator:1:Define**
+function_id_decl
+---
+interface_decl:
+class_access_modifier 'interface' identifier opt_extends_list '{' interface_members_opt '}'
+---
+interface_members_opt:
+interface_members
+
+---
+interface_members:
+interface_members interface_member ';'
+interface_member ';'
+---
+interface_member:
+access_modifiers_opt 'var' identifier ':' type
+access_modifiers_opt function_id_decl
+---
+class_access_modifier:
+'final'
+'extern'
+
+---
+class_decl:
+class_access_modifier 'class' identifier opt_type_parameter opt_extends opt_implements_list '{' class_members '}'
+---
+class_members:
+
+class_members class_member **fixme=kDataWhatever:1:Insertable;class_member=kDataVarDefine:1:Define;**
+---
+class_member:
+function_definition **function_definition=kDataFunctionType:1:Define**
+access_modifiers_opt variable_id_decl **variable_id_decl=kDataVarDefine:1:Define**
+---
+function_definition:
+access_modifiers_opt function_id_decl function_body **function_body=kDataFunctionBody:1:Insertable**
+---
+function_body:
+block_stmt
+---
+access_modifiers_opt:
+access_modifiers
+
+---
+access_modifiers:
+access_modifiers access_modifier
+access_modifier
+---
+access_modifier:
+'static'
+'inline'
+'public'
+'private'
+'dynamic'
+---
+function_id_decl:
+'function' function_name opt_type_parameter '(' param_decl_list_opt ')' **function_name=kDataFunctionName:1:Define;param_decl_list_opt=kDataFunctionArg:1:Define**
+'function' function_name opt_type_parameter '(' param_decl_list_opt ')' ':' type **function_name=kDataFunctionName:1:Define;param_decl_list_opt=kDataFunctionArg:1:Define;type=kDataFunctionReturnValue:1:Use**
+---
+function_name:
+identifier
+---
+variable_id_decl:
+'var' direct_declarator ':' type '=' expr ';' **direct_declarator=kDataDeclarator:1:Define;expr=kDataWhatever:1:Define**
+'var' direct_declarator ':' type ';' **direct_declarator=kDataDeclarator:1:Define**
+---
+direct_declarator:
+identifier **identifier=kDataVarName:1:Define**
+---
+block_stmt:
+'{' block_stmt_list '}'
+---
+block_stmt_list:
+block_stmt_lists
+
+---
+block_stmt_lists:
+block_stmt_item
+block_stmt_lists block_stmt_item
+---
+block_stmt_item:
+block_stmt
+block_var_decl
+expression_stmt ';'
+assignment_expr ';'
+if_stmt
+for_stmt
+'return' expr ';'
+while_stmt
+do_while_stmt ';'
+'break' ';'
+'continue' ';'
+---
+block_var_decl:
+static_opt variable_id_decl **variable_id_decl=kDataVarDefine:1:Define**
+---
+static_opt:
+'static'
+
+---
+do_while_stmt:
+'do' block_stmt_item 'while' '(' expr ')'
+---
+while_stmt:
+'while' '(' expr ')' block_stmt_item
+---
+for_stmt:
+'for' '(' identifier 'in' range_def ')' block_stmt_item
+'for' '(' identifier '=>' identifier 'in' expr ')' block_stmt_item
+---
+range_def:
+expr '...' expr
+expr
+---
+assignment_expr:
+expr '=' expr **expr_1=kDataFixUnit:1:Use;expr_2=kDataFixUnit:1:Use**
+expr '|=' expr **expr_1=kDataFixUnit:1:Use;expr_2=kDataFixUnit:1:Use**
+expr '^=' expr **expr_1=kDataFixUnit:1:Use;expr_2=kDataFixUnit:1:Use**
+expr '&=' expr **expr_1=kDataFixUnit:1:Use;expr_2=kDataFixUnit:1:Use**
+expr '<<=' expr **expr_1=kDataFixUnit:1:Use;expr_2=kDataFixUnit:1:Use**
+expr '>>=' expr **expr_1=kDataFixUnit:1:Use;expr_2=kDataFixUnit:1:Use**
+expr '+=' expr **expr_1=kDataFixUnit:1:Use;expr_2=kDataFixUnit:1:Use**
+expr '-=' expr **expr_1=kDataFixUnit:1:Use;expr_2=kDataFixUnit:1:Use**
+expr '*=' expr **expr_1=kDataFixUnit:1:Use;expr_2=kDataFixUnit:1:Use**
+expr '/=' expr **expr_1=kDataFixUnit:1:Use;expr_2=kDataFixUnit:1:Use**
+expr '%=' expr **expr_1=kDataFixUnit:1:Use;expr_2=kDataFixUnit:1:Use**
+---
+if_stmt:
+'if' '(' expr ')' block_stmt_item %prec THEN
+'if' '(' expr ')' block_stmt_item 'else' block_stmt_item
+---
+expression_stmt:
+
+expr 
+---
+param_decl_list_opt:
+param_decl_list
+
+---
+param_decl_list:
+param_decl_list ',' param_decl
+param_decl
+---
+param_decl:
+opt_nullable direct_declarator ':' type default_value_opt  **direct_declarator=kDataDeclarator:1:Define**
+---
+opt_nullable:
+'?'
+
+---
+default_value_opt:
+'=' expr
+
+---
+opt_implements_list:
+
+opt_implements_list implements
+---
+implements:
+'implements' identifier
+---
+opt_extends_list:
+
+opt_extends_list extends
+---
+extends:
+'extends' identifier
+---
+opt_extends:
+
+extends
+---
+opt_type_parameter:
+
+type_parameter
+---
+type_parameter:
+'<' one_type_param_list '>'
+---
+one_type_param_list:
+one_type_param
+one_type_param_list ',' one_type_param
+---
+one_type_param:
+identifier
+identifier ':' type
+---
+binary_operator:
+'+'
+'-'
+'*'
+'/'
+'%'
+'>>'
+'<<'
+'&'
+'^'
+'|'
+'>'
+'<'
+'=='
+'!='
+'&&'
+'||'
+'<='
+'>='
+---
+unary_operator:
+'~'
+'!'
+'-'
+'+'
+---
+expr:
+expr binary_operator expr **fixme=kDataFixUnit:1:Use** %prec UNARY
+'--' expr **fixme=kDataFixUnit:1:Use**
+'++' expr **fixme=kDataFixUnit:1:Use**
+expr '++' **fixme=kDataFixUnit:1:Use**
+expr '--' **fixme=kDataFixUnit:1:Use**
+'(' expr ')' %prec UNARY
+unary_operator expr **fixme=kDataFixUnit:1:Use** %prec UNARY
+identifier **fixme=kDataFixUnit:1:Use**
+access_field
+literal_expr
+'null'
+object_instace
+literal_array
+literal_map
+object_literal 
+function_call **fixme=kDataFixUnit:1:Use**
+---
+object_instace:
+'new' identifier '(' param_list_opt ')'
+---
+function_call:
+identifier '(' param_list_opt ')'
+---
+param_list_opt:
+expr_list
+
+---
+object_literal:
+'{' element_list opt_trail_comma '}'
+---
+element_list:
+keyed_element
+element_list ',' keyed_element
+---
+keyed_element:
+expr ':' expr
+---
+opt_trail_comma:
+
+','
+---
+access_field:
+identifier access_tail
+---
+access_tail:
+access_tail '.' identifier
+'.' identifier
+---
+literal_map:
+'[' map_expr ']'
+---
+map_expr:
+map_expr_element
+map_expr ',' map_expr_element
+---
+map_expr_element:
+expr '=>' expr
+---
+literal_array:
+'[' expr_list ']'
+---
+expr_list:
+expr
+expr_list ',' expr
+---
+type:
+identifier type_parameter
+identifier **identifier=kDataVarType:1:Use**
+---
+literal_expr:
+int_literal
+float_literal
+string_literal
+boolean_literal
+---
+boolean_literal:
+'true'
+'false'
+---
+identifier:
+IDENTIFIER
+---
+string_literal:
+STRINGLITERAL
+---
+float_literal:
+FLOATLITERAL
+---
+int_literal:
+INTLITERAL
+---
