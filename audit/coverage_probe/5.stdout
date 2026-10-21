@@ -1,0 +1,8 @@
+[0;36mafl-showmap++5.01a[0m by Michal Zalewski
+[1;94m[*] [0mExecuting '/home/zzj/opt/zig/zig'...[0m
+-- Program output begins --
+[0m[0m-- Program output ends --
+[1;91m
++++ Program timed off +++
+[0m[1;92m[+] [0mHash of coverage map: 867b3b3643a650e2[0m
+[1;92m[+] [0mCaptured 65088 tuples (map size 65536, highest value 8, total values 465271) in '/home/zzj/TeTRIS/audit/coverage_probe/5_direct.map'.[0m[0m

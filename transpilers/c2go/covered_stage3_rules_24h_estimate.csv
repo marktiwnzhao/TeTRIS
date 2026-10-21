@@ -1,0 +1,28 @@
+Index,Program Element,Specific C,Syntax Pattern,Translation Rule,Semantic Tags,Coverage Basis
+3,Variable,char type,char,Negative char overflow casts are handled by converting negative values via addition of 256.,character,Observed in 24h c2go queue samples
+4,Variable,signed integer types,short / int / long / long long,Signed integer types are recognized and handled in cast expressions.,"integer, signed",Observed in 24h c2go queue samples
+5,Variable,unsigned integer types,unsigned short / unsigned int / unsigned long / unsigned long long,Unsigned integer types are recognized and handled in cast expressions.,"integer, unsigned",Observed in 24h c2go queue samples
+9,Variable,struct type,struct S { ... },C struct declarations become Go struct type definitions with fields translated appropriately.,"aggregate, record",Observed in 24h c2go queue samples
+12,Function,function type,R f(...),C function types become Go function types with separated parameter and result lists.,function_type,Observed in 24h c2go queue samples
+14,Expression,pointer dereference,*a,Pointer dereference (*) is translated to Go's * operator via transpilePointerArith.,pointer_dereference,Observed in 24h c2go queue samples
+15,Expression,address-of operator,&a,"Address-of operator (&) becomes Go's & operator, with special handling for arrays where &a[0] is used.",address_of,Observed in 24h c2go queue samples
+16,Expression,member access,a.b,C struct/union member access (a.b) becomes Go selector expression (a.b). Pointer member access (a->b) becomes (*a).b.,member_access,Observed in 24h c2go queue samples
+21,Expression,comparison operators,a == b / a != b / a < b / a > b / a <= b / a >= b,"Comparison operators (==, !=, <, >, <=, >=) are translated to Go's corresponding operators, with pointer comparisons converted to uintptr.",comparison,Observed in 24h c2go queue samples
+22,Expression,assignment operator,a = b,"Assignment (=) is translated to Go's = operator, with right-hand side cast to the target type and memory allocation converted to Go-style.",assignment,Observed in 24h c2go queue samples
+23,Expression,compound assignment operators,a += b / a -= b / ...,"Compound assignment operators (+=, -=) are translated to Go's corresponding operators, with right-hand side cast to the target type.",compound_assignment,Observed in 24h c2go queue samples
+24,Expression,arithmetic operators,a + b / a - b / a * b / a / b / a % b,"Arithmetic operators (+, -, *, /, %) are translated to Go's corresponding operators, with type casting and pointer arithmetic handled separately.",arithmetic,Observed in 24h c2go queue samples
+27,Expression,unary minus,-a,Unary minus operator is preserved in Go with appropriate type handling.,negation,Observed in 24h c2go queue samples
+28,Expression,bitwise NOT,~a,Bitwise NOT operator (~) is translated to Go's ^ operator.,bitwise_not,Observed in 24h c2go queue samples
+29,Expression,bitwise operators,a & b / a | b / a ^ b / a << b / a >> b,"Bitwise operators (&, |, ^, <<, >>) are translated to Go's corresponding operators, with shift counts cast to unsigned long long.",bitwise,Observed in 24h c2go queue samples
+30,Expression,increment/decrement operators,++a / --a / a++ / a--,"C increment/decrement operators become Go anonymous functions that capture side effects, using temp variables for complex lvalues.",increment_decrement,Observed in 24h c2go queue samples
+33,Expression,type cast,(type) a,Implicit casts are translated using type conversion functions or explicit Go type casts, with special handling for null pointers and enums.,type_cast,Observed in 24h c2go queue samples
+36,Expression,integer constant,123,C integer literals become Go integer literals, with explicit int32 conversion if the C type is 'int'.,integer_literal,Observed in 24h c2go queue samples
+37,Expression,floating constant,3.14,C floating-point literals become Go float literals.,floating_literal,Observed in 24h c2go queue samples
+40,Statement,if statement,if (expr) stmt;,"C if statement is translated to Go's if statement, with condition cast to bool and else-if chains flattened.",branch,Observed in 24h c2go queue samples
+41,Statement,switch statement,switch (expr) { case ...: stmt; },C switch statement becomes Go switch statement with condition as tag and normalized case clauses in a block.,branch,Observed in 24h c2go queue samples
+42,Statement,for loop,for (init; cond; iter) stmt;,"C for loop is translated to Go's for statement, with init, condition, and step expressions converted appropriately. Comma operators in init/step are flattened, and multiple conditions are transformed into if-break statements in the loop body.",loop,Observed in 24h c2go queue samples
+43,Statement,while loop,while (expr) stmt;,C while loop is converted to a C for loop with nil init and step, then transpiled to Go's for statement.,loop,Observed in 24h c2go queue samples
+46,Statement,break statement,break;,Break statements inside switch cases become goto statements to a generated switch end label.,break,Observed in 24h c2go queue samples
+48,Statement,return statement,return expr; / return;,"C return statements become Go return statements, with return value cast to function's return type. For main() returning non-zero, os.Exit is used instead.",return,Observed in 24h c2go queue samples
+49,Variable,scalar initialization,T x = expr,C variable declarations with initializers become Go var declarations with the initializer expression.,scalar_initialization,Observed in 24h c2go queue samples
+56,Function,function definition,R f(args) { ... },C function definitions become Go function definitions with body translation and automatic return statement addition.,"callable, definition",Observed in 24h c2go queue samples

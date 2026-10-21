@@ -1,0 +1,22 @@
+{
+  "repository": "elliotchance/c2go",
+  "result": "No matching issue found in GitHub search; not proof of novelty",
+  "queries": [
+    "\"return &\"",
+    "\"compound assignment\"",
+    "\"dereferenced\"",
+    "\"anonymous function\" pointer",
+    "\"cannot use &\" \"return\"",
+    "\"cannot use\" \"value of type **\""
+  ],
+  "reviewed_related_issues": {
+    "787": "increment expressions emitted as +=; different generation branch",
+    "938": "struct pointer-to-pointer loses indirection; different type-resolution failure",
+    "789": "struct pointer-to-pointer loses indirection; different type-resolution failure",
+    "333": "Csmith integration umbrella; initial issue body does not describe this specific defect"
+  },
+  "root_cause": "atomicOperation CompoundAssignOperator with dereferenced pointer lhs emits token.AND return expression instead of dereferenced element value",
+  "source": "/home/zzj/opt/go-work/pkg/mod/github.com/elliotchance/c2go@v0.26.11/transpiler/operators.go",
+  "valid_minimal_reproducer": "int f(void) { int x=1; int *p=&x; int y=(*p ^= *p); return y; }",
+  "correction": "Prior x += (*p += *p) example aliases x and may contain unsequenced side effects; use independent y or direct return for reporting."
+}

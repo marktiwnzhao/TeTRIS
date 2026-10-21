@@ -1,0 +1,4 @@
+Transpiler,Rule File,Total Rules,Estimated Covered Rules,Coverage Percent,Estimation Basis
+c2go,/home/zzj/LLM4Transpiler/transpiler_pipeline/outputs/stage2-c2go/stage3_rules.csv,64,27,42.2,"Conservative syntactic estimate from 24h queue samples; excludes wrapper-introduced constructs and rules requiring semantic inference only."
+c2rust,/home/zzj/LLM4Transpiler/transpiler_pipeline/outputs/stage2-c2rust/stage3_rules.csv,118,37,31.4,"Conservative syntactic estimate from 24h queue samples; excludes wrapper-introduced constructs and rules requiring semantic inference only."
+translate-c / zig-tc,/home/zzj/LLM4Transpiler/transpiler_pipeline/outputs/stage2-translate-c/stage3_rules.csv,101,30,29.7,"Conservative syntactic estimate from 24h queue samples; excludes wrapper-introduced constructs and rules requiring semantic inference only."

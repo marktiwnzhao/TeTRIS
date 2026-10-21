@@ -1,0 +1,1 @@
+[{"directory": "/home/zzj/TeTRIS/audit/minimal_repros/rust_order_right", "file": "/home/zzj/TeTRIS/audit/minimal_repros/rust_order_right/runner.c", "arguments": ["/home/zzj/opt/llvm17/bin/clang", "-O0", "/home/zzj/TeTRIS/audit/minimal_repros/rust_order_right/runner.c"]}]

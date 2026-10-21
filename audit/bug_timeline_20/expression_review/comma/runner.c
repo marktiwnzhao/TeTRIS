@@ -1,0 +1,1 @@
+int main(void){int c=1; int r=(c*2,c); return r-1;}

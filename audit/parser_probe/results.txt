@@ -1,0 +1,3 @@
+audit/parser_probe/ordinary.c PARSE_OK
+audit/parser_probe/bitfield.c PARSE_OK
+audit/parser_probe/compound.c PARSE_FAILED

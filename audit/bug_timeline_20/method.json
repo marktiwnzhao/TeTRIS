@@ -1,0 +1,22 @@
+{
+  "campaign": "output_20",
+  "budget_seconds": 86400,
+  "time_basis": "AFL candidate filename time:HH-MM-SS, checked against historical verification_results; second precision; before checker completion",
+  "included": [
+    911,
+    912,
+    918,
+    928,
+    "address-of-rvalue (#909/#715)",
+    "switch-no-case"
+  ],
+  "review_status": "selected six-family timeline; retrospective earliest matched saved candidates, not an exhaustive discovery census",
+  "not_attributed": {
+    "921": "no union in archived build_failure or output_diff_c candidates; no unsafe.Pointer struct-literal diagnostic"
+  },
+  "zero_by_user_counting_policy": [
+    "c2rust",
+    "translate-c"
+  ],
+  "scope": "six confirmed root-cause families requested for the curve; pointer-return compound-assignment family intentionally excluded"
+}

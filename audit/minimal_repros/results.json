@@ -1,0 +1,762 @@
+[
+  {
+    "case": "zig_char_promotion",
+    "cmd": [
+      "clang",
+      "-fsigned-char",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "driver.c",
+      "-o",
+      "c_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "zig_char_promotion",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/zig_char_promotion/c_runner"
+    ],
+    "code": 0,
+    "stdout": "0\n",
+    "stderr": ""
+  },
+  {
+    "case": "zig_char_promotion",
+    "cmd": [
+      "zig",
+      "translate-c",
+      "probe.c"
+    ],
+    "code": 0,
+    "stdout": "const __root = @This();\npub const __builtin = @import(\"std\").zig.c_translation.builtins;\npub const __helpers = @import(\"std\").zig.c_translation.helpers;\npub export fn probe() c_int {\n    var x: u8 = @bitCast(@as(i8, @truncate(-@as(c_int, 1))));\n    _ = &x;\n    return @as(c_int, x) + @as(c_int, 1);\n}\n\npub const __VERSION__ = \"Aro aro-zig\";\npub const __Aro__ = \"\";\npub const __STDC__ = @as(c_int, 1);\npub const __STDC_HOSTED__ = @as(c_int, 1);\npub const __STDC_UTF_16__ = @as(c_int, 1);\npub const __STDC_UTF_32__ = @as(c_int, 1);\npub const __STDC_EMBED_NOT_FOUND__ = @as(c_int, 0);\npub const __STDC_EMBED_FOUND__ = @as(c_int, 1);\npub const __STDC_EMBED_EMPTY__ = @as(c_int, 2);\npub const __STDC_VERSION__ = @as(c_long, 201710);\npub const __GNUC__ = @as(c_int, 7);\npub const __GNUC_MINOR__ = @as(c_int, 1);\npub const __GNUC_PATCHLEVEL__ = @as(c_int, 0);\npub const __ARO_EMULATE_NO__ = @as(c_int, 0);\npub const __ARO_EMULATE_CLANG__ = @as(c_int, 1);\npub const __ARO_EMULATE_GCC__ = @as(c_int, 2);\npub const __ARO_EMULATE_MSVC__ = @as(c_int, 3);\npub const __ARO_EMULATE__ = __ARO_EMULATE_GCC__;\npub inline fn __building_module(x: anytype) @TypeOf(@as(c_int, 0)) {\n    _ = &x;\n    return @as(c_int, 0);\n}\npub const linux = @as(c_int, 1);\npub const __linux = @as(c_int, 1);\npub const __linux__ = @as(c_int, 1);\npub const unix = @as(c_int, 1);\npub const __unix = @as(c_int, 1);\npub const __unix__ = @as(c_int, 1);\npub const __code_model_small__ = @as(c_int, 1);\npub const __amd64__ = @as(c_int, 1);\npub const __amd64 = @as(c_int, 1);\npub const __x86_64__ = @as(c_int, 1);\npub const __x86_64 = @as(c_int, 1);\npub const __SEG_GS = @as(c_int, 1);\npub const __SEG_FS = @as(c_int, 1);\npub const __seg_gs = @compileError(\"unable to translate macro: undefined identifier `address_space`\"); // <builtin>:33:9\npub const __seg_fs = @compileError(\"unable to translate macro: undefined identifier `address_space`\"); // <builtin>:34:9\npub const __LAHF_SAHF__ = @as(c_int, 1);\npub const __AES__ = @as(c_int, 1);\npub const __PCLMUL__ = @as(c_int, 1);\npub const __LZCNT__ = @as(c_int, 1);\npub const __RDRND__ = @as(c_int, 1);\npub const __FSGSBASE__ = @as(c_int, 1);\npub const __BMI__ = @as(c_int, 1);\npub const __BMI2__ = @as(c_int, 1);\npub const __POPCNT__ = @as(c_int, 1);\npub const __RTM__ = @as(c_int, 1);\npub const __PRFCHW__ = @as(c_int, 1);\npub const __RDSEED__ = @as(c_int, 1);\npub const __ADX__ = @as(c_int, 1);\npub const __MOVBE__ = @as(c_int, 1);\npub const __FMA__ = @as(c_int, 1);\npub const __F16C__ = @as(c_int, 1);\npub const __EVEX512__ = @as(c_int, 1);\npub const __AVX512CD__ = @as(c_int, 1);\npub const __AVX512DQ__ = @as(c_int, 1);\npub const __AVX512BW__ = @as(c_int, 1);\npub const __AVX512VL__ = @as(c_int, 1);\npub const __EVEX256__ = @as(c_int, 1);\npub const __FXSR__ = @as(c_int, 1);\npub const __XSAVE__ = @as(c_int, 1);\npub const __XSAVEOPT__ = @as(c_int, 1);\npub const __XSAVEC__ = @as(c_int, 1);\npub const __XSAVES__ = @as(c_int, 1);\npub const __PKU__ = @as(c_int, 1);\npub const __CLFLUSHOPT__ = @as(c_int, 1);\npub const __CLWB__ = @as(c_int, 1);\npub const __INVPCID__ = @as(c_int, 1);\npub const __CRC32__ = @as(c_int, 1);\npub const __AVX512F__ = @as(c_int, 1);\npub const __AVX2__ = @as(c_int, 1);\npub const __AVX__ = @as(c_int, 1);\npub const __SSE4_2__ = @as(c_int, 1);\npub const __SSE4_1__ = @as(c_int, 1);\npub const __SSSE3__ = @as(c_int, 1);\npub const __SSE3__ = @as(c_int, 1);\npub const __SSE2__ = @as(c_int, 1);\npub const __SSE__ = @as(c_int, 1);\npub const __SSE_MATH__ = @as(c_int, 1);\npub const __MMX__ = @as(c_int, 1);\npub const __GCC_HAVE_SYNC_COMPARE_AND_SWAP_8 = @as(c_int, 1);\npub const __SIZEOF_FLOAT128__ = @as(c_int, 16);\npub const _LP64 = @as(c_int, 1);\npub const __LP64__ = @as(c_int, 1);\npub const __FLOAT128__ = @as(c_int, 1);\npub const __ORDER_LITTLE_ENDIAN__ = @as(c_int, 1234);\npub const __ORDER_BIG_ENDIAN__ = @as(c_int, 4321);\npub const __ORDER_PDP_ENDIAN__ = @as(c_int, 3412);\npub const __BYTE_ORDER__ = __ORDER_LITTLE_ENDIAN__;\npub const __LITTLE_ENDIAN__ = @as(c_int, 1);\npub const __ELF__ = @as(c_int, 1);\npub const __ATOMIC_RELAXED = @as(c_int, 0);\npub const __ATOMIC_CONSUME = @as(c_int, 1);\npub const __ATOMIC_ACQUIRE = @as(c_int, 2);\npub const __ATOMIC_RELEASE = @as(c_int, 3);\npub const __ATOMIC_ACQ_REL = @as(c_int, 4);\npub const __ATOMIC_SEQ_CST = @as(c_int, 5);\npub const __ATOMIC_BOOL_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_CHAR_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_CHAR16_T_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_CHAR32_T_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_WCHAR_T_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_WINT_T_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_SHORT_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_INT_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_LONG_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_LLONG_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_POINTER_LOCK_FREE = @as(c_int, 1);\npub const __WINT_UNSIGNED__ = @as(c_int, 1);\npub const __CHAR_BIT__ = @as(c_int, 8);\npub const __BOOL_WIDTH__ = @as(c_int, 8);\npub const __SCHAR_MAX__ = @as(c_int, 127);\npub const __SCHAR_WIDTH__ = @as(c_int, 8);\npub const __SHRT_MAX__ = @as(c_int, 32767);\npub const __SHRT_WIDTH__ = @as(c_int, 16);\npub const __INT_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __INT_WIDTH__ = @as(c_int, 32);\npub const __LONG_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __LONG_WIDTH__ = @as(c_int, 64);\npub const __LONG_LONG_MAX__ = @as(c_longlong, 9223372036854775807);\npub const __LONG_LONG_WIDTH__ = @as(c_int, 64);\npub const __WCHAR_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __WCHAR_WIDTH__ = @as(c_int, 32);\npub const __WINT_MAX__ = __helpers.promoteIntLiteral(c_uint, 4294967295, .decimal);\npub const __WINT_WIDTH__ = @as(c_int, 32);\npub const __INTMAX_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __INTMAX_WIDTH__ = @as(c_int, 64);\npub const __SIZE_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const __SIZE_WIDTH__ = @as(c_int, 64);\npub const __UINTMAX_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const __UINTMAX_WIDTH__ = @as(c_int, 64);\npub const __PTRDIFF_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __PTRDIFF_WIDTH__ = @as(c_int, 64);\npub const __INTPTR_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __INTPTR_WIDTH__ = @as(c_int, 64);\npub const __UINTPTR_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const __UINTPTR_WIDTH__ = @as(c_int, 64);\npub const __SIG_ATOMIC_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __SIG_ATOMIC_WIDTH__ = @as(c_int, 32);\npub const __BITINT_MAXWIDTH__ = __helpers.promoteIntLiteral(c_int, 65535, .decimal);\npub const __SIZEOF_FLOAT__ = @as(c_int, 4);\npub const __SIZEOF_DOUBLE__ = @as(c_int, 8);\npub const __SIZEOF_LONG_DOUBLE__ = @as(c_int, 10);\npub const __SIZEOF_SHORT__ = @as(c_int, 2);\npub const __SIZEOF_INT__ = @as(c_int, 4);\npub const __SIZEOF_LONG__ = @as(c_int, 8);\npub const __SIZEOF_LONG_LONG__ = @as(c_int, 8);\npub const __SIZEOF_POINTER__ = @as(c_int, 8);\npub const __SIZEOF_PTRDIFF_T__ = @as(c_int, 8);\npub const __SIZEOF_SIZE_T__ = @as(c_int, 8);\npub const __SIZEOF_WCHAR_T__ = @as(c_int, 4);\npub const __SIZEOF_WINT_T__ = @as(c_int, 4);\npub const __SIZEOF_INT128__ = @as(c_int, 16);\npub const __INTPTR_TYPE__ = c_long;\npub const __UINTPTR_TYPE__ = c_ulong;\npub const __INTMAX_TYPE__ = c_long;\npub const __INTMAX_C_SUFFIX__ = @compileError(\"unable to translate macro: undefined identifier `L`\"); // <builtin>:155:9\npub const __INTMAX_C = __helpers.L_SUFFIX;\npub const __UINTMAX_TYPE__ = c_ulong;\npub const __UINTMAX_C_SUFFIX__ = @compileError(\"unable to translate macro: undefined identifier `UL`\"); // <builtin>:158:9\npub const __UINTMAX_C = __helpers.UL_SUFFIX;\npub const __PTRDIFF_TYPE__ = c_long;\npub const __SIZE_TYPE__ = c_ulong;\npub const __WCHAR_TYPE__ = c_int;\npub const __WINT_TYPE__ = c_uint;\npub const __CHAR16_TYPE__ = c_ushort;\npub const __CHAR32_TYPE__ = c_uint;\npub const __INT8_TYPE__ = i8;\npub const __INT8_FMTd__ = \"hhd\";\npub const __INT8_FMTi__ = \"hhi\";\npub const __INT8_C_SUFFIX__ = \"\";\npub inline fn __INT8_C(c: anytype) @TypeOf(c) {\n    _ = &c;\n    return c;\n}\npub const __INT16_TYPE__ = c_short;\npub const __INT16_FMTd__ = \"hd\";\npub const __INT16_FMTi__ = \"hi\";\npub const __INT16_C_SUFFIX__ = \"\";\npub inline fn __INT16_C(c: anytype) @TypeOf(c) {\n    _ = &c;\n    return c;\n}\npub const __INT32_TYPE__ = c_int;\npub const __INT32_FMTd__ = \"d\";\npub const __INT32_FMTi__ = \"i\";\npub const __INT32_C_SUFFIX__ = \"\";\npub inline fn __INT32_C(c: anytype) @TypeOf(c) {\n    _ = &c;\n    return c;\n}\npub const __INT64_TYPE__ = c_long;\npub const __INT64_FMTd__ = \"ld\";\npub const __INT64_FMTi__ = \"li\";\npub const __INT64_C_SUFFIX__ = @compileError(\"unable to translate macro: undefined identifier `L`\"); // <builtin>:184:9\npub const __INT64_C = __helpers.L_SUFFIX;\npub const __UINT8_TYPE__ = u8;\npub const __UINT8_FMTo__ = \"hho\";\npub const __UINT8_FMTu__ = \"hhu\";\npub const __UINT8_FMTx__ = \"hhx\";\npub const __UINT8_FMTX__ = \"hhX\";\npub const __UINT8_C_SUFFIX__ = \"\";\npub inline fn __UINT8_C(c: anytype) @TypeOf(c) {\n    _ = &c;\n    return c;\n}\npub const __UINT8_MAX__ = @as(c_int, 255);\npub const __INT8_MAX__ = @as(c_int, 127);\npub const __UINT16_TYPE__ = c_ushort;\npub const __UINT16_FMTo__ = \"ho\";\npub const __UINT16_FMTu__ = \"hu\";\npub const __UINT16_FMTx__ = \"hx\";\npub const __UINT16_FMTX__ = \"hX\";\npub const __UINT16_C_SUFFIX__ = \"\";\npub inline fn __UINT16_C(c: anytype) @TypeOf(c) {\n    _ = &c;\n    return c;\n}\npub const __UINT16_MAX__ = __helpers.promoteIntLiteral(c_int, 65535, .decimal);\npub const __INT16_MAX__ = @as(c_int, 32767);\npub const __UINT32_TYPE__ = c_uint;\npub const __UINT32_FMTo__ = \"o\";\npub const __UINT32_FMTu__ = \"u\";\npub const __UINT32_FMTx__ = \"x\";\npub const __UINT32_FMTX__ = \"X\";\npub const __UINT32_C_SUFFIX__ = @compileError(\"unable to translate macro: undefined identifier `U`\"); // <builtin>:209:9\npub const __UINT32_C = __helpers.U_SUFFIX;\npub const __UINT32_MAX__ = __helpers.promoteIntLiteral(c_uint, 4294967295, .decimal);\npub const __INT32_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __UINT64_TYPE__ = c_ulong;\npub const __UINT64_FMTo__ = \"lo\";\npub const __UINT64_FMTu__ = \"lu\";\npub const __UINT64_FMTx__ = \"lx\";\npub const __UINT64_FMTX__ = \"lX\";\npub const __UINT64_C_SUFFIX__ = @compileError(\"unable to translate macro: undefined identifier `UL`\"); // <builtin>:218:9\npub const __UINT64_C = __helpers.UL_SUFFIX;\npub const __UINT64_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const __INT64_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __INT_LEAST8_TYPE__ = i8;\npub const __INT_LEAST8_MAX__ = @as(c_int, 127);\npub const __INT_LEAST8_WIDTH__ = @as(c_int, 8);\npub const INT_LEAST8_FMTd__ = \"hhd\";\npub const INT_LEAST8_FMTi__ = \"hhi\";\npub const __UINT_LEAST8_TYPE__ = u8;\npub const __UINT_LEAST8_MAX__ = @as(c_int, 255);\npub const UINT_LEAST8_FMTo__ = \"hho\";\npub const UINT_LEAST8_FMTu__ = \"hhu\";\npub const UINT_LEAST8_FMTx__ = \"hhx\";\npub const UINT_LEAST8_FMTX__ = \"hhX\";\npub const __INT_FAST8_TYPE__ = i8;\npub const __INT_FAST8_MAX__ = @as(c_int, 127);\npub const __INT_FAST8_WIDTH__ = @as(c_int, 8);\npub const INT_FAST8_FMTd__ = \"hhd\";\npub const INT_FAST8_FMTi__ = \"hhi\";\npub const __UINT_FAST8_TYPE__ = u8;\npub const __UINT_FAST8_MAX__ = @as(c_int, 255);\npub const UINT_FAST8_FMTo__ = \"hho\";\npub const UINT_FAST8_FMTu__ = \"hhu\";\npub const UINT_FAST8_FMTx__ = \"hhx\";\npub const UINT_FAST8_FMTX__ = \"hhX\";\npub const __INT_LEAST16_TYPE__ = c_short;\npub const __INT_LEAST16_MAX__ = @as(c_int, 32767);\npub const __INT_LEAST16_WIDTH__ = @as(c_int, 16);\npub const INT_LEAST16_FMTd__ = \"hd\";\npub const INT_LEAST16_FMTi__ = \"hi\";\npub const __UINT_LEAST16_TYPE__ = c_ushort;\npub const __UINT_LEAST16_MAX__ = __helpers.promoteIntLiteral(c_int, 65535, .decimal);\npub const UINT_LEAST16_FMTo__ = \"ho\";\npub const UINT_LEAST16_FMTu__ = \"hu\";\npub const UINT_LEAST16_FMTx__ = \"hx\";\npub const UINT_LEAST16_FMTX__ = \"hX\";\npub const __INT_FAST16_TYPE__ = c_short;\npub const __INT_FAST16_MAX__ = @as(c_int, 32767);\npub const __INT_FAST16_WIDTH__ = @as(c_int, 16);\npub const INT_FAST16_FMTd__ = \"hd\";\npub const INT_FAST16_FMTi__ = \"hi\";\npub const __UINT_FAST16_TYPE__ = c_ushort;\npub const __UINT_FAST16_MAX__ = __helpers.promoteIntLiteral(c_int, 65535, .decimal);\npub const UINT_FAST16_FMTo__ = \"ho\";\npub const UINT_FAST16_FMTu__ = \"hu\";\npub const UINT_FAST16_FMTx__ = \"hx\";\npub const UINT_FAST16_FMTX__ = \"hX\";\npub const __INT_LEAST32_TYPE__ = c_int;\npub const __INT_LEAST32_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __INT_LEAST32_WIDTH__ = @as(c_int, 32);\npub const INT_LEAST32_FMTd__ = \"d\";\npub const INT_LEAST32_FMTi__ = \"i\";\npub const __UINT_LEAST32_TYPE__ = c_uint;\npub const __UINT_LEAST32_MAX__ = __helpers.promoteIntLiteral(c_uint, 4294967295, .decimal);\npub const UINT_LEAST32_FMTo__ = \"o\";\npub const UINT_LEAST32_FMTu__ = \"u\";\npub const UINT_LEAST32_FMTx__ = \"x\";\npub const UINT_LEAST32_FMTX__ = \"X\";\npub const __INT_FAST32_TYPE__ = c_int;\npub const __INT_FAST32_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __INT_FAST32_WIDTH__ = @as(c_int, 32);\npub const INT_FAST32_FMTd__ = \"d\";\npub const INT_FAST32_FMTi__ = \"i\";\npub const __UINT_FAST32_TYPE__ = c_uint;\npub const __UINT_FAST32_MAX__ = __helpers.promoteIntLiteral(c_uint, 4294967295, .decimal);\npub const UINT_FAST32_FMTo__ = \"o\";\npub const UINT_FAST32_FMTu__ = \"u\";\npub const UINT_FAST32_FMTx__ = \"x\";\npub const UINT_FAST32_FMTX__ = \"X\";\npub const __INT_LEAST64_TYPE__ = c_long;\npub const __INT_LEAST64_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __INT_LEAST64_WIDTH__ = @as(c_int, 64);\npub const INT_LEAST64_FMTd__ = \"ld\";\npub const INT_LEAST64_FMTi__ = \"li\";\npub const __UINT_LEAST64_TYPE__ = c_ulong;\npub const __UINT_LEAST64_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const UINT_LEAST64_FMTo__ = \"lo\";\npub const UINT_LEAST64_FMTu__ = \"lu\";\npub const UINT_LEAST64_FMTx__ = \"lx\";\npub const UINT_LEAST64_FMTX__ = \"lX\";\npub const __INT_FAST64_TYPE__ = c_long;\npub const __INT_FAST64_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __INT_FAST64_WIDTH__ = @as(c_int, 64);\npub const INT_FAST64_FMTd__ = \"ld\";\npub const INT_FAST64_FMTi__ = \"li\";\npub const __UINT_FAST64_TYPE__ = c_ulong;\npub const __UINT_FAST64_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const UINT_FAST64_FMTo__ = \"lo\";\npub const UINT_FAST64_FMTu__ = \"lu\";\npub const UINT_FAST64_FMTx__ = \"lx\";\npub const UINT_FAST64_FMTX__ = \"lX\";\npub const __FLT16_DENORM_MIN__ = @as(f16, 5.9604644775390625e-8);\npub const __FLT16_HAS_DENORM__ = \"\";\npub const __FLT16_DIG__ = @as(c_int, 3);\npub const __FLT16_DECIMAL_DIG__ = @as(c_int, 5);\npub const __FLT16_EPSILON__ = @as(f16, 9.765625e-4);\npub const __FLT16_HAS_INFINITY__ = \"\";\npub const __FLT16_HAS_QUIET_NAN__ = \"\";\npub const __FLT16_MANT_DIG__ = @as(c_int, 11);\npub const __FLT16_MAX_10_EXP__ = @as(c_int, 4);\npub const __FLT16_MAX_EXP__ = @as(c_int, 16);\npub const __FLT16_MAX__ = @as(f16, 6.5504e+4);\npub const __FLT16_MIN_10_EXP__ = -@as(c_int, 4);\npub const __FLT16_MIN_EXP__ = -@as(c_int, 13);\npub const __FLT16_MIN__ = @as(f16, 6.103515625e-5);\npub const __FLT_DENORM_MIN__ = @as(f32, 1.40129846e-45);\npub const __FLT_HAS_DENORM__ = \"\";\npub const __FLT_DIG__ = @as(c_int, 6);\npub const __FLT_DECIMAL_DIG__ = @as(c_int, 9);\npub const __FLT_EPSILON__ = @as(f32, 1.19209290e-7);\npub const __FLT_HAS_INFINITY__ = \"\";\npub const __FLT_HAS_QUIET_NAN__ = \"\";\npub const __FLT_MANT_DIG__ = @as(c_int, 24);\npub const __FLT_MAX_10_EXP__ = @as(c_int, 38);\npub const __FLT_MAX_EXP__ = @as(c_int, 128);\npub const __FLT_MAX__ = @as(f32, 3.40282347e+38);\npub const __FLT_MIN_10_EXP__ = -@as(c_int, 37);\npub const __FLT_MIN_EXP__ = -@as(c_int, 125);\npub const __FLT_MIN__ = @as(f32, 1.17549435e-38);\npub const __DBL_DENORM_MIN__ = @as(f64, 4.9406564584124654e-324);\npub const __DBL_HAS_DENORM__ = \"\";\npub const __DBL_DIG__ = @as(c_int, 15);\npub const __DBL_DECIMAL_DIG__ = @as(c_int, 17);\npub const __DBL_EPSILON__ = @as(f64, 2.2204460492503131e-16);\npub const __DBL_HAS_INFINITY__ = \"\";\npub const __DBL_HAS_QUIET_NAN__ = \"\";\npub const __DBL_MANT_DIG__ = @as(c_int, 53);\npub const __DBL_MAX_10_EXP__ = @as(c_int, 308);\npub const __DBL_MAX_EXP__ = @as(c_int, 1024);\npub const __DBL_MAX__ = @as(f64, 1.7976931348623157e+308);\npub const __DBL_MIN_10_EXP__ = -@as(c_int, 307);\npub const __DBL_MIN_EXP__ = -@as(c_int, 1021);\npub const __DBL_MIN__ = @as(f64, 2.2250738585072014e-308);\npub const __LDBL_DENORM_MIN__ = @as(c_longdouble, 3.64519953188247460253e-4951);\npub const __LDBL_HAS_DENORM__ = \"\";\npub const __LDBL_DIG__ = @as(c_int, 18);\npub const __LDBL_DECIMAL_DIG__ = @as(c_int, 21);\npub const __LDBL_EPSILON__ = @as(c_longdouble, 1.08420217248550443401e-19);\npub const __LDBL_HAS_INFINITY__ = \"\";\npub const __LDBL_HAS_QUIET_NAN__ = \"\";\npub const __LDBL_MANT_DIG__ = @as(c_int, 64);\npub const __LDBL_MAX_10_EXP__ = @as(c_int, 4932);\npub const __LDBL_MAX_EXP__ = @as(c_int, 16384);\npub const __LDBL_MAX__ = @as(c_longdouble, 1.18973149535723176502e+4932);\npub const __LDBL_MIN_10_EXP__ = -@as(c_int, 4931);\npub const __LDBL_MIN_EXP__ = -@as(c_int, 16381);\npub const __LDBL_MIN__ = @as(c_longdouble, 3.36210314311209350626e-4932);\npub const __FLT_EVAL_METHOD__ = @as(c_int, 0);\npub const __FLT_RADIX__ = @as(c_int, 2);\npub const __DECIMAL_DIG__ = __LDBL_DECIMAL_DIG__;\n",
+    "stderr": ""
+  },
+  {
+    "case": "zig_char_promotion",
+    "cmd": [
+      "zig",
+      "build-exe",
+      "probe.zig",
+      "-femit-bin=zig_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "zig_char_promotion",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/zig_char_promotion/zig_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "256\n"
+  },
+  {
+    "case": "zig_signed_char_control",
+    "cmd": [
+      "clang",
+      "-fsigned-char",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "driver.c",
+      "-o",
+      "c_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "zig_signed_char_control",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/zig_signed_char_control/c_runner"
+    ],
+    "code": 0,
+    "stdout": "0\n",
+    "stderr": ""
+  },
+  {
+    "case": "zig_signed_char_control",
+    "cmd": [
+      "zig",
+      "translate-c",
+      "probe.c"
+    ],
+    "code": 0,
+    "stdout": "const __root = @This();\npub const __builtin = @import(\"std\").zig.c_translation.builtins;\npub const __helpers = @import(\"std\").zig.c_translation.helpers;\npub export fn probe() c_int {\n    var x: i8 = @truncate(-@as(c_int, 1));\n    _ = &x;\n    return @as(c_int, x) + @as(c_int, 1);\n}\n\npub const __VERSION__ = \"Aro aro-zig\";\npub const __Aro__ = \"\";\npub const __STDC__ = @as(c_int, 1);\npub const __STDC_HOSTED__ = @as(c_int, 1);\npub const __STDC_UTF_16__ = @as(c_int, 1);\npub const __STDC_UTF_32__ = @as(c_int, 1);\npub const __STDC_EMBED_NOT_FOUND__ = @as(c_int, 0);\npub const __STDC_EMBED_FOUND__ = @as(c_int, 1);\npub const __STDC_EMBED_EMPTY__ = @as(c_int, 2);\npub const __STDC_VERSION__ = @as(c_long, 201710);\npub const __GNUC__ = @as(c_int, 7);\npub const __GNUC_MINOR__ = @as(c_int, 1);\npub const __GNUC_PATCHLEVEL__ = @as(c_int, 0);\npub const __ARO_EMULATE_NO__ = @as(c_int, 0);\npub const __ARO_EMULATE_CLANG__ = @as(c_int, 1);\npub const __ARO_EMULATE_GCC__ = @as(c_int, 2);\npub const __ARO_EMULATE_MSVC__ = @as(c_int, 3);\npub const __ARO_EMULATE__ = __ARO_EMULATE_GCC__;\npub inline fn __building_module(x: anytype) @TypeOf(@as(c_int, 0)) {\n    _ = &x;\n    return @as(c_int, 0);\n}\npub const linux = @as(c_int, 1);\npub const __linux = @as(c_int, 1);\npub const __linux__ = @as(c_int, 1);\npub const unix = @as(c_int, 1);\npub const __unix = @as(c_int, 1);\npub const __unix__ = @as(c_int, 1);\npub const __code_model_small__ = @as(c_int, 1);\npub const __amd64__ = @as(c_int, 1);\npub const __amd64 = @as(c_int, 1);\npub const __x86_64__ = @as(c_int, 1);\npub const __x86_64 = @as(c_int, 1);\npub const __SEG_GS = @as(c_int, 1);\npub const __SEG_FS = @as(c_int, 1);\npub const __seg_gs = @compileError(\"unable to translate macro: undefined identifier `address_space`\"); // <builtin>:33:9\npub const __seg_fs = @compileError(\"unable to translate macro: undefined identifier `address_space`\"); // <builtin>:34:9\npub const __LAHF_SAHF__ = @as(c_int, 1);\npub const __AES__ = @as(c_int, 1);\npub const __PCLMUL__ = @as(c_int, 1);\npub const __LZCNT__ = @as(c_int, 1);\npub const __RDRND__ = @as(c_int, 1);\npub const __FSGSBASE__ = @as(c_int, 1);\npub const __BMI__ = @as(c_int, 1);\npub const __BMI2__ = @as(c_int, 1);\npub const __POPCNT__ = @as(c_int, 1);\npub const __RTM__ = @as(c_int, 1);\npub const __PRFCHW__ = @as(c_int, 1);\npub const __RDSEED__ = @as(c_int, 1);\npub const __ADX__ = @as(c_int, 1);\npub const __MOVBE__ = @as(c_int, 1);\npub const __FMA__ = @as(c_int, 1);\npub const __F16C__ = @as(c_int, 1);\npub const __EVEX512__ = @as(c_int, 1);\npub const __AVX512CD__ = @as(c_int, 1);\npub const __AVX512DQ__ = @as(c_int, 1);\npub const __AVX512BW__ = @as(c_int, 1);\npub const __AVX512VL__ = @as(c_int, 1);\npub const __EVEX256__ = @as(c_int, 1);\npub const __FXSR__ = @as(c_int, 1);\npub const __XSAVE__ = @as(c_int, 1);\npub const __XSAVEOPT__ = @as(c_int, 1);\npub const __XSAVEC__ = @as(c_int, 1);\npub const __XSAVES__ = @as(c_int, 1);\npub const __PKU__ = @as(c_int, 1);\npub const __CLFLUSHOPT__ = @as(c_int, 1);\npub const __CLWB__ = @as(c_int, 1);\npub const __INVPCID__ = @as(c_int, 1);\npub const __CRC32__ = @as(c_int, 1);\npub const __AVX512F__ = @as(c_int, 1);\npub const __AVX2__ = @as(c_int, 1);\npub const __AVX__ = @as(c_int, 1);\npub const __SSE4_2__ = @as(c_int, 1);\npub const __SSE4_1__ = @as(c_int, 1);\npub const __SSSE3__ = @as(c_int, 1);\npub const __SSE3__ = @as(c_int, 1);\npub const __SSE2__ = @as(c_int, 1);\npub const __SSE__ = @as(c_int, 1);\npub const __SSE_MATH__ = @as(c_int, 1);\npub const __MMX__ = @as(c_int, 1);\npub const __GCC_HAVE_SYNC_COMPARE_AND_SWAP_8 = @as(c_int, 1);\npub const __SIZEOF_FLOAT128__ = @as(c_int, 16);\npub const _LP64 = @as(c_int, 1);\npub const __LP64__ = @as(c_int, 1);\npub const __FLOAT128__ = @as(c_int, 1);\npub const __ORDER_LITTLE_ENDIAN__ = @as(c_int, 1234);\npub const __ORDER_BIG_ENDIAN__ = @as(c_int, 4321);\npub const __ORDER_PDP_ENDIAN__ = @as(c_int, 3412);\npub const __BYTE_ORDER__ = __ORDER_LITTLE_ENDIAN__;\npub const __LITTLE_ENDIAN__ = @as(c_int, 1);\npub const __ELF__ = @as(c_int, 1);\npub const __ATOMIC_RELAXED = @as(c_int, 0);\npub const __ATOMIC_CONSUME = @as(c_int, 1);\npub const __ATOMIC_ACQUIRE = @as(c_int, 2);\npub const __ATOMIC_RELEASE = @as(c_int, 3);\npub const __ATOMIC_ACQ_REL = @as(c_int, 4);\npub const __ATOMIC_SEQ_CST = @as(c_int, 5);\npub const __ATOMIC_BOOL_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_CHAR_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_CHAR16_T_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_CHAR32_T_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_WCHAR_T_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_WINT_T_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_SHORT_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_INT_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_LONG_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_LLONG_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_POINTER_LOCK_FREE = @as(c_int, 1);\npub const __WINT_UNSIGNED__ = @as(c_int, 1);\npub const __CHAR_BIT__ = @as(c_int, 8);\npub const __BOOL_WIDTH__ = @as(c_int, 8);\npub const __SCHAR_MAX__ = @as(c_int, 127);\npub const __SCHAR_WIDTH__ = @as(c_int, 8);\npub const __SHRT_MAX__ = @as(c_int, 32767);\npub const __SHRT_WIDTH__ = @as(c_int, 16);\npub const __INT_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __INT_WIDTH__ = @as(c_int, 32);\npub const __LONG_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __LONG_WIDTH__ = @as(c_int, 64);\npub const __LONG_LONG_MAX__ = @as(c_longlong, 9223372036854775807);\npub const __LONG_LONG_WIDTH__ = @as(c_int, 64);\npub const __WCHAR_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __WCHAR_WIDTH__ = @as(c_int, 32);\npub const __WINT_MAX__ = __helpers.promoteIntLiteral(c_uint, 4294967295, .decimal);\npub const __WINT_WIDTH__ = @as(c_int, 32);\npub const __INTMAX_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __INTMAX_WIDTH__ = @as(c_int, 64);\npub const __SIZE_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const __SIZE_WIDTH__ = @as(c_int, 64);\npub const __UINTMAX_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const __UINTMAX_WIDTH__ = @as(c_int, 64);\npub const __PTRDIFF_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __PTRDIFF_WIDTH__ = @as(c_int, 64);\npub const __INTPTR_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __INTPTR_WIDTH__ = @as(c_int, 64);\npub const __UINTPTR_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const __UINTPTR_WIDTH__ = @as(c_int, 64);\npub const __SIG_ATOMIC_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __SIG_ATOMIC_WIDTH__ = @as(c_int, 32);\npub const __BITINT_MAXWIDTH__ = __helpers.promoteIntLiteral(c_int, 65535, .decimal);\npub const __SIZEOF_FLOAT__ = @as(c_int, 4);\npub const __SIZEOF_DOUBLE__ = @as(c_int, 8);\npub const __SIZEOF_LONG_DOUBLE__ = @as(c_int, 10);\npub const __SIZEOF_SHORT__ = @as(c_int, 2);\npub const __SIZEOF_INT__ = @as(c_int, 4);\npub const __SIZEOF_LONG__ = @as(c_int, 8);\npub const __SIZEOF_LONG_LONG__ = @as(c_int, 8);\npub const __SIZEOF_POINTER__ = @as(c_int, 8);\npub const __SIZEOF_PTRDIFF_T__ = @as(c_int, 8);\npub const __SIZEOF_SIZE_T__ = @as(c_int, 8);\npub const __SIZEOF_WCHAR_T__ = @as(c_int, 4);\npub const __SIZEOF_WINT_T__ = @as(c_int, 4);\npub const __SIZEOF_INT128__ = @as(c_int, 16);\npub const __INTPTR_TYPE__ = c_long;\npub const __UINTPTR_TYPE__ = c_ulong;\npub const __INTMAX_TYPE__ = c_long;\npub const __INTMAX_C_SUFFIX__ = @compileError(\"unable to translate macro: undefined identifier `L`\"); // <builtin>:155:9\npub const __INTMAX_C = __helpers.L_SUFFIX;\npub const __UINTMAX_TYPE__ = c_ulong;\npub const __UINTMAX_C_SUFFIX__ = @compileError(\"unable to translate macro: undefined identifier `UL`\"); // <builtin>:158:9\npub const __UINTMAX_C = __helpers.UL_SUFFIX;\npub const __PTRDIFF_TYPE__ = c_long;\npub const __SIZE_TYPE__ = c_ulong;\npub const __WCHAR_TYPE__ = c_int;\npub const __WINT_TYPE__ = c_uint;\npub const __CHAR16_TYPE__ = c_ushort;\npub const __CHAR32_TYPE__ = c_uint;\npub const __INT8_TYPE__ = i8;\npub const __INT8_FMTd__ = \"hhd\";\npub const __INT8_FMTi__ = \"hhi\";\npub const __INT8_C_SUFFIX__ = \"\";\npub inline fn __INT8_C(c: anytype) @TypeOf(c) {\n    _ = &c;\n    return c;\n}\npub const __INT16_TYPE__ = c_short;\npub const __INT16_FMTd__ = \"hd\";\npub const __INT16_FMTi__ = \"hi\";\npub const __INT16_C_SUFFIX__ = \"\";\npub inline fn __INT16_C(c: anytype) @TypeOf(c) {\n    _ = &c;\n    return c;\n}\npub const __INT32_TYPE__ = c_int;\npub const __INT32_FMTd__ = \"d\";\npub const __INT32_FMTi__ = \"i\";\npub const __INT32_C_SUFFIX__ = \"\";\npub inline fn __INT32_C(c: anytype) @TypeOf(c) {\n    _ = &c;\n    return c;\n}\npub const __INT64_TYPE__ = c_long;\npub const __INT64_FMTd__ = \"ld\";\npub const __INT64_FMTi__ = \"li\";\npub const __INT64_C_SUFFIX__ = @compileError(\"unable to translate macro: undefined identifier `L`\"); // <builtin>:184:9\npub const __INT64_C = __helpers.L_SUFFIX;\npub const __UINT8_TYPE__ = u8;\npub const __UINT8_FMTo__ = \"hho\";\npub const __UINT8_FMTu__ = \"hhu\";\npub const __UINT8_FMTx__ = \"hhx\";\npub const __UINT8_FMTX__ = \"hhX\";\npub const __UINT8_C_SUFFIX__ = \"\";\npub inline fn __UINT8_C(c: anytype) @TypeOf(c) {\n    _ = &c;\n    return c;\n}\npub const __UINT8_MAX__ = @as(c_int, 255);\npub const __INT8_MAX__ = @as(c_int, 127);\npub const __UINT16_TYPE__ = c_ushort;\npub const __UINT16_FMTo__ = \"ho\";\npub const __UINT16_FMTu__ = \"hu\";\npub const __UINT16_FMTx__ = \"hx\";\npub const __UINT16_FMTX__ = \"hX\";\npub const __UINT16_C_SUFFIX__ = \"\";\npub inline fn __UINT16_C(c: anytype) @TypeOf(c) {\n    _ = &c;\n    return c;\n}\npub const __UINT16_MAX__ = __helpers.promoteIntLiteral(c_int, 65535, .decimal);\npub const __INT16_MAX__ = @as(c_int, 32767);\npub const __UINT32_TYPE__ = c_uint;\npub const __UINT32_FMTo__ = \"o\";\npub const __UINT32_FMTu__ = \"u\";\npub const __UINT32_FMTx__ = \"x\";\npub const __UINT32_FMTX__ = \"X\";\npub const __UINT32_C_SUFFIX__ = @compileError(\"unable to translate macro: undefined identifier `U`\"); // <builtin>:209:9\npub const __UINT32_C = __helpers.U_SUFFIX;\npub const __UINT32_MAX__ = __helpers.promoteIntLiteral(c_uint, 4294967295, .decimal);\npub const __INT32_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __UINT64_TYPE__ = c_ulong;\npub const __UINT64_FMTo__ = \"lo\";\npub const __UINT64_FMTu__ = \"lu\";\npub const __UINT64_FMTx__ = \"lx\";\npub const __UINT64_FMTX__ = \"lX\";\npub const __UINT64_C_SUFFIX__ = @compileError(\"unable to translate macro: undefined identifier `UL`\"); // <builtin>:218:9\npub const __UINT64_C = __helpers.UL_SUFFIX;\npub const __UINT64_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const __INT64_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __INT_LEAST8_TYPE__ = i8;\npub const __INT_LEAST8_MAX__ = @as(c_int, 127);\npub const __INT_LEAST8_WIDTH__ = @as(c_int, 8);\npub const INT_LEAST8_FMTd__ = \"hhd\";\npub const INT_LEAST8_FMTi__ = \"hhi\";\npub const __UINT_LEAST8_TYPE__ = u8;\npub const __UINT_LEAST8_MAX__ = @as(c_int, 255);\npub const UINT_LEAST8_FMTo__ = \"hho\";\npub const UINT_LEAST8_FMTu__ = \"hhu\";\npub const UINT_LEAST8_FMTx__ = \"hhx\";\npub const UINT_LEAST8_FMTX__ = \"hhX\";\npub const __INT_FAST8_TYPE__ = i8;\npub const __INT_FAST8_MAX__ = @as(c_int, 127);\npub const __INT_FAST8_WIDTH__ = @as(c_int, 8);\npub const INT_FAST8_FMTd__ = \"hhd\";\npub const INT_FAST8_FMTi__ = \"hhi\";\npub const __UINT_FAST8_TYPE__ = u8;\npub const __UINT_FAST8_MAX__ = @as(c_int, 255);\npub const UINT_FAST8_FMTo__ = \"hho\";\npub const UINT_FAST8_FMTu__ = \"hhu\";\npub const UINT_FAST8_FMTx__ = \"hhx\";\npub const UINT_FAST8_FMTX__ = \"hhX\";\npub const __INT_LEAST16_TYPE__ = c_short;\npub const __INT_LEAST16_MAX__ = @as(c_int, 32767);\npub const __INT_LEAST16_WIDTH__ = @as(c_int, 16);\npub const INT_LEAST16_FMTd__ = \"hd\";\npub const INT_LEAST16_FMTi__ = \"hi\";\npub const __UINT_LEAST16_TYPE__ = c_ushort;\npub const __UINT_LEAST16_MAX__ = __helpers.promoteIntLiteral(c_int, 65535, .decimal);\npub const UINT_LEAST16_FMTo__ = \"ho\";\npub const UINT_LEAST16_FMTu__ = \"hu\";\npub const UINT_LEAST16_FMTx__ = \"hx\";\npub const UINT_LEAST16_FMTX__ = \"hX\";\npub const __INT_FAST16_TYPE__ = c_short;\npub const __INT_FAST16_MAX__ = @as(c_int, 32767);\npub const __INT_FAST16_WIDTH__ = @as(c_int, 16);\npub const INT_FAST16_FMTd__ = \"hd\";\npub const INT_FAST16_FMTi__ = \"hi\";\npub const __UINT_FAST16_TYPE__ = c_ushort;\npub const __UINT_FAST16_MAX__ = __helpers.promoteIntLiteral(c_int, 65535, .decimal);\npub const UINT_FAST16_FMTo__ = \"ho\";\npub const UINT_FAST16_FMTu__ = \"hu\";\npub const UINT_FAST16_FMTx__ = \"hx\";\npub const UINT_FAST16_FMTX__ = \"hX\";\npub const __INT_LEAST32_TYPE__ = c_int;\npub const __INT_LEAST32_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __INT_LEAST32_WIDTH__ = @as(c_int, 32);\npub const INT_LEAST32_FMTd__ = \"d\";\npub const INT_LEAST32_FMTi__ = \"i\";\npub const __UINT_LEAST32_TYPE__ = c_uint;\npub const __UINT_LEAST32_MAX__ = __helpers.promoteIntLiteral(c_uint, 4294967295, .decimal);\npub const UINT_LEAST32_FMTo__ = \"o\";\npub const UINT_LEAST32_FMTu__ = \"u\";\npub const UINT_LEAST32_FMTx__ = \"x\";\npub const UINT_LEAST32_FMTX__ = \"X\";\npub const __INT_FAST32_TYPE__ = c_int;\npub const __INT_FAST32_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __INT_FAST32_WIDTH__ = @as(c_int, 32);\npub const INT_FAST32_FMTd__ = \"d\";\npub const INT_FAST32_FMTi__ = \"i\";\npub const __UINT_FAST32_TYPE__ = c_uint;\npub const __UINT_FAST32_MAX__ = __helpers.promoteIntLiteral(c_uint, 4294967295, .decimal);\npub const UINT_FAST32_FMTo__ = \"o\";\npub const UINT_FAST32_FMTu__ = \"u\";\npub const UINT_FAST32_FMTx__ = \"x\";\npub const UINT_FAST32_FMTX__ = \"X\";\npub const __INT_LEAST64_TYPE__ = c_long;\npub const __INT_LEAST64_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __INT_LEAST64_WIDTH__ = @as(c_int, 64);\npub const INT_LEAST64_FMTd__ = \"ld\";\npub const INT_LEAST64_FMTi__ = \"li\";\npub const __UINT_LEAST64_TYPE__ = c_ulong;\npub const __UINT_LEAST64_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const UINT_LEAST64_FMTo__ = \"lo\";\npub const UINT_LEAST64_FMTu__ = \"lu\";\npub const UINT_LEAST64_FMTx__ = \"lx\";\npub const UINT_LEAST64_FMTX__ = \"lX\";\npub const __INT_FAST64_TYPE__ = c_long;\npub const __INT_FAST64_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __INT_FAST64_WIDTH__ = @as(c_int, 64);\npub const INT_FAST64_FMTd__ = \"ld\";\npub const INT_FAST64_FMTi__ = \"li\";\npub const __UINT_FAST64_TYPE__ = c_ulong;\npub const __UINT_FAST64_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const UINT_FAST64_FMTo__ = \"lo\";\npub const UINT_FAST64_FMTu__ = \"lu\";\npub const UINT_FAST64_FMTx__ = \"lx\";\npub const UINT_FAST64_FMTX__ = \"lX\";\npub const __FLT16_DENORM_MIN__ = @as(f16, 5.9604644775390625e-8);\npub const __FLT16_HAS_DENORM__ = \"\";\npub const __FLT16_DIG__ = @as(c_int, 3);\npub const __FLT16_DECIMAL_DIG__ = @as(c_int, 5);\npub const __FLT16_EPSILON__ = @as(f16, 9.765625e-4);\npub const __FLT16_HAS_INFINITY__ = \"\";\npub const __FLT16_HAS_QUIET_NAN__ = \"\";\npub const __FLT16_MANT_DIG__ = @as(c_int, 11);\npub const __FLT16_MAX_10_EXP__ = @as(c_int, 4);\npub const __FLT16_MAX_EXP__ = @as(c_int, 16);\npub const __FLT16_MAX__ = @as(f16, 6.5504e+4);\npub const __FLT16_MIN_10_EXP__ = -@as(c_int, 4);\npub const __FLT16_MIN_EXP__ = -@as(c_int, 13);\npub const __FLT16_MIN__ = @as(f16, 6.103515625e-5);\npub const __FLT_DENORM_MIN__ = @as(f32, 1.40129846e-45);\npub const __FLT_HAS_DENORM__ = \"\";\npub const __FLT_DIG__ = @as(c_int, 6);\npub const __FLT_DECIMAL_DIG__ = @as(c_int, 9);\npub const __FLT_EPSILON__ = @as(f32, 1.19209290e-7);\npub const __FLT_HAS_INFINITY__ = \"\";\npub const __FLT_HAS_QUIET_NAN__ = \"\";\npub const __FLT_MANT_DIG__ = @as(c_int, 24);\npub const __FLT_MAX_10_EXP__ = @as(c_int, 38);\npub const __FLT_MAX_EXP__ = @as(c_int, 128);\npub const __FLT_MAX__ = @as(f32, 3.40282347e+38);\npub const __FLT_MIN_10_EXP__ = -@as(c_int, 37);\npub const __FLT_MIN_EXP__ = -@as(c_int, 125);\npub const __FLT_MIN__ = @as(f32, 1.17549435e-38);\npub const __DBL_DENORM_MIN__ = @as(f64, 4.9406564584124654e-324);\npub const __DBL_HAS_DENORM__ = \"\";\npub const __DBL_DIG__ = @as(c_int, 15);\npub const __DBL_DECIMAL_DIG__ = @as(c_int, 17);\npub const __DBL_EPSILON__ = @as(f64, 2.2204460492503131e-16);\npub const __DBL_HAS_INFINITY__ = \"\";\npub const __DBL_HAS_QUIET_NAN__ = \"\";\npub const __DBL_MANT_DIG__ = @as(c_int, 53);\npub const __DBL_MAX_10_EXP__ = @as(c_int, 308);\npub const __DBL_MAX_EXP__ = @as(c_int, 1024);\npub const __DBL_MAX__ = @as(f64, 1.7976931348623157e+308);\npub const __DBL_MIN_10_EXP__ = -@as(c_int, 307);\npub const __DBL_MIN_EXP__ = -@as(c_int, 1021);\npub const __DBL_MIN__ = @as(f64, 2.2250738585072014e-308);\npub const __LDBL_DENORM_MIN__ = @as(c_longdouble, 3.64519953188247460253e-4951);\npub const __LDBL_HAS_DENORM__ = \"\";\npub const __LDBL_DIG__ = @as(c_int, 18);\npub const __LDBL_DECIMAL_DIG__ = @as(c_int, 21);\npub const __LDBL_EPSILON__ = @as(c_longdouble, 1.08420217248550443401e-19);\npub const __LDBL_HAS_INFINITY__ = \"\";\npub const __LDBL_HAS_QUIET_NAN__ = \"\";\npub const __LDBL_MANT_DIG__ = @as(c_int, 64);\npub const __LDBL_MAX_10_EXP__ = @as(c_int, 4932);\npub const __LDBL_MAX_EXP__ = @as(c_int, 16384);\npub const __LDBL_MAX__ = @as(c_longdouble, 1.18973149535723176502e+4932);\npub const __LDBL_MIN_10_EXP__ = -@as(c_int, 4931);\npub const __LDBL_MIN_EXP__ = -@as(c_int, 16381);\npub const __LDBL_MIN__ = @as(c_longdouble, 3.36210314311209350626e-4932);\npub const __FLT_EVAL_METHOD__ = @as(c_int, 0);\npub const __FLT_RADIX__ = @as(c_int, 2);\npub const __DECIMAL_DIG__ = __LDBL_DECIMAL_DIG__;\n",
+    "stderr": ""
+  },
+  {
+    "case": "zig_signed_char_control",
+    "cmd": [
+      "zig",
+      "build-exe",
+      "probe.zig",
+      "-femit-bin=zig_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "zig_signed_char_control",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/zig_signed_char_control/zig_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "0\n"
+  },
+  {
+    "case": "zig_char_float",
+    "cmd": [
+      "clang",
+      "-fsigned-char",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "driver.c",
+      "-o",
+      "c_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "zig_char_float",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/zig_char_float/c_runner"
+    ],
+    "code": 0,
+    "stdout": "-1\n",
+    "stderr": ""
+  },
+  {
+    "case": "zig_char_float",
+    "cmd": [
+      "zig",
+      "translate-c",
+      "probe.c"
+    ],
+    "code": 0,
+    "stdout": "const __root = @This();\npub const __builtin = @import(\"std\").zig.c_translation.builtins;\npub const __helpers = @import(\"std\").zig.c_translation.helpers;\npub export fn probe() c_int {\n    var f: f32 = -@as(f32, 1.0);\n    _ = &f;\n    var x: u8 = @intFromFloat(f);\n    _ = &x;\n    return x;\n}\n\npub const __VERSION__ = \"Aro aro-zig\";\npub const __Aro__ = \"\";\npub const __STDC__ = @as(c_int, 1);\npub const __STDC_HOSTED__ = @as(c_int, 1);\npub const __STDC_UTF_16__ = @as(c_int, 1);\npub const __STDC_UTF_32__ = @as(c_int, 1);\npub const __STDC_EMBED_NOT_FOUND__ = @as(c_int, 0);\npub const __STDC_EMBED_FOUND__ = @as(c_int, 1);\npub const __STDC_EMBED_EMPTY__ = @as(c_int, 2);\npub const __STDC_VERSION__ = @as(c_long, 201710);\npub const __GNUC__ = @as(c_int, 7);\npub const __GNUC_MINOR__ = @as(c_int, 1);\npub const __GNUC_PATCHLEVEL__ = @as(c_int, 0);\npub const __ARO_EMULATE_NO__ = @as(c_int, 0);\npub const __ARO_EMULATE_CLANG__ = @as(c_int, 1);\npub const __ARO_EMULATE_GCC__ = @as(c_int, 2);\npub const __ARO_EMULATE_MSVC__ = @as(c_int, 3);\npub const __ARO_EMULATE__ = __ARO_EMULATE_GCC__;\npub inline fn __building_module(x: anytype) @TypeOf(@as(c_int, 0)) {\n    _ = &x;\n    return @as(c_int, 0);\n}\npub const linux = @as(c_int, 1);\npub const __linux = @as(c_int, 1);\npub const __linux__ = @as(c_int, 1);\npub const unix = @as(c_int, 1);\npub const __unix = @as(c_int, 1);\npub const __unix__ = @as(c_int, 1);\npub const __code_model_small__ = @as(c_int, 1);\npub const __amd64__ = @as(c_int, 1);\npub const __amd64 = @as(c_int, 1);\npub const __x86_64__ = @as(c_int, 1);\npub const __x86_64 = @as(c_int, 1);\npub const __SEG_GS = @as(c_int, 1);\npub const __SEG_FS = @as(c_int, 1);\npub const __seg_gs = @compileError(\"unable to translate macro: undefined identifier `address_space`\"); // <builtin>:33:9\npub const __seg_fs = @compileError(\"unable to translate macro: undefined identifier `address_space`\"); // <builtin>:34:9\npub const __LAHF_SAHF__ = @as(c_int, 1);\npub const __AES__ = @as(c_int, 1);\npub const __PCLMUL__ = @as(c_int, 1);\npub const __LZCNT__ = @as(c_int, 1);\npub const __RDRND__ = @as(c_int, 1);\npub const __FSGSBASE__ = @as(c_int, 1);\npub const __BMI__ = @as(c_int, 1);\npub const __BMI2__ = @as(c_int, 1);\npub const __POPCNT__ = @as(c_int, 1);\npub const __RTM__ = @as(c_int, 1);\npub const __PRFCHW__ = @as(c_int, 1);\npub const __RDSEED__ = @as(c_int, 1);\npub const __ADX__ = @as(c_int, 1);\npub const __MOVBE__ = @as(c_int, 1);\npub const __FMA__ = @as(c_int, 1);\npub const __F16C__ = @as(c_int, 1);\npub const __EVEX512__ = @as(c_int, 1);\npub const __AVX512CD__ = @as(c_int, 1);\npub const __AVX512DQ__ = @as(c_int, 1);\npub const __AVX512BW__ = @as(c_int, 1);\npub const __AVX512VL__ = @as(c_int, 1);\npub const __EVEX256__ = @as(c_int, 1);\npub const __FXSR__ = @as(c_int, 1);\npub const __XSAVE__ = @as(c_int, 1);\npub const __XSAVEOPT__ = @as(c_int, 1);\npub const __XSAVEC__ = @as(c_int, 1);\npub const __XSAVES__ = @as(c_int, 1);\npub const __PKU__ = @as(c_int, 1);\npub const __CLFLUSHOPT__ = @as(c_int, 1);\npub const __CLWB__ = @as(c_int, 1);\npub const __INVPCID__ = @as(c_int, 1);\npub const __CRC32__ = @as(c_int, 1);\npub const __AVX512F__ = @as(c_int, 1);\npub const __AVX2__ = @as(c_int, 1);\npub const __AVX__ = @as(c_int, 1);\npub const __SSE4_2__ = @as(c_int, 1);\npub const __SSE4_1__ = @as(c_int, 1);\npub const __SSSE3__ = @as(c_int, 1);\npub const __SSE3__ = @as(c_int, 1);\npub const __SSE2__ = @as(c_int, 1);\npub const __SSE__ = @as(c_int, 1);\npub const __SSE_MATH__ = @as(c_int, 1);\npub const __MMX__ = @as(c_int, 1);\npub const __GCC_HAVE_SYNC_COMPARE_AND_SWAP_8 = @as(c_int, 1);\npub const __SIZEOF_FLOAT128__ = @as(c_int, 16);\npub const _LP64 = @as(c_int, 1);\npub const __LP64__ = @as(c_int, 1);\npub const __FLOAT128__ = @as(c_int, 1);\npub const __ORDER_LITTLE_ENDIAN__ = @as(c_int, 1234);\npub const __ORDER_BIG_ENDIAN__ = @as(c_int, 4321);\npub const __ORDER_PDP_ENDIAN__ = @as(c_int, 3412);\npub const __BYTE_ORDER__ = __ORDER_LITTLE_ENDIAN__;\npub const __LITTLE_ENDIAN__ = @as(c_int, 1);\npub const __ELF__ = @as(c_int, 1);\npub const __ATOMIC_RELAXED = @as(c_int, 0);\npub const __ATOMIC_CONSUME = @as(c_int, 1);\npub const __ATOMIC_ACQUIRE = @as(c_int, 2);\npub const __ATOMIC_RELEASE = @as(c_int, 3);\npub const __ATOMIC_ACQ_REL = @as(c_int, 4);\npub const __ATOMIC_SEQ_CST = @as(c_int, 5);\npub const __ATOMIC_BOOL_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_CHAR_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_CHAR16_T_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_CHAR32_T_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_WCHAR_T_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_WINT_T_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_SHORT_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_INT_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_LONG_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_LLONG_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_POINTER_LOCK_FREE = @as(c_int, 1);\npub const __WINT_UNSIGNED__ = @as(c_int, 1);\npub const __CHAR_BIT__ = @as(c_int, 8);\npub const __BOOL_WIDTH__ = @as(c_int, 8);\npub const __SCHAR_MAX__ = @as(c_int, 127);\npub const __SCHAR_WIDTH__ = @as(c_int, 8);\npub const __SHRT_MAX__ = @as(c_int, 32767);\npub const __SHRT_WIDTH__ = @as(c_int, 16);\npub const __INT_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __INT_WIDTH__ = @as(c_int, 32);\npub const __LONG_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __LONG_WIDTH__ = @as(c_int, 64);\npub const __LONG_LONG_MAX__ = @as(c_longlong, 9223372036854775807);\npub const __LONG_LONG_WIDTH__ = @as(c_int, 64);\npub const __WCHAR_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __WCHAR_WIDTH__ = @as(c_int, 32);\npub const __WINT_MAX__ = __helpers.promoteIntLiteral(c_uint, 4294967295, .decimal);\npub const __WINT_WIDTH__ = @as(c_int, 32);\npub const __INTMAX_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __INTMAX_WIDTH__ = @as(c_int, 64);\npub const __SIZE_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const __SIZE_WIDTH__ = @as(c_int, 64);\npub const __UINTMAX_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const __UINTMAX_WIDTH__ = @as(c_int, 64);\npub const __PTRDIFF_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __PTRDIFF_WIDTH__ = @as(c_int, 64);\npub const __INTPTR_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __INTPTR_WIDTH__ = @as(c_int, 64);\npub const __UINTPTR_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const __UINTPTR_WIDTH__ = @as(c_int, 64);\npub const __SIG_ATOMIC_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __SIG_ATOMIC_WIDTH__ = @as(c_int, 32);\npub const __BITINT_MAXWIDTH__ = __helpers.promoteIntLiteral(c_int, 65535, .decimal);\npub const __SIZEOF_FLOAT__ = @as(c_int, 4);\npub const __SIZEOF_DOUBLE__ = @as(c_int, 8);\npub const __SIZEOF_LONG_DOUBLE__ = @as(c_int, 10);\npub const __SIZEOF_SHORT__ = @as(c_int, 2);\npub const __SIZEOF_INT__ = @as(c_int, 4);\npub const __SIZEOF_LONG__ = @as(c_int, 8);\npub const __SIZEOF_LONG_LONG__ = @as(c_int, 8);\npub const __SIZEOF_POINTER__ = @as(c_int, 8);\npub const __SIZEOF_PTRDIFF_T__ = @as(c_int, 8);\npub const __SIZEOF_SIZE_T__ = @as(c_int, 8);\npub const __SIZEOF_WCHAR_T__ = @as(c_int, 4);\npub const __SIZEOF_WINT_T__ = @as(c_int, 4);\npub const __SIZEOF_INT128__ = @as(c_int, 16);\npub const __INTPTR_TYPE__ = c_long;\npub const __UINTPTR_TYPE__ = c_ulong;\npub const __INTMAX_TYPE__ = c_long;\npub const __INTMAX_C_SUFFIX__ = @compileError(\"unable to translate macro: undefined identifier `L`\"); // <builtin>:155:9\npub const __INTMAX_C = __helpers.L_SUFFIX;\npub const __UINTMAX_TYPE__ = c_ulong;\npub const __UINTMAX_C_SUFFIX__ = @compileError(\"unable to translate macro: undefined identifier `UL`\"); // <builtin>:158:9\npub const __UINTMAX_C = __helpers.UL_SUFFIX;\npub const __PTRDIFF_TYPE__ = c_long;\npub const __SIZE_TYPE__ = c_ulong;\npub const __WCHAR_TYPE__ = c_int;\npub const __WINT_TYPE__ = c_uint;\npub const __CHAR16_TYPE__ = c_ushort;\npub const __CHAR32_TYPE__ = c_uint;\npub const __INT8_TYPE__ = i8;\npub const __INT8_FMTd__ = \"hhd\";\npub const __INT8_FMTi__ = \"hhi\";\npub const __INT8_C_SUFFIX__ = \"\";\npub inline fn __INT8_C(c: anytype) @TypeOf(c) {\n    _ = &c;\n    return c;\n}\npub const __INT16_TYPE__ = c_short;\npub const __INT16_FMTd__ = \"hd\";\npub const __INT16_FMTi__ = \"hi\";\npub const __INT16_C_SUFFIX__ = \"\";\npub inline fn __INT16_C(c: anytype) @TypeOf(c) {\n    _ = &c;\n    return c;\n}\npub const __INT32_TYPE__ = c_int;\npub const __INT32_FMTd__ = \"d\";\npub const __INT32_FMTi__ = \"i\";\npub const __INT32_C_SUFFIX__ = \"\";\npub inline fn __INT32_C(c: anytype) @TypeOf(c) {\n    _ = &c;\n    return c;\n}\npub const __INT64_TYPE__ = c_long;\npub const __INT64_FMTd__ = \"ld\";\npub const __INT64_FMTi__ = \"li\";\npub const __INT64_C_SUFFIX__ = @compileError(\"unable to translate macro: undefined identifier `L`\"); // <builtin>:184:9\npub const __INT64_C = __helpers.L_SUFFIX;\npub const __UINT8_TYPE__ = u8;\npub const __UINT8_FMTo__ = \"hho\";\npub const __UINT8_FMTu__ = \"hhu\";\npub const __UINT8_FMTx__ = \"hhx\";\npub const __UINT8_FMTX__ = \"hhX\";\npub const __UINT8_C_SUFFIX__ = \"\";\npub inline fn __UINT8_C(c: anytype) @TypeOf(c) {\n    _ = &c;\n    return c;\n}\npub const __UINT8_MAX__ = @as(c_int, 255);\npub const __INT8_MAX__ = @as(c_int, 127);\npub const __UINT16_TYPE__ = c_ushort;\npub const __UINT16_FMTo__ = \"ho\";\npub const __UINT16_FMTu__ = \"hu\";\npub const __UINT16_FMTx__ = \"hx\";\npub const __UINT16_FMTX__ = \"hX\";\npub const __UINT16_C_SUFFIX__ = \"\";\npub inline fn __UINT16_C(c: anytype) @TypeOf(c) {\n    _ = &c;\n    return c;\n}\npub const __UINT16_MAX__ = __helpers.promoteIntLiteral(c_int, 65535, .decimal);\npub const __INT16_MAX__ = @as(c_int, 32767);\npub const __UINT32_TYPE__ = c_uint;\npub const __UINT32_FMTo__ = \"o\";\npub const __UINT32_FMTu__ = \"u\";\npub const __UINT32_FMTx__ = \"x\";\npub const __UINT32_FMTX__ = \"X\";\npub const __UINT32_C_SUFFIX__ = @compileError(\"unable to translate macro: undefined identifier `U`\"); // <builtin>:209:9\npub const __UINT32_C = __helpers.U_SUFFIX;\npub const __UINT32_MAX__ = __helpers.promoteIntLiteral(c_uint, 4294967295, .decimal);\npub const __INT32_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __UINT64_TYPE__ = c_ulong;\npub const __UINT64_FMTo__ = \"lo\";\npub const __UINT64_FMTu__ = \"lu\";\npub const __UINT64_FMTx__ = \"lx\";\npub const __UINT64_FMTX__ = \"lX\";\npub const __UINT64_C_SUFFIX__ = @compileError(\"unable to translate macro: undefined identifier `UL`\"); // <builtin>:218:9\npub const __UINT64_C = __helpers.UL_SUFFIX;\npub const __UINT64_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const __INT64_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __INT_LEAST8_TYPE__ = i8;\npub const __INT_LEAST8_MAX__ = @as(c_int, 127);\npub const __INT_LEAST8_WIDTH__ = @as(c_int, 8);\npub const INT_LEAST8_FMTd__ = \"hhd\";\npub const INT_LEAST8_FMTi__ = \"hhi\";\npub const __UINT_LEAST8_TYPE__ = u8;\npub const __UINT_LEAST8_MAX__ = @as(c_int, 255);\npub const UINT_LEAST8_FMTo__ = \"hho\";\npub const UINT_LEAST8_FMTu__ = \"hhu\";\npub const UINT_LEAST8_FMTx__ = \"hhx\";\npub const UINT_LEAST8_FMTX__ = \"hhX\";\npub const __INT_FAST8_TYPE__ = i8;\npub const __INT_FAST8_MAX__ = @as(c_int, 127);\npub const __INT_FAST8_WIDTH__ = @as(c_int, 8);\npub const INT_FAST8_FMTd__ = \"hhd\";\npub const INT_FAST8_FMTi__ = \"hhi\";\npub const __UINT_FAST8_TYPE__ = u8;\npub const __UINT_FAST8_MAX__ = @as(c_int, 255);\npub const UINT_FAST8_FMTo__ = \"hho\";\npub const UINT_FAST8_FMTu__ = \"hhu\";\npub const UINT_FAST8_FMTx__ = \"hhx\";\npub const UINT_FAST8_FMTX__ = \"hhX\";\npub const __INT_LEAST16_TYPE__ = c_short;\npub const __INT_LEAST16_MAX__ = @as(c_int, 32767);\npub const __INT_LEAST16_WIDTH__ = @as(c_int, 16);\npub const INT_LEAST16_FMTd__ = \"hd\";\npub const INT_LEAST16_FMTi__ = \"hi\";\npub const __UINT_LEAST16_TYPE__ = c_ushort;\npub const __UINT_LEAST16_MAX__ = __helpers.promoteIntLiteral(c_int, 65535, .decimal);\npub const UINT_LEAST16_FMTo__ = \"ho\";\npub const UINT_LEAST16_FMTu__ = \"hu\";\npub const UINT_LEAST16_FMTx__ = \"hx\";\npub const UINT_LEAST16_FMTX__ = \"hX\";\npub const __INT_FAST16_TYPE__ = c_short;\npub const __INT_FAST16_MAX__ = @as(c_int, 32767);\npub const __INT_FAST16_WIDTH__ = @as(c_int, 16);\npub const INT_FAST16_FMTd__ = \"hd\";\npub const INT_FAST16_FMTi__ = \"hi\";\npub const __UINT_FAST16_TYPE__ = c_ushort;\npub const __UINT_FAST16_MAX__ = __helpers.promoteIntLiteral(c_int, 65535, .decimal);\npub const UINT_FAST16_FMTo__ = \"ho\";\npub const UINT_FAST16_FMTu__ = \"hu\";\npub const UINT_FAST16_FMTx__ = \"hx\";\npub const UINT_FAST16_FMTX__ = \"hX\";\npub const __INT_LEAST32_TYPE__ = c_int;\npub const __INT_LEAST32_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __INT_LEAST32_WIDTH__ = @as(c_int, 32);\npub const INT_LEAST32_FMTd__ = \"d\";\npub const INT_LEAST32_FMTi__ = \"i\";\npub const __UINT_LEAST32_TYPE__ = c_uint;\npub const __UINT_LEAST32_MAX__ = __helpers.promoteIntLiteral(c_uint, 4294967295, .decimal);\npub const UINT_LEAST32_FMTo__ = \"o\";\npub const UINT_LEAST32_FMTu__ = \"u\";\npub const UINT_LEAST32_FMTx__ = \"x\";\npub const UINT_LEAST32_FMTX__ = \"X\";\npub const __INT_FAST32_TYPE__ = c_int;\npub const __INT_FAST32_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __INT_FAST32_WIDTH__ = @as(c_int, 32);\npub const INT_FAST32_FMTd__ = \"d\";\npub const INT_FAST32_FMTi__ = \"i\";\npub const __UINT_FAST32_TYPE__ = c_uint;\npub const __UINT_FAST32_MAX__ = __helpers.promoteIntLiteral(c_uint, 4294967295, .decimal);\npub const UINT_FAST32_FMTo__ = \"o\";\npub const UINT_FAST32_FMTu__ = \"u\";\npub const UINT_FAST32_FMTx__ = \"x\";\npub const UINT_FAST32_FMTX__ = \"X\";\npub const __INT_LEAST64_TYPE__ = c_long;\npub const __INT_LEAST64_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __INT_LEAST64_WIDTH__ = @as(c_int, 64);\npub const INT_LEAST64_FMTd__ = \"ld\";\npub const INT_LEAST64_FMTi__ = \"li\";\npub const __UINT_LEAST64_TYPE__ = c_ulong;\npub const __UINT_LEAST64_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const UINT_LEAST64_FMTo__ = \"lo\";\npub const UINT_LEAST64_FMTu__ = \"lu\";\npub const UINT_LEAST64_FMTx__ = \"lx\";\npub const UINT_LEAST64_FMTX__ = \"lX\";\npub const __INT_FAST64_TYPE__ = c_long;\npub const __INT_FAST64_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __INT_FAST64_WIDTH__ = @as(c_int, 64);\npub const INT_FAST64_FMTd__ = \"ld\";\npub const INT_FAST64_FMTi__ = \"li\";\npub const __UINT_FAST64_TYPE__ = c_ulong;\npub const __UINT_FAST64_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const UINT_FAST64_FMTo__ = \"lo\";\npub const UINT_FAST64_FMTu__ = \"lu\";\npub const UINT_FAST64_FMTx__ = \"lx\";\npub const UINT_FAST64_FMTX__ = \"lX\";\npub const __FLT16_DENORM_MIN__ = @as(f16, 5.9604644775390625e-8);\npub const __FLT16_HAS_DENORM__ = \"\";\npub const __FLT16_DIG__ = @as(c_int, 3);\npub const __FLT16_DECIMAL_DIG__ = @as(c_int, 5);\npub const __FLT16_EPSILON__ = @as(f16, 9.765625e-4);\npub const __FLT16_HAS_INFINITY__ = \"\";\npub const __FLT16_HAS_QUIET_NAN__ = \"\";\npub const __FLT16_MANT_DIG__ = @as(c_int, 11);\npub const __FLT16_MAX_10_EXP__ = @as(c_int, 4);\npub const __FLT16_MAX_EXP__ = @as(c_int, 16);\npub const __FLT16_MAX__ = @as(f16, 6.5504e+4);\npub const __FLT16_MIN_10_EXP__ = -@as(c_int, 4);\npub const __FLT16_MIN_EXP__ = -@as(c_int, 13);\npub const __FLT16_MIN__ = @as(f16, 6.103515625e-5);\npub const __FLT_DENORM_MIN__ = @as(f32, 1.40129846e-45);\npub const __FLT_HAS_DENORM__ = \"\";\npub const __FLT_DIG__ = @as(c_int, 6);\npub const __FLT_DECIMAL_DIG__ = @as(c_int, 9);\npub const __FLT_EPSILON__ = @as(f32, 1.19209290e-7);\npub const __FLT_HAS_INFINITY__ = \"\";\npub const __FLT_HAS_QUIET_NAN__ = \"\";\npub const __FLT_MANT_DIG__ = @as(c_int, 24);\npub const __FLT_MAX_10_EXP__ = @as(c_int, 38);\npub const __FLT_MAX_EXP__ = @as(c_int, 128);\npub const __FLT_MAX__ = @as(f32, 3.40282347e+38);\npub const __FLT_MIN_10_EXP__ = -@as(c_int, 37);\npub const __FLT_MIN_EXP__ = -@as(c_int, 125);\npub const __FLT_MIN__ = @as(f32, 1.17549435e-38);\npub const __DBL_DENORM_MIN__ = @as(f64, 4.9406564584124654e-324);\npub const __DBL_HAS_DENORM__ = \"\";\npub const __DBL_DIG__ = @as(c_int, 15);\npub const __DBL_DECIMAL_DIG__ = @as(c_int, 17);\npub const __DBL_EPSILON__ = @as(f64, 2.2204460492503131e-16);\npub const __DBL_HAS_INFINITY__ = \"\";\npub const __DBL_HAS_QUIET_NAN__ = \"\";\npub const __DBL_MANT_DIG__ = @as(c_int, 53);\npub const __DBL_MAX_10_EXP__ = @as(c_int, 308);\npub const __DBL_MAX_EXP__ = @as(c_int, 1024);\npub const __DBL_MAX__ = @as(f64, 1.7976931348623157e+308);\npub const __DBL_MIN_10_EXP__ = -@as(c_int, 307);\npub const __DBL_MIN_EXP__ = -@as(c_int, 1021);\npub const __DBL_MIN__ = @as(f64, 2.2250738585072014e-308);\npub const __LDBL_DENORM_MIN__ = @as(c_longdouble, 3.64519953188247460253e-4951);\npub const __LDBL_HAS_DENORM__ = \"\";\npub const __LDBL_DIG__ = @as(c_int, 18);\npub const __LDBL_DECIMAL_DIG__ = @as(c_int, 21);\npub const __LDBL_EPSILON__ = @as(c_longdouble, 1.08420217248550443401e-19);\npub const __LDBL_HAS_INFINITY__ = \"\";\npub const __LDBL_HAS_QUIET_NAN__ = \"\";\npub const __LDBL_MANT_DIG__ = @as(c_int, 64);\npub const __LDBL_MAX_10_EXP__ = @as(c_int, 4932);\npub const __LDBL_MAX_EXP__ = @as(c_int, 16384);\npub const __LDBL_MAX__ = @as(c_longdouble, 1.18973149535723176502e+4932);\npub const __LDBL_MIN_10_EXP__ = -@as(c_int, 4931);\npub const __LDBL_MIN_EXP__ = -@as(c_int, 16381);\npub const __LDBL_MIN__ = @as(c_longdouble, 3.36210314311209350626e-4932);\npub const __FLT_EVAL_METHOD__ = @as(c_int, 0);\npub const __FLT_RADIX__ = @as(c_int, 2);\npub const __DECIMAL_DIG__ = __LDBL_DECIMAL_DIG__;\n",
+    "stderr": ""
+  },
+  {
+    "case": "zig_char_float",
+    "cmd": [
+      "zig",
+      "build-exe",
+      "probe.zig",
+      "-femit-bin=zig_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "zig_char_float",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/zig_char_float/zig_runner"
+    ],
+    "code": -6,
+    "stdout": "",
+    "stderr": "thread 668594 panic: integer part of floating point value out of bounds\n/home/zzj/TeTRIS/audit/minimal_repros/zig_char_float/probe.zig:7:17: 0x11d8115 in probe (probe.zig)\n    var x: u8 = @intFromFloat(f);\n                ^\n/home/zzj/TeTRIS/audit/minimal_repros/zig_char_float/probe.zig:399:53: 0x11d7ec2 in main (probe.zig)\npub fn main() void { std.debug.print(\"{}\\n\", .{probe()}); }\n                                                    ^\n/home/zzj/opt/zig-x86_64-linux-0.16.0/lib/std/start.zig:698:59: 0x11d77d1 in callMain (std.zig)\n    if (fn_info.params.len == 0) return wrapMain(root.main());\n                                                          ^\n/home/zzj/opt/zig-x86_64-linux-0.16.0/lib/std/start.zig:190:5: 0x11d7201 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\n"
+  },
+  {
+    "case": "zig_signed_char_float_control",
+    "cmd": [
+      "clang",
+      "-fsigned-char",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "driver.c",
+      "-o",
+      "c_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "zig_signed_char_float_control",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/zig_signed_char_float_control/c_runner"
+    ],
+    "code": 0,
+    "stdout": "-1\n",
+    "stderr": ""
+  },
+  {
+    "case": "zig_signed_char_float_control",
+    "cmd": [
+      "zig",
+      "translate-c",
+      "probe.c"
+    ],
+    "code": 0,
+    "stdout": "const __root = @This();\npub const __builtin = @import(\"std\").zig.c_translation.builtins;\npub const __helpers = @import(\"std\").zig.c_translation.helpers;\npub export fn probe() c_int {\n    var f: f32 = -@as(f32, 1.0);\n    _ = &f;\n    var x: i8 = @intFromFloat(f);\n    _ = &x;\n    return x;\n}\n\npub const __VERSION__ = \"Aro aro-zig\";\npub const __Aro__ = \"\";\npub const __STDC__ = @as(c_int, 1);\npub const __STDC_HOSTED__ = @as(c_int, 1);\npub const __STDC_UTF_16__ = @as(c_int, 1);\npub const __STDC_UTF_32__ = @as(c_int, 1);\npub const __STDC_EMBED_NOT_FOUND__ = @as(c_int, 0);\npub const __STDC_EMBED_FOUND__ = @as(c_int, 1);\npub const __STDC_EMBED_EMPTY__ = @as(c_int, 2);\npub const __STDC_VERSION__ = @as(c_long, 201710);\npub const __GNUC__ = @as(c_int, 7);\npub const __GNUC_MINOR__ = @as(c_int, 1);\npub const __GNUC_PATCHLEVEL__ = @as(c_int, 0);\npub const __ARO_EMULATE_NO__ = @as(c_int, 0);\npub const __ARO_EMULATE_CLANG__ = @as(c_int, 1);\npub const __ARO_EMULATE_GCC__ = @as(c_int, 2);\npub const __ARO_EMULATE_MSVC__ = @as(c_int, 3);\npub const __ARO_EMULATE__ = __ARO_EMULATE_GCC__;\npub inline fn __building_module(x: anytype) @TypeOf(@as(c_int, 0)) {\n    _ = &x;\n    return @as(c_int, 0);\n}\npub const linux = @as(c_int, 1);\npub const __linux = @as(c_int, 1);\npub const __linux__ = @as(c_int, 1);\npub const unix = @as(c_int, 1);\npub const __unix = @as(c_int, 1);\npub const __unix__ = @as(c_int, 1);\npub const __code_model_small__ = @as(c_int, 1);\npub const __amd64__ = @as(c_int, 1);\npub const __amd64 = @as(c_int, 1);\npub const __x86_64__ = @as(c_int, 1);\npub const __x86_64 = @as(c_int, 1);\npub const __SEG_GS = @as(c_int, 1);\npub const __SEG_FS = @as(c_int, 1);\npub const __seg_gs = @compileError(\"unable to translate macro: undefined identifier `address_space`\"); // <builtin>:33:9\npub const __seg_fs = @compileError(\"unable to translate macro: undefined identifier `address_space`\"); // <builtin>:34:9\npub const __LAHF_SAHF__ = @as(c_int, 1);\npub const __AES__ = @as(c_int, 1);\npub const __PCLMUL__ = @as(c_int, 1);\npub const __LZCNT__ = @as(c_int, 1);\npub const __RDRND__ = @as(c_int, 1);\npub const __FSGSBASE__ = @as(c_int, 1);\npub const __BMI__ = @as(c_int, 1);\npub const __BMI2__ = @as(c_int, 1);\npub const __POPCNT__ = @as(c_int, 1);\npub const __RTM__ = @as(c_int, 1);\npub const __PRFCHW__ = @as(c_int, 1);\npub const __RDSEED__ = @as(c_int, 1);\npub const __ADX__ = @as(c_int, 1);\npub const __MOVBE__ = @as(c_int, 1);\npub const __FMA__ = @as(c_int, 1);\npub const __F16C__ = @as(c_int, 1);\npub const __EVEX512__ = @as(c_int, 1);\npub const __AVX512CD__ = @as(c_int, 1);\npub const __AVX512DQ__ = @as(c_int, 1);\npub const __AVX512BW__ = @as(c_int, 1);\npub const __AVX512VL__ = @as(c_int, 1);\npub const __EVEX256__ = @as(c_int, 1);\npub const __FXSR__ = @as(c_int, 1);\npub const __XSAVE__ = @as(c_int, 1);\npub const __XSAVEOPT__ = @as(c_int, 1);\npub const __XSAVEC__ = @as(c_int, 1);\npub const __XSAVES__ = @as(c_int, 1);\npub const __PKU__ = @as(c_int, 1);\npub const __CLFLUSHOPT__ = @as(c_int, 1);\npub const __CLWB__ = @as(c_int, 1);\npub const __INVPCID__ = @as(c_int, 1);\npub const __CRC32__ = @as(c_int, 1);\npub const __AVX512F__ = @as(c_int, 1);\npub const __AVX2__ = @as(c_int, 1);\npub const __AVX__ = @as(c_int, 1);\npub const __SSE4_2__ = @as(c_int, 1);\npub const __SSE4_1__ = @as(c_int, 1);\npub const __SSSE3__ = @as(c_int, 1);\npub const __SSE3__ = @as(c_int, 1);\npub const __SSE2__ = @as(c_int, 1);\npub const __SSE__ = @as(c_int, 1);\npub const __SSE_MATH__ = @as(c_int, 1);\npub const __MMX__ = @as(c_int, 1);\npub const __GCC_HAVE_SYNC_COMPARE_AND_SWAP_8 = @as(c_int, 1);\npub const __SIZEOF_FLOAT128__ = @as(c_int, 16);\npub const _LP64 = @as(c_int, 1);\npub const __LP64__ = @as(c_int, 1);\npub const __FLOAT128__ = @as(c_int, 1);\npub const __ORDER_LITTLE_ENDIAN__ = @as(c_int, 1234);\npub const __ORDER_BIG_ENDIAN__ = @as(c_int, 4321);\npub const __ORDER_PDP_ENDIAN__ = @as(c_int, 3412);\npub const __BYTE_ORDER__ = __ORDER_LITTLE_ENDIAN__;\npub const __LITTLE_ENDIAN__ = @as(c_int, 1);\npub const __ELF__ = @as(c_int, 1);\npub const __ATOMIC_RELAXED = @as(c_int, 0);\npub const __ATOMIC_CONSUME = @as(c_int, 1);\npub const __ATOMIC_ACQUIRE = @as(c_int, 2);\npub const __ATOMIC_RELEASE = @as(c_int, 3);\npub const __ATOMIC_ACQ_REL = @as(c_int, 4);\npub const __ATOMIC_SEQ_CST = @as(c_int, 5);\npub const __ATOMIC_BOOL_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_CHAR_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_CHAR16_T_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_CHAR32_T_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_WCHAR_T_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_WINT_T_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_SHORT_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_INT_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_LONG_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_LLONG_LOCK_FREE = @as(c_int, 1);\npub const __ATOMIC_POINTER_LOCK_FREE = @as(c_int, 1);\npub const __WINT_UNSIGNED__ = @as(c_int, 1);\npub const __CHAR_BIT__ = @as(c_int, 8);\npub const __BOOL_WIDTH__ = @as(c_int, 8);\npub const __SCHAR_MAX__ = @as(c_int, 127);\npub const __SCHAR_WIDTH__ = @as(c_int, 8);\npub const __SHRT_MAX__ = @as(c_int, 32767);\npub const __SHRT_WIDTH__ = @as(c_int, 16);\npub const __INT_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __INT_WIDTH__ = @as(c_int, 32);\npub const __LONG_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __LONG_WIDTH__ = @as(c_int, 64);\npub const __LONG_LONG_MAX__ = @as(c_longlong, 9223372036854775807);\npub const __LONG_LONG_WIDTH__ = @as(c_int, 64);\npub const __WCHAR_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __WCHAR_WIDTH__ = @as(c_int, 32);\npub const __WINT_MAX__ = __helpers.promoteIntLiteral(c_uint, 4294967295, .decimal);\npub const __WINT_WIDTH__ = @as(c_int, 32);\npub const __INTMAX_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __INTMAX_WIDTH__ = @as(c_int, 64);\npub const __SIZE_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const __SIZE_WIDTH__ = @as(c_int, 64);\npub const __UINTMAX_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const __UINTMAX_WIDTH__ = @as(c_int, 64);\npub const __PTRDIFF_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __PTRDIFF_WIDTH__ = @as(c_int, 64);\npub const __INTPTR_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __INTPTR_WIDTH__ = @as(c_int, 64);\npub const __UINTPTR_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const __UINTPTR_WIDTH__ = @as(c_int, 64);\npub const __SIG_ATOMIC_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __SIG_ATOMIC_WIDTH__ = @as(c_int, 32);\npub const __BITINT_MAXWIDTH__ = __helpers.promoteIntLiteral(c_int, 65535, .decimal);\npub const __SIZEOF_FLOAT__ = @as(c_int, 4);\npub const __SIZEOF_DOUBLE__ = @as(c_int, 8);\npub const __SIZEOF_LONG_DOUBLE__ = @as(c_int, 10);\npub const __SIZEOF_SHORT__ = @as(c_int, 2);\npub const __SIZEOF_INT__ = @as(c_int, 4);\npub const __SIZEOF_LONG__ = @as(c_int, 8);\npub const __SIZEOF_LONG_LONG__ = @as(c_int, 8);\npub const __SIZEOF_POINTER__ = @as(c_int, 8);\npub const __SIZEOF_PTRDIFF_T__ = @as(c_int, 8);\npub const __SIZEOF_SIZE_T__ = @as(c_int, 8);\npub const __SIZEOF_WCHAR_T__ = @as(c_int, 4);\npub const __SIZEOF_WINT_T__ = @as(c_int, 4);\npub const __SIZEOF_INT128__ = @as(c_int, 16);\npub const __INTPTR_TYPE__ = c_long;\npub const __UINTPTR_TYPE__ = c_ulong;\npub const __INTMAX_TYPE__ = c_long;\npub const __INTMAX_C_SUFFIX__ = @compileError(\"unable to translate macro: undefined identifier `L`\"); // <builtin>:155:9\npub const __INTMAX_C = __helpers.L_SUFFIX;\npub const __UINTMAX_TYPE__ = c_ulong;\npub const __UINTMAX_C_SUFFIX__ = @compileError(\"unable to translate macro: undefined identifier `UL`\"); // <builtin>:158:9\npub const __UINTMAX_C = __helpers.UL_SUFFIX;\npub const __PTRDIFF_TYPE__ = c_long;\npub const __SIZE_TYPE__ = c_ulong;\npub const __WCHAR_TYPE__ = c_int;\npub const __WINT_TYPE__ = c_uint;\npub const __CHAR16_TYPE__ = c_ushort;\npub const __CHAR32_TYPE__ = c_uint;\npub const __INT8_TYPE__ = i8;\npub const __INT8_FMTd__ = \"hhd\";\npub const __INT8_FMTi__ = \"hhi\";\npub const __INT8_C_SUFFIX__ = \"\";\npub inline fn __INT8_C(c: anytype) @TypeOf(c) {\n    _ = &c;\n    return c;\n}\npub const __INT16_TYPE__ = c_short;\npub const __INT16_FMTd__ = \"hd\";\npub const __INT16_FMTi__ = \"hi\";\npub const __INT16_C_SUFFIX__ = \"\";\npub inline fn __INT16_C(c: anytype) @TypeOf(c) {\n    _ = &c;\n    return c;\n}\npub const __INT32_TYPE__ = c_int;\npub const __INT32_FMTd__ = \"d\";\npub const __INT32_FMTi__ = \"i\";\npub const __INT32_C_SUFFIX__ = \"\";\npub inline fn __INT32_C(c: anytype) @TypeOf(c) {\n    _ = &c;\n    return c;\n}\npub const __INT64_TYPE__ = c_long;\npub const __INT64_FMTd__ = \"ld\";\npub const __INT64_FMTi__ = \"li\";\npub const __INT64_C_SUFFIX__ = @compileError(\"unable to translate macro: undefined identifier `L`\"); // <builtin>:184:9\npub const __INT64_C = __helpers.L_SUFFIX;\npub const __UINT8_TYPE__ = u8;\npub const __UINT8_FMTo__ = \"hho\";\npub const __UINT8_FMTu__ = \"hhu\";\npub const __UINT8_FMTx__ = \"hhx\";\npub const __UINT8_FMTX__ = \"hhX\";\npub const __UINT8_C_SUFFIX__ = \"\";\npub inline fn __UINT8_C(c: anytype) @TypeOf(c) {\n    _ = &c;\n    return c;\n}\npub const __UINT8_MAX__ = @as(c_int, 255);\npub const __INT8_MAX__ = @as(c_int, 127);\npub const __UINT16_TYPE__ = c_ushort;\npub const __UINT16_FMTo__ = \"ho\";\npub const __UINT16_FMTu__ = \"hu\";\npub const __UINT16_FMTx__ = \"hx\";\npub const __UINT16_FMTX__ = \"hX\";\npub const __UINT16_C_SUFFIX__ = \"\";\npub inline fn __UINT16_C(c: anytype) @TypeOf(c) {\n    _ = &c;\n    return c;\n}\npub const __UINT16_MAX__ = __helpers.promoteIntLiteral(c_int, 65535, .decimal);\npub const __INT16_MAX__ = @as(c_int, 32767);\npub const __UINT32_TYPE__ = c_uint;\npub const __UINT32_FMTo__ = \"o\";\npub const __UINT32_FMTu__ = \"u\";\npub const __UINT32_FMTx__ = \"x\";\npub const __UINT32_FMTX__ = \"X\";\npub const __UINT32_C_SUFFIX__ = @compileError(\"unable to translate macro: undefined identifier `U`\"); // <builtin>:209:9\npub const __UINT32_C = __helpers.U_SUFFIX;\npub const __UINT32_MAX__ = __helpers.promoteIntLiteral(c_uint, 4294967295, .decimal);\npub const __INT32_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __UINT64_TYPE__ = c_ulong;\npub const __UINT64_FMTo__ = \"lo\";\npub const __UINT64_FMTu__ = \"lu\";\npub const __UINT64_FMTx__ = \"lx\";\npub const __UINT64_FMTX__ = \"lX\";\npub const __UINT64_C_SUFFIX__ = @compileError(\"unable to translate macro: undefined identifier `UL`\"); // <builtin>:218:9\npub const __UINT64_C = __helpers.UL_SUFFIX;\npub const __UINT64_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const __INT64_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __INT_LEAST8_TYPE__ = i8;\npub const __INT_LEAST8_MAX__ = @as(c_int, 127);\npub const __INT_LEAST8_WIDTH__ = @as(c_int, 8);\npub const INT_LEAST8_FMTd__ = \"hhd\";\npub const INT_LEAST8_FMTi__ = \"hhi\";\npub const __UINT_LEAST8_TYPE__ = u8;\npub const __UINT_LEAST8_MAX__ = @as(c_int, 255);\npub const UINT_LEAST8_FMTo__ = \"hho\";\npub const UINT_LEAST8_FMTu__ = \"hhu\";\npub const UINT_LEAST8_FMTx__ = \"hhx\";\npub const UINT_LEAST8_FMTX__ = \"hhX\";\npub const __INT_FAST8_TYPE__ = i8;\npub const __INT_FAST8_MAX__ = @as(c_int, 127);\npub const __INT_FAST8_WIDTH__ = @as(c_int, 8);\npub const INT_FAST8_FMTd__ = \"hhd\";\npub const INT_FAST8_FMTi__ = \"hhi\";\npub const __UINT_FAST8_TYPE__ = u8;\npub const __UINT_FAST8_MAX__ = @as(c_int, 255);\npub const UINT_FAST8_FMTo__ = \"hho\";\npub const UINT_FAST8_FMTu__ = \"hhu\";\npub const UINT_FAST8_FMTx__ = \"hhx\";\npub const UINT_FAST8_FMTX__ = \"hhX\";\npub const __INT_LEAST16_TYPE__ = c_short;\npub const __INT_LEAST16_MAX__ = @as(c_int, 32767);\npub const __INT_LEAST16_WIDTH__ = @as(c_int, 16);\npub const INT_LEAST16_FMTd__ = \"hd\";\npub const INT_LEAST16_FMTi__ = \"hi\";\npub const __UINT_LEAST16_TYPE__ = c_ushort;\npub const __UINT_LEAST16_MAX__ = __helpers.promoteIntLiteral(c_int, 65535, .decimal);\npub const UINT_LEAST16_FMTo__ = \"ho\";\npub const UINT_LEAST16_FMTu__ = \"hu\";\npub const UINT_LEAST16_FMTx__ = \"hx\";\npub const UINT_LEAST16_FMTX__ = \"hX\";\npub const __INT_FAST16_TYPE__ = c_short;\npub const __INT_FAST16_MAX__ = @as(c_int, 32767);\npub const __INT_FAST16_WIDTH__ = @as(c_int, 16);\npub const INT_FAST16_FMTd__ = \"hd\";\npub const INT_FAST16_FMTi__ = \"hi\";\npub const __UINT_FAST16_TYPE__ = c_ushort;\npub const __UINT_FAST16_MAX__ = __helpers.promoteIntLiteral(c_int, 65535, .decimal);\npub const UINT_FAST16_FMTo__ = \"ho\";\npub const UINT_FAST16_FMTu__ = \"hu\";\npub const UINT_FAST16_FMTx__ = \"hx\";\npub const UINT_FAST16_FMTX__ = \"hX\";\npub const __INT_LEAST32_TYPE__ = c_int;\npub const __INT_LEAST32_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __INT_LEAST32_WIDTH__ = @as(c_int, 32);\npub const INT_LEAST32_FMTd__ = \"d\";\npub const INT_LEAST32_FMTi__ = \"i\";\npub const __UINT_LEAST32_TYPE__ = c_uint;\npub const __UINT_LEAST32_MAX__ = __helpers.promoteIntLiteral(c_uint, 4294967295, .decimal);\npub const UINT_LEAST32_FMTo__ = \"o\";\npub const UINT_LEAST32_FMTu__ = \"u\";\npub const UINT_LEAST32_FMTx__ = \"x\";\npub const UINT_LEAST32_FMTX__ = \"X\";\npub const __INT_FAST32_TYPE__ = c_int;\npub const __INT_FAST32_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);\npub const __INT_FAST32_WIDTH__ = @as(c_int, 32);\npub const INT_FAST32_FMTd__ = \"d\";\npub const INT_FAST32_FMTi__ = \"i\";\npub const __UINT_FAST32_TYPE__ = c_uint;\npub const __UINT_FAST32_MAX__ = __helpers.promoteIntLiteral(c_uint, 4294967295, .decimal);\npub const UINT_FAST32_FMTo__ = \"o\";\npub const UINT_FAST32_FMTu__ = \"u\";\npub const UINT_FAST32_FMTx__ = \"x\";\npub const UINT_FAST32_FMTX__ = \"X\";\npub const __INT_LEAST64_TYPE__ = c_long;\npub const __INT_LEAST64_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __INT_LEAST64_WIDTH__ = @as(c_int, 64);\npub const INT_LEAST64_FMTd__ = \"ld\";\npub const INT_LEAST64_FMTi__ = \"li\";\npub const __UINT_LEAST64_TYPE__ = c_ulong;\npub const __UINT_LEAST64_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const UINT_LEAST64_FMTo__ = \"lo\";\npub const UINT_LEAST64_FMTu__ = \"lu\";\npub const UINT_LEAST64_FMTx__ = \"lx\";\npub const UINT_LEAST64_FMTX__ = \"lX\";\npub const __INT_FAST64_TYPE__ = c_long;\npub const __INT_FAST64_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);\npub const __INT_FAST64_WIDTH__ = @as(c_int, 64);\npub const INT_FAST64_FMTd__ = \"ld\";\npub const INT_FAST64_FMTi__ = \"li\";\npub const __UINT_FAST64_TYPE__ = c_ulong;\npub const __UINT_FAST64_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);\npub const UINT_FAST64_FMTo__ = \"lo\";\npub const UINT_FAST64_FMTu__ = \"lu\";\npub const UINT_FAST64_FMTx__ = \"lx\";\npub const UINT_FAST64_FMTX__ = \"lX\";\npub const __FLT16_DENORM_MIN__ = @as(f16, 5.9604644775390625e-8);\npub const __FLT16_HAS_DENORM__ = \"\";\npub const __FLT16_DIG__ = @as(c_int, 3);\npub const __FLT16_DECIMAL_DIG__ = @as(c_int, 5);\npub const __FLT16_EPSILON__ = @as(f16, 9.765625e-4);\npub const __FLT16_HAS_INFINITY__ = \"\";\npub const __FLT16_HAS_QUIET_NAN__ = \"\";\npub const __FLT16_MANT_DIG__ = @as(c_int, 11);\npub const __FLT16_MAX_10_EXP__ = @as(c_int, 4);\npub const __FLT16_MAX_EXP__ = @as(c_int, 16);\npub const __FLT16_MAX__ = @as(f16, 6.5504e+4);\npub const __FLT16_MIN_10_EXP__ = -@as(c_int, 4);\npub const __FLT16_MIN_EXP__ = -@as(c_int, 13);\npub const __FLT16_MIN__ = @as(f16, 6.103515625e-5);\npub const __FLT_DENORM_MIN__ = @as(f32, 1.40129846e-45);\npub const __FLT_HAS_DENORM__ = \"\";\npub const __FLT_DIG__ = @as(c_int, 6);\npub const __FLT_DECIMAL_DIG__ = @as(c_int, 9);\npub const __FLT_EPSILON__ = @as(f32, 1.19209290e-7);\npub const __FLT_HAS_INFINITY__ = \"\";\npub const __FLT_HAS_QUIET_NAN__ = \"\";\npub const __FLT_MANT_DIG__ = @as(c_int, 24);\npub const __FLT_MAX_10_EXP__ = @as(c_int, 38);\npub const __FLT_MAX_EXP__ = @as(c_int, 128);\npub const __FLT_MAX__ = @as(f32, 3.40282347e+38);\npub const __FLT_MIN_10_EXP__ = -@as(c_int, 37);\npub const __FLT_MIN_EXP__ = -@as(c_int, 125);\npub const __FLT_MIN__ = @as(f32, 1.17549435e-38);\npub const __DBL_DENORM_MIN__ = @as(f64, 4.9406564584124654e-324);\npub const __DBL_HAS_DENORM__ = \"\";\npub const __DBL_DIG__ = @as(c_int, 15);\npub const __DBL_DECIMAL_DIG__ = @as(c_int, 17);\npub const __DBL_EPSILON__ = @as(f64, 2.2204460492503131e-16);\npub const __DBL_HAS_INFINITY__ = \"\";\npub const __DBL_HAS_QUIET_NAN__ = \"\";\npub const __DBL_MANT_DIG__ = @as(c_int, 53);\npub const __DBL_MAX_10_EXP__ = @as(c_int, 308);\npub const __DBL_MAX_EXP__ = @as(c_int, 1024);\npub const __DBL_MAX__ = @as(f64, 1.7976931348623157e+308);\npub const __DBL_MIN_10_EXP__ = -@as(c_int, 307);\npub const __DBL_MIN_EXP__ = -@as(c_int, 1021);\npub const __DBL_MIN__ = @as(f64, 2.2250738585072014e-308);\npub const __LDBL_DENORM_MIN__ = @as(c_longdouble, 3.64519953188247460253e-4951);\npub const __LDBL_HAS_DENORM__ = \"\";\npub const __LDBL_DIG__ = @as(c_int, 18);\npub const __LDBL_DECIMAL_DIG__ = @as(c_int, 21);\npub const __LDBL_EPSILON__ = @as(c_longdouble, 1.08420217248550443401e-19);\npub const __LDBL_HAS_INFINITY__ = \"\";\npub const __LDBL_HAS_QUIET_NAN__ = \"\";\npub const __LDBL_MANT_DIG__ = @as(c_int, 64);\npub const __LDBL_MAX_10_EXP__ = @as(c_int, 4932);\npub const __LDBL_MAX_EXP__ = @as(c_int, 16384);\npub const __LDBL_MAX__ = @as(c_longdouble, 1.18973149535723176502e+4932);\npub const __LDBL_MIN_10_EXP__ = -@as(c_int, 4931);\npub const __LDBL_MIN_EXP__ = -@as(c_int, 16381);\npub const __LDBL_MIN__ = @as(c_longdouble, 3.36210314311209350626e-4932);\npub const __FLT_EVAL_METHOD__ = @as(c_int, 0);\npub const __FLT_RADIX__ = @as(c_int, 2);\npub const __DECIMAL_DIG__ = __LDBL_DECIMAL_DIG__;\n",
+    "stderr": ""
+  },
+  {
+    "case": "zig_signed_char_float_control",
+    "cmd": [
+      "zig",
+      "build-exe",
+      "probe.zig",
+      "-femit-bin=zig_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "zig_signed_char_float_control",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/zig_signed_char_float_control/zig_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "-1\n"
+  },
+  {
+    "case": "rust_order",
+    "cmd": [
+      "clang",
+      "-O0",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "runner.c",
+      "-o",
+      "c_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/rust_order/c_runner"
+    ],
+    "code": 0,
+    "stdout": "116\n",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order",
+    "cmd": [
+      "clang",
+      "-O2",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "runner.c",
+      "-o",
+      "c_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/rust_order/c_runner"
+    ],
+    "code": 0,
+    "stdout": "116\n",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order",
+    "cmd": [
+      "gcc",
+      "-O0",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "runner.c",
+      "-o",
+      "c_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/rust_order/c_runner"
+    ],
+    "code": 0,
+    "stdout": "116\n",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order",
+    "cmd": [
+      "gcc",
+      "-O2",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "runner.c",
+      "-o",
+      "c_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/rust_order/c_runner"
+    ],
+    "code": 0,
+    "stdout": "116\n",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order",
+    "cmd": [
+      "c2rust-transpile",
+      "compile_commands.json",
+      "-e",
+      "-o",
+      "rust",
+      "--overwrite-existing",
+      "--binary",
+      "runner"
+    ],
+    "code": 0,
+    "stdout": "Transpiling runner.c\n",
+    "stderr": "Error: file `rust/src/runner.rs` does not exist\n\u001b[33mwarning:\u001b[0m rustfmt failed, code may not be well-formatted\nError: file `rust/build.rs` does not exist\n\u001b[33mwarning:\u001b[0m rustfmt failed, code may not be well-formatted\nError: file `rust/lib.rs` does not exist\n\u001b[33mwarning:\u001b[0m rustfmt failed, code may not be well-formatted\n"
+  },
+  {
+    "case": "rust_order",
+    "cmd": [
+      "cargo",
+      "build",
+      "--release",
+      "--manifest-path",
+      "rust/Cargo.toml"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "   Compiling rust v0.0.0 (/home/zzj/TeTRIS/audit/minimal_repros/rust_order/rust)\n    Finished `release` profile [optimized] target(s) in 0.30s\n"
+  },
+  {
+    "case": "rust_order",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/rust_order/rust/target/release/runner"
+    ],
+    "code": 0,
+    "stdout": "116\n",
+    "stderr": ""
+  },
+  {
+    "case": "rust_sequenced",
+    "cmd": [
+      "clang",
+      "-O0",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "runner.c",
+      "-o",
+      "c_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "rust_sequenced",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/rust_sequenced/c_runner"
+    ],
+    "code": 0,
+    "stdout": "56\n",
+    "stderr": ""
+  },
+  {
+    "case": "rust_sequenced",
+    "cmd": [
+      "clang",
+      "-O2",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "runner.c",
+      "-o",
+      "c_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "rust_sequenced",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/rust_sequenced/c_runner"
+    ],
+    "code": 0,
+    "stdout": "56\n",
+    "stderr": ""
+  },
+  {
+    "case": "rust_sequenced",
+    "cmd": [
+      "gcc",
+      "-O0",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "runner.c",
+      "-o",
+      "c_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "rust_sequenced",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/rust_sequenced/c_runner"
+    ],
+    "code": 0,
+    "stdout": "56\n",
+    "stderr": ""
+  },
+  {
+    "case": "rust_sequenced",
+    "cmd": [
+      "gcc",
+      "-O2",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "runner.c",
+      "-o",
+      "c_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "rust_sequenced",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/rust_sequenced/c_runner"
+    ],
+    "code": 0,
+    "stdout": "56\n",
+    "stderr": ""
+  },
+  {
+    "case": "rust_sequenced",
+    "cmd": [
+      "c2rust-transpile",
+      "compile_commands.json",
+      "-e",
+      "-o",
+      "rust",
+      "--overwrite-existing",
+      "--binary",
+      "runner"
+    ],
+    "code": 0,
+    "stdout": "Transpiling runner.c\n",
+    "stderr": "Error: file `rust/src/runner.rs` does not exist\n\u001b[33mwarning:\u001b[0m rustfmt failed, code may not be well-formatted\nError: file `rust/build.rs` does not exist\n\u001b[33mwarning:\u001b[0m rustfmt failed, code may not be well-formatted\nError: file `rust/lib.rs` does not exist\n\u001b[33mwarning:\u001b[0m rustfmt failed, code may not be well-formatted\n"
+  },
+  {
+    "case": "rust_sequenced",
+    "cmd": [
+      "cargo",
+      "build",
+      "--release",
+      "--manifest-path",
+      "rust/Cargo.toml"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "   Compiling rust v0.0.0 (/home/zzj/TeTRIS/audit/minimal_repros/rust_sequenced/rust)\n    Finished `release` profile [optimized] target(s) in 0.30s\n"
+  },
+  {
+    "case": "rust_sequenced",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/rust_sequenced/rust/target/release/runner"
+    ],
+    "code": 0,
+    "stdout": "56\n",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order_left",
+    "cmd": [
+      "clang",
+      "-O0",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "runner.c",
+      "-o",
+      "c_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order_left",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/rust_order_left/c_runner"
+    ],
+    "code": 0,
+    "stdout": "56\n",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order_left",
+    "cmd": [
+      "clang",
+      "-O2",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "runner.c",
+      "-o",
+      "c_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order_left",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/rust_order_left/c_runner"
+    ],
+    "code": 0,
+    "stdout": "56\n",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order_left",
+    "cmd": [
+      "gcc",
+      "-O0",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "runner.c",
+      "-o",
+      "c_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order_left",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/rust_order_left/c_runner"
+    ],
+    "code": 0,
+    "stdout": "56\n",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order_left",
+    "cmd": [
+      "gcc",
+      "-O2",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "runner.c",
+      "-o",
+      "c_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order_left",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/rust_order_left/c_runner"
+    ],
+    "code": 0,
+    "stdout": "56\n",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order_left",
+    "cmd": [
+      "c2rust-transpile",
+      "compile_commands.json",
+      "-e",
+      "-o",
+      "rust",
+      "--overwrite-existing",
+      "--binary",
+      "runner"
+    ],
+    "code": 0,
+    "stdout": "Transpiling runner.c\n",
+    "stderr": "Error: file `rust/src/runner.rs` does not exist\n\u001b[33mwarning:\u001b[0m rustfmt failed, code may not be well-formatted\nError: file `rust/build.rs` does not exist\n\u001b[33mwarning:\u001b[0m rustfmt failed, code may not be well-formatted\nError: file `rust/lib.rs` does not exist\n\u001b[33mwarning:\u001b[0m rustfmt failed, code may not be well-formatted\n"
+  },
+  {
+    "case": "rust_order_left",
+    "cmd": [
+      "cargo",
+      "build",
+      "--release",
+      "--manifest-path",
+      "rust/Cargo.toml"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "   Compiling rust v0.0.0 (/home/zzj/TeTRIS/audit/minimal_repros/rust_order_left/rust)\n    Finished `release` profile [optimized] target(s) in 0.30s\n"
+  },
+  {
+    "case": "rust_order_left",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/rust_order_left/rust/target/release/runner"
+    ],
+    "code": 0,
+    "stdout": "56\n",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order_right",
+    "cmd": [
+      "clang",
+      "-O0",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "runner.c",
+      "-o",
+      "c_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order_right",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/rust_order_right/c_runner"
+    ],
+    "code": 0,
+    "stdout": "116\n",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order_right",
+    "cmd": [
+      "clang",
+      "-O2",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "runner.c",
+      "-o",
+      "c_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order_right",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/rust_order_right/c_runner"
+    ],
+    "code": 0,
+    "stdout": "116\n",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order_right",
+    "cmd": [
+      "gcc",
+      "-O0",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "runner.c",
+      "-o",
+      "c_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order_right",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/rust_order_right/c_runner"
+    ],
+    "code": 0,
+    "stdout": "116\n",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order_right",
+    "cmd": [
+      "gcc",
+      "-O2",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=all",
+      "runner.c",
+      "-o",
+      "c_runner"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order_right",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/rust_order_right/c_runner"
+    ],
+    "code": 0,
+    "stdout": "116\n",
+    "stderr": ""
+  },
+  {
+    "case": "rust_order_right",
+    "cmd": [
+      "c2rust-transpile",
+      "compile_commands.json",
+      "-e",
+      "-o",
+      "rust",
+      "--overwrite-existing",
+      "--binary",
+      "runner"
+    ],
+    "code": 0,
+    "stdout": "Transpiling runner.c\n",
+    "stderr": "Error: file `rust/src/runner.rs` does not exist\n\u001b[33mwarning:\u001b[0m rustfmt failed, code may not be well-formatted\nError: file `rust/build.rs` does not exist\n\u001b[33mwarning:\u001b[0m rustfmt failed, code may not be well-formatted\nError: file `rust/lib.rs` does not exist\n\u001b[33mwarning:\u001b[0m rustfmt failed, code may not be well-formatted\n"
+  },
+  {
+    "case": "rust_order_right",
+    "cmd": [
+      "cargo",
+      "build",
+      "--release",
+      "--manifest-path",
+      "rust/Cargo.toml"
+    ],
+    "code": 0,
+    "stdout": "",
+    "stderr": "   Compiling rust v0.0.0 (/home/zzj/TeTRIS/audit/minimal_repros/rust_order_right/rust)\n    Finished `release` profile [optimized] target(s) in 0.30s\n"
+  },
+  {
+    "case": "rust_order_right",
+    "cmd": [
+      "/home/zzj/TeTRIS/audit/minimal_repros/rust_order_right/rust/target/release/runner"
+    ],
+    "code": 0,
+    "stdout": "116\n",
+    "stderr": ""
+  }
+]

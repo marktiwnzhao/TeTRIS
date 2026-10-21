@@ -1,7 +1,7 @@
 [
  {
   "arguments": [
-    "/usr/bin/clang",
+    "$CLANG_BIN",
     "-O3",
     "$CAMPAIGN_OUT_DIR/fuzz_env/c_src/runner.c"
   ],

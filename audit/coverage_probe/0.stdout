@@ -1,0 +1,6 @@
+[0;36mafl-showmap++5.01a[0m by Michal Zalewski
+[1;94m[*] [0mExecuting '/home/zzj/TeTRIS/audit/coverage_probe/wrapper'...[0m
+-- Program output begins --
+[0m[0m-- Program output ends --
+[1;92m[+] [0mHash of coverage map: 54e492a4b6d6e1f4[0m
+[1;92m[+] [0mCaptured 18 tuples (map size 65536, highest value 1, total values 18) in '/home/zzj/TeTRIS/audit/coverage_probe/0_wrapper.map'.[0m[0m

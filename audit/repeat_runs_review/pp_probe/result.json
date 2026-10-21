@@ -1,0 +1,6 @@
+{
+  "raw_code": 0,
+  "raw_stderr": "",
+  "processed_code": 1,
+  "processed_stderr": "# command-line-arguments\n./runner.go:11:8: \"fmt\" imported and not used\n./runner.go:18:6: undefined: pp\n"
+}

@@ -1,0 +1,51 @@
+{
+  "c_build": {
+    "command": [
+      "/home/zzj/opt/llvm17/bin/clang",
+      "runner.c",
+      "-o",
+      "c_runner"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "runner.c:7:13: warning: no case matching constant switch condition '0'\n    7 |     switch (0) {\n      |             ^\n1 warning generated.\n"
+  },
+  "c_run": {
+    "command": [
+      "./c_runner"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "transpile": {
+    "command": [
+      "/home/zzj/opt/go-work/bin/c2go",
+      "transpile",
+      "runner.c"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "go_build": {
+    "command": [
+      "/home/zzj/opt/go/bin/go",
+      "build",
+      "-o",
+      "go_runner",
+      "runner.go"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "go_run": {
+    "command": [
+      "./go_runner"
+    ],
+    "returncode": 7,
+    "stdout": "",
+    "stderr": ""
+  }
+}

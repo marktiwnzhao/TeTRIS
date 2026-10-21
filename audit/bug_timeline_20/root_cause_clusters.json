@@ -1,0 +1,37 @@
+[
+  {
+    "cluster": "unused_expr_or_var",
+    "count": 1505,
+    "first_seconds": 24,
+    "first_case": "id:000006,src:000000,time:00-00-24,op:(null),pos:0,+cov1780935991_BUILD_FAILURE",
+    "first_error": "./runner.go:51:3: *ft_ptr (variable of type float32) is not used"
+  },
+  {
+    "cluster": "address_of_rvalue",
+    "count": 369,
+    "first_seconds": 109,
+    "first_case": "id:000032,src:000001,time:00-01-49,op:(null),pos:0,+cov1780936075_BUILD_FAILURE",
+    "first_error": "./runner.go:67:4: -local_float (value of type float32) is not used\n./runner.go:68:4: local_float (variable of type float32) is not used\n./runner.go:72:16: invalid operation: cannot take address of int32(pp) (value of type int32)\n./runner.go:73:4: int32(pp) (value of type int32) is not used"
+  },
+  {
+    "cluster": "incdec_expression",
+    "count": 333,
+    "first_seconds": 442,
+    "first_case": "id:000065,src:000005,time:00-07-22,op:(null),pos:0,+cov1780936409_BUILD_FAILURE",
+    "first_error": "./runner.go:49:27: syntax error: unexpected += in argument list; possibly missing comma or )"
+  },
+  {
+    "cluster": "pointer_return_type",
+    "count": 6,
+    "first_seconds": 1058,
+    "first_case": "id:000120,src:000012,time:00-17-38,op:(null),pos:0,+cov1780937024_BUILD_FAILURE",
+    "first_error": "./runner.go:60:10: cannot use &int_ptr (value of type **int32) as int32 value in return statement"
+  },
+  {
+    "cluster": "missing_noarch_harness",
+    "count": 6,
+    "first_seconds": 1678,
+    "first_case": "id:000225,src:000017,time:00-27-58,op:(null),pos:0,+cov1780937644_BUILD_FAILURE",
+    "first_error": "runner.go:10:8: no required module provides package github.com/elliotchance/c2go/noarch; to add it:\ngo get github.com/elliotchance/c2go/noarch"
+  }
+]

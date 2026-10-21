@@ -1,0 +1,7 @@
+﻿experiment,bug_id,time_seconds,source,program_path
+c2go,911,55,TeTRIS output_20,"transpilers/c2go/fuzzing/output_20/build_failure/id:000013,src:000000,time:00-00-55,op:(null),pos:0,+cov1780936021_BUILD_FAILURE"
+c2go,address-of-rvalue (#909/#715),109,TeTRIS output_20,"transpilers/c2go/fuzzing/output_20/build_failure/id:000032,src:000001,time:00-01-49,op:(null),pos:0,+cov1780936075_BUILD_FAILURE"
+c2go,918,442,TeTRIS output_20,"transpilers/c2go/fuzzing/output_20/build_failure/id:000065,src:000005,time:00-07-22,op:(null),pos:0,+cov1780936409_BUILD_FAILURE"
+c2go,928,9328,TeTRIS output_20,"transpilers/c2go/fuzzing/output_20/output_diff_c/id:000731,src:000068,time:02-35-28,op:(null),pos:0,+cov1780945294_OUTPUT_DIFF_C"
+c2go,switch-no-case,29647,TeTRIS output_20,"transpilers/c2go/fuzzing/output_20/output_diff_c/id:001448,src:000224,time:08-14-07,op:(null),pos:01780965613_OUTPUT_DIFF_C"
+c2go,912,66323,TeTRIS output_20,"transpilers/c2go/fuzzing/output_20/build_failure/id:002116,src:000515,time:18-25-23,op:(null),pos:01781002289_BUILD_FAILURE"

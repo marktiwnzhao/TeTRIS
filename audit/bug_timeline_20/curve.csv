@@ -1,0 +1,13 @@
+﻿experiment,time_seconds,bug_count
+c2rust,0,0
+c2rust,86400,0
+c2go,0,0
+c2go,55,1
+c2go,109,2
+c2go,442,3
+c2go,9328,4
+c2go,29647,5
+c2go,66323,6
+c2go,86400,6
+translate-c,0,0
+translate-c,86400,0

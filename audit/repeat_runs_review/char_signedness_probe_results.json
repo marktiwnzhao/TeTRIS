@@ -1,0 +1,20 @@
+{
+  "clang": {
+    "build_rc": 0,
+    "stderr": "",
+    "stdout": "-3:-3:253\n",
+    "rc": 0
+  },
+  "zig_cc": {
+    "build_rc": 0,
+    "stderr": "",
+    "stdout": "-3:-3:253\n",
+    "rc": 0
+  },
+  "translated": {
+    "build_rc": 0,
+    "stderr": "",
+    "stdout": "253:-3:253\n",
+    "rc": 0
+  }
+}

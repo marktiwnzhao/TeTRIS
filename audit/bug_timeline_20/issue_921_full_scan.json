@@ -1,0 +1,22 @@
+{
+  "files_scanned": 16040,
+  "excluded": [
+    "go-cache",
+    "binary executables",
+    "files >10MB"
+  ],
+  "matches": {
+    "union": [],
+    "unsafe.Pointer": [],
+    "struct literal": [],
+    "cannot use": [
+      "transpilers/c2go/fuzzing/output_20/build_failure_errors.csv",
+      "transpilers/c2go/fuzzing/output_20/LOGS/py_checker.607-4090.zzj.log.INFO.20260609-035535.2112077",
+      "transpilers/c2go/fuzzing/output_20/LOGS/py_checker.607-4090.zzj.log.INFO.20260609-035833.2114364",
+      "transpilers/c2go/fuzzing/output_20/LOGS/py_checker.607-4090.zzj.log.INFO.20260609-020037.2023488",
+      "transpilers/c2go/fuzzing/output_20/LOGS/py_checker.607-4090.zzj.log.INFO.20260609-043447.2147260",
+      "transpilers/c2go/fuzzing/output_20/LOGS/py_checker.607-4090.zzj.log.INFO.20260609-235559.3359897",
+      "transpilers/c2go/fuzzing/output_20/LOGS/py_checker.607-4090.zzj.log.INFO.20260609-004344.1923116"
+    ]
+  }
+}

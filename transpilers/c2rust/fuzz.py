@@ -3,6 +3,10 @@ import subprocess
 from datetime import datetime
 import sys
 import json
+import shutil
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from oracle_events import run_campaign
 
 def run_command(command):
     process = subprocess.run(command, shell=True)
@@ -11,20 +15,44 @@ def run_command(command):
         exit(1)
 
 def main(trial_number):
-    original_dir = os.getcwd()
+    original_dir = str(Path(__file__).resolve().parent)
+    os.chdir(original_dir)
     root_dir = os.path.abspath(os.path.join(original_dir, "..", ".."))
     semantic_json_path = f"{root_dir}/generator/grammars/c/semantic.json"
     INPUT_SEED_FOLDER = f"{original_dir}/seeds/"
-    
+    os.environ["TETRIS_INIT_FILE_DIR"] = INPUT_SEED_FOLDER
+    clang_bin = shutil.which("clang")
+    if clang_bin is None:
+        print("Error: clang is not available from PATH")
+        exit(1)
+    os.environ["CLANG_BIN"] = clang_bin
+
+    afl_qemu_trace = shutil.which("afl-qemu-trace")
+    if afl_qemu_trace is None:
+        default_afl_qemu_trace = "/home/zzj/opt/aflplusplus/bin/afl-qemu-trace"
+        if os.path.exists(default_afl_qemu_trace):
+            afl_qemu_trace = default_afl_qemu_trace
+    if afl_qemu_trace is None:
+        print("Error: afl-qemu-trace is not available from PATH")
+        print("Set AFL_PATH to the directory containing afl-qemu-trace.")
+        exit(1)
+    os.environ["AFL_PATH"] = os.path.dirname(afl_qemu_trace)
+    capstone_home = os.environ.get("CAPSTONE_HOME", "/home/zzj/opt/src/AFLplusplus/nyx_mode/QEMU-Nyx/capstone_v4")
+    if os.path.exists(capstone_home):
+        os.environ["LD_LIBRARY_PATH"] = capstone_home + ":" + os.environ.get("LD_LIBRARY_PATH", "")
+
+    skip_tetris_build = os.environ.get("SKIP_TETRIS_BUILD") == "1"
+
     # Update InitFileDir in semantic.json
-    with open(semantic_json_path, "r+") as file:
-        data = json.load(file)
-        data["InitFileDir"] = INPUT_SEED_FOLDER  # Set full path to InitFileDir
-        
-        # Write changes back to the file
-        file.seek(0)
-        json.dump(data, file, indent=4)
-        file.truncate()
+    if not skip_tetris_build:
+        with open(semantic_json_path, "r+") as file:
+            data = json.load(file)
+            data["InitFileDir"] = INPUT_SEED_FOLDER  # Set full path to InitFileDir
+
+            # Write changes back to the file
+            file.seek(0)
+            json.dump(data, file, indent=4)
+            file.truncate()
 
     # Check if the fuzzing directory exists, if not, create it
     parent_fuzz_dir = os.path.join(original_dir, "fuzzing")
@@ -38,16 +66,19 @@ def main(trial_number):
         print(f"Directory {campaign_out_dir} already exists. Please provide a new trial number.")
         exit(1)
 
-    #Build TeTRIS
-    print("Building TeTRIS...")
-    os.chdir(f"{root_dir}/generator")
-    run_command("make clean")
-    run_command("make LAN=c")
-    os.chdir(original_dir)
+    # Build TeTRIS once per campaign unless a prepared binary is requested.
+    if not skip_tetris_build:
+        print("Building TeTRIS...")
+        os.chdir(f"{root_dir}/generator")
+        run_command("make clean")
+        run_command("make LAN=c")
+        os.chdir(original_dir)
+    elif not os.path.exists(f"{root_dir}/core/afl-fuzz-tetris"):
+        raise RuntimeError("SKIP_TETRIS_BUILD=1 but core/afl-fuzz-tetris is missing")
 
     # Copy the instrument_testcase binary to fuzz_c2rust directory
     print("Building pre-transpilation script...")
-    
+
     run_command("g++ -std=c++17 -O3 -funroll-loops -fpermissive scripts/instrument_testcase.cc -o scripts/instrument_testcase")
 
     # Set up the campaign output directory
@@ -70,7 +101,7 @@ def main(trial_number):
 
     # Define paths and scripts
     TeTRIS_FUZZER = f"{root_dir}/core/afl-fuzz-tetris"
-    
+
     AFL_FLAGS = "-Q -t 10000000+ -m none -f mutated_code.c"
     INSTRUMENT_SCRIPT = f"{original_dir}/scripts/instrument_testcase mutated_code.c ./c_src/runner.c ./c_src/new_runner.c"
     VERIFIER_SCRIPT = f"{original_dir}/scripts/checker.py --check_compiler_warnings --status_file {CAMPAIGN_OUT_DIR}/verification_results --log_dir={CAMPAIGN_OUT_DIR}/LOGS"
@@ -80,11 +111,15 @@ def main(trial_number):
     print("Running the fuzzer...")
     AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES = "1"
     AFL_SKIP_CPUFREQ = "1"
+    AFL_NO_FORKSRV = "1"
+    AFL_NO_UI = "1"
     os.environ['AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES'] = AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES
     os.environ['AFL_SKIP_CPUFREQ'] = AFL_SKIP_CPUFREQ
+    os.environ['AFL_NO_FORKSRV'] = AFL_NO_FORKSRV
+    os.environ['AFL_NO_UI'] = AFL_NO_UI
 
     fuzz_command = f"{TeTRIS_FUZZER} -i {INPUT_SEED_FOLDER} -o {CAMPAIGN_OUT_DIR} {AFL_FLAGS} -V \"{VERIFIER_SCRIPT}\" -I \"{INSTRUMENT_SCRIPT}\" -- {C2RUST_BIN} $PWD/compile_commands.json -e -o $PWD/transpiled_code --overwrite-existing --binary runner"
-    run_command(fuzz_command)
+    run_campaign(CAMPAIGN_OUT_DIR, "c2rust", fuzz_command)
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:

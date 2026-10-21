@@ -1,0 +1,20 @@
+{
+  "trial": "paper_tmux2_20260924_023348",
+  "sessions": {
+    "c2rust": {
+      "session": "tetris2-c2rust",
+      "log": "/home/zzj/TeTRIS/audit/paper_launch/paper_tmux2_20260924_023348_c2rust.log",
+      "output": "/home/zzj/TeTRIS/transpilers/c2rust/fuzzing/output_paper_tmux2_20260924_023348"
+    },
+    "c2go": {
+      "session": "tetris2-c2go",
+      "log": "/home/zzj/TeTRIS/audit/paper_launch/paper_tmux2_20260924_023348_c2go.log",
+      "output": "/home/zzj/TeTRIS/transpilers/c2go/fuzzing/output_paper_tmux2_20260924_023348"
+    },
+    "zig-tc": {
+      "session": "tetris2-translate-c",
+      "log": "/home/zzj/TeTRIS/audit/paper_launch/paper_tmux2_20260924_023348_zig-tc.log",
+      "output": "/home/zzj/TeTRIS/transpilers/zig-tc/fuzzing/output_paper_tmux2_20260924_023348"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "case": "id:000120,src:000012,time:00-17-38,op:(null),pos:0,+cov1780937024_BUILD_FAILURE",
+    "historical_error": "./runner.go:60:10: cannot use &int_ptr (value of type **int32) as int32 value in return statement",
+    "replay_returncode": 0,
+    "snippets": [
+      "\t\t}\n\t}(int32(int16((local_int))) > int32(int16((global_int * int32(3))))))\n\tlocal_float += 1\n\tminee.integerMember = func() int32 {\n\t\tfunc() int32 {\n\t\t\t*int_ptr ^= *int_ptr\n\t\t\treturn *int_ptr\n\t\t}()\n\t\treturn &int_ptr\n\t}()\n\t*int_ptr = global_int*int32(2) + minee.integerMember + int32(56) - ((*int_ptr) | (global_int*int32(2) + minee.integerMember))\n\t*ft_ptr = float32(float64(float32(minee.integerMember)) + 2.19 + float64(float32(int32(56))*float32((func(val bool) int32 {"
+    ]
+  },
+  {
+    "case": "id:000660,src:000056,time:01-34-31,op:(null),pos:0,+cov1780941638_BUILD_FAILURE",
+    "historical_error": "./runner.go:52:10: cannot use &int_ptr (value of type **int32) as int32 value in return statement",
+    "replay_returncode": 0,
+    "snippets": [
+      "\tvar p_p byte = byte(int32(1))\n\tvar ft_ptr *float32 = &why\n\tvar int_ptr *int32 = &minee.integerMember\n\tlocal_int += func() int32 {\n\t\tfunc() int32 {\n\t\t\t*int_ptr += *int_ptr\n\t\t\treturn *int_ptr\n\t\t}()\n\t\treturn &int_ptr\n\t}()\n\tlocal_float += 1\n\tminee.integerMember = local_int + int32(4) + int32(56) - (int32(uint16((minee.integerMember)))+int32(uint16((*int_ptr))))*((minee.integerMember)|(*int_ptr)) + int32(56)*(func(val bool) int32 {"
+    ]
+  },
+  {
+    "case": "id:000791,src:000080,time:03-29-29,op:(null),pos:0,+cov1780948535_BUILD_FAILURE",
+    "historical_error": "./runner.go:52:10: cannot use &int_ptr (value of type **int32) as int32 value in return statement",
+    "replay_returncode": 0,
+    "snippets": [
+      "\tvar p_p byte = byte(int32(1))\n\tvar ft_ptr *float32 = &why\n\tvar int_ptr *int32 = &minee.integerMember\n\tlocal_int += func() int32 {\n\t\tfunc() int32 {\n\t\t\t*int_ptr -= *int_ptr\n\t\t\treturn *int_ptr\n\t\t}()\n\t\treturn &int_ptr\n\t}()\n\tlocal_float += 1\n\tminee.integerMember = local_int + int32(4) + int32(56) + int32((float32((minee.integerMember))+float32((whatif.integerMember))))*int32((uint32((*int_ptr))*uint32((local_int+int32(4))))) - (func(val bool) int32 {"
+    ]
+  },
+  {
+    "case": "id:000801,src:000081,time:03-32-27,op:(null),pos:01780948713_BUILD_FAILURE",
+    "historical_error": "./runner.go:84:10: cannot use &ft_ptr (value of type **float32) as float32 value in return statement",
+    "replay_returncode": 0,
+    "snippets": [
+      "\t*int_ptr = -(^(local_int * global_int))\n\tlocal_int = int32(global_char) + int32(1) + int32(56)*int32((uint32((local_int))|uint32((int32(global_char)+int32(1))))) + int32(56) - int32((int64((local_int)) - int64((int32(global_char) + int32(1) + int32(56)*int32((uint32((local_int))|uint32((int32(global_char)+int32(1))))))))) - int32((float64((local_int)) * float64((int32(global_char) + int32(1) + int32(56)*int32((uint32((local_int))|uint32((int32(global_char)+int32(1))))))))) + int32((float64((int32(global_char) + int32(1) + int32(56)*int32((uint32((local_int))|uint32((int32(global_char)+int32(1))))))) - float64((int32(global_char) + int32(1) + int32(56)*int32((uint32((local_int))|uint32((int32(global_char)+int32(1)))))))))\n\twhatif.important = float32(float64(*ft_ptr+minee.important) + 5.45 + float64(float32(int32(56))*((whatif.important)+(minee.important))))\n\tlocal_float = func() float32 {\n\t\tfunc() float32 {\n\t\t\t*ft_ptr -= *ft_ptr\n\t\t\treturn *ft_ptr\n\t\t}()\n\t\treturn &ft_ptr\n\t}()\n\tset_var(local_int, local_float, local_char)\n\treturn int32(0)"
+    ]
+  },
+  {
+    "case": "id:000865,src:000102,time:04-08-41,op:(null),pos:0,+cov1780950887_BUILD_FAILURE",
+    "historical_error": "./runner.go:58:10: cannot use &int_ptr (value of type **int32) as int32 value in return statement",
+    "replay_returncode": 0,
+    "snippets": [
+      "\tlocal_float -= -dis + float32(int32(56)) - ((-dis) - (why)) + ((whatif.important) + (why))\n\t*ft_ptr = float32(float64(float32(minee.integerMember)) + 2.19 + float64(int32(56)) - float64(float32((float64((minee.important)) * float64((minee.important))))) + float64(((why)+(minee.important))*((why)-(minee.important))) + float64(float32(int32(56))*((*ft_ptr)*(dis))))\n\tglobal_float = *ft_ptr*float32(int32(2)) + float32(int32(56))*((whatif.important)*(minee.important)) + float32((int32(uint16((whatif.important))) & int32(uint16((minee.important))))) + float32((uint64((whatif.important)) + uint64((minee.important)))) + float32(int32(56)) - float32((float64((global_float))-float64((*ft_ptr*float32(int32(2))+float32(int32(56))*((whatif.important)*(minee.important))+float32((int32(uint16((whatif.important)))&int32(uint16((minee.important)))))+float32((uint64((whatif.important))+uint64((minee.important))))))))*((global_float)-(*ft_ptr)) + float32((int32(uint16((dis))) & int32(uint16((*ft_ptr)))))\n\tlocal_int = func() int32 {\n\t\tfunc() int32 {\n\t\t\t*int_ptr /= *int_ptr\n\t\t\treturn *int_ptr\n\t\t}()\n\t\treturn &int_ptr\n\t}()\n\twhatif.important = float32(float64(*ft_ptr+minee.important) + 5.45 + float64(int32(56)) - float64(float32((func(val bool) int32 {\n\t\tif val {"
+    ]
+  },
+  {
+    "case": "id:002217,src:000636,time:23-29-53,op:(null),pos:01781020559_BUILD_FAILURE",
+    "historical_error": "./runner.go:126:10: cannot use &ft_ptr (value of type **float32) as float32 value in return statement",
+    "replay_returncode": 0,
+    "snippets": [
+      "\t\t}\n\t}(int32(int16((*int_ptr))) < int32(int16((*int_ptr)))))))))+int32(56)*int32((float32((global_int))*float32((local_int))))))))*int32((float32((global_int))*float32((local_int)))) - int32((float64((local_int)) * float64((local_int))))\n\twhatif.important = float32(float64(*ft_ptr+minee.important) + 5.45 + float64(float32(int32(56))*float32((uint64((whatif.important))|uint64((local_float))))*((whatif.important)+(local_float))) - float64(float32((float64((whatif.important)) * float64((local_float))))) + float64(int32(56)) - float64(float32((int32((whatif.important)) + int32((float64(*ft_ptr+minee.important) + 5.45 + float64(float32(int32(56))*float32((uint64((whatif.important))|uint64((local_float))))*((whatif.important)+(local_float))) - float64(float32((float64((whatif.important)) * float64((local_float)))))))))) - float64(float32((int32((whatif.important)) + int32((why))))))\n\tlocal_float = func() float32 {\n\t\tfunc() float32 {\n\t\t\t*ft_ptr += *ft_ptr\n\t\t\treturn *ft_ptr\n\t\t}()\n\t\treturn &ft_ptr\n\t}()\n\tset_var(local_int, local_float, local_char)\n\treturn int32(0)"
+    ]
+  }
+]

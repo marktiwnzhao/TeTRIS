@@ -1,0 +1,45 @@
+{
+  "campaign": "output_20",
+  "build_failure_records": 1851,
+  "unsafe_pointer_diagnostics": 0,
+  "struct_literal_diagnostics": 0,
+  "cannot_use_candidates": [
+    {
+      "category": "build_failure",
+      "case": "id:000120,src:000012,time:00-17-38,op:(null),pos:0,+cov1780937024_BUILD_FAILURE",
+      "log": "/home/zzj/TeTRIS/transpilers/c2go/fuzzing/output_20/LOGS/py_checker.607-4090.zzj.log.INFO.20260609-004344.1923116",
+      "error": "./runner.go:60:10: cannot use &int_ptr (value of type **int32) as int32 value in return statement"
+    },
+    {
+      "category": "build_failure",
+      "case": "id:000660,src:000056,time:01-34-31,op:(null),pos:0,+cov1780941638_BUILD_FAILURE",
+      "log": "/home/zzj/TeTRIS/transpilers/c2go/fuzzing/output_20/LOGS/py_checker.607-4090.zzj.log.INFO.20260609-020037.2023488",
+      "error": "./runner.go:52:10: cannot use &int_ptr (value of type **int32) as int32 value in return statement"
+    },
+    {
+      "category": "build_failure",
+      "case": "id:000791,src:000080,time:03-29-29,op:(null),pos:0,+cov1780948535_BUILD_FAILURE",
+      "log": "/home/zzj/TeTRIS/transpilers/c2go/fuzzing/output_20/LOGS/py_checker.607-4090.zzj.log.INFO.20260609-035535.2112077",
+      "error": "./runner.go:52:10: cannot use &int_ptr (value of type **int32) as int32 value in return statement"
+    },
+    {
+      "category": "build_failure",
+      "case": "id:000801,src:000081,time:03-32-27,op:(null),pos:01780948713_BUILD_FAILURE",
+      "log": "/home/zzj/TeTRIS/transpilers/c2go/fuzzing/output_20/LOGS/py_checker.607-4090.zzj.log.INFO.20260609-035833.2114364",
+      "error": "./runner.go:84:10: cannot use &ft_ptr (value of type **float32) as float32 value in return statement"
+    },
+    {
+      "category": "build_failure",
+      "case": "id:000865,src:000102,time:04-08-41,op:(null),pos:0,+cov1780950887_BUILD_FAILURE",
+      "log": "/home/zzj/TeTRIS/transpilers/c2go/fuzzing/output_20/LOGS/py_checker.607-4090.zzj.log.INFO.20260609-043447.2147260",
+      "error": "./runner.go:58:10: cannot use &int_ptr (value of type **int32) as int32 value in return statement"
+    },
+    {
+      "category": "build_failure",
+      "case": "id:002217,src:000636,time:23-29-53,op:(null),pos:01781020559_BUILD_FAILURE",
+      "log": "/home/zzj/TeTRIS/transpilers/c2go/fuzzing/output_20/LOGS/py_checker.607-4090.zzj.log.INFO.20260609-235559.3359897",
+      "error": "./runner.go:126:10: cannot use &ft_ptr (value of type **float32) as float32 value in return statement"
+    }
+  ],
+  "conclusion": "No matching union-initializer representation root cause found. Six cannot-use diagnostics concern pointer-return type mismatches, not aggregate initialization."
+}

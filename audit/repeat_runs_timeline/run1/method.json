@@ -1,0 +1,17 @@
+{
+  "run": 1,
+  "budget_seconds": 86400,
+  "time_basis": "oracle completion elapsed_seconds from fuzzer launch",
+  "included_c2go_families": [
+    "discarded_expression",
+    "incdec_expression",
+    "nonaddressable_expression",
+    "pointer_return",
+    "char_signedness",
+    "unused_declaration"
+  ],
+  "c2rust": "No accepted bug; NaN formatting and source-semantics candidates excluded",
+  "translate_c": "Known char signedness issue #159 excluded by user policy",
+  "scope": "User-selected confirmed root families, not a count of previously unreported upstream issues",
+  "comparison_with_output_20": "Different selected families: these runs include pointer_return and char_signedness; historical output_20 chart excluded pointer_return and included switch-no-case. Do not interpret equal final totals as equal discovery sets."
+}

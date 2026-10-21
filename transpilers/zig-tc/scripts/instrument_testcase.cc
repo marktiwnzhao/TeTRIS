@@ -120,6 +120,13 @@ int main(int argc, char **argv) {
     // Get the return status of the process after it finishes or times out
     int return_status = pclose(pipe);
 
+    // Materialize the translation for the verifier before AFL executes the
+    // translator itself. AFL redirects the target stdout to /dev/null, while
+    // zig translate-c emits Zig source on stdout.
+    string translate_command =
+        "timeout 120s zig translate-c -j1 runner.c -I /usr/include -I /usr/include/x86_64-linux-gnu > runner.zig";
+    (void)system(translate_command.c_str());
+
     // If the return status indicates a timeout (usually 124 for timeout command)
     if (WEXITSTATUS(return_status) == 124) {
         //cerr << "Execution failed: process timed out." << endl;

@@ -3,6 +3,10 @@ import subprocess
 from datetime import datetime
 import sys
 import json
+import shutil
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from oracle_events import run_campaign
 
 def run_command(command):
     process = subprocess.run(command, shell=True)
@@ -11,20 +15,48 @@ def run_command(command):
         exit(1)
 
 def main(trial_number):
-    original_dir = os.getcwd()
+    original_dir = str(Path(__file__).resolve().parent)
+    os.chdir(original_dir)
     root_dir = os.path.abspath(os.path.join(original_dir, "..", ".."))
     semantic_json_path = f"{root_dir}/generator/grammars/c/semantic.json"
     INPUT_SEED_FOLDER = f"{original_dir}/seeds/"
-    
-    # Update InitFileDir in semantic.json
-    with open(semantic_json_path, "r+") as file:
-        data = json.load(file)
-        data["InitFileDir"] = INPUT_SEED_FOLDER  # Set full path to InitFileDir
-        
-        # Write changes back to the file
-        file.seek(0)
-        json.dump(data, file, indent=4)
-        file.truncate()
+    os.environ["TETRIS_INIT_FILE_DIR"] = INPUT_SEED_FOLDER
+    skip_tetris_build = os.environ.get("SKIP_TETRIS_BUILD") == "1"
+    clang_bin = shutil.which("clang")
+    if clang_bin is None:
+        print("Error: clang is not available from PATH")
+        exit(1)
+    os.environ["CLANG_BIN"] = clang_bin
+
+    zig_bin = shutil.which("zig")
+    if zig_bin is None:
+        print("Error: zig is not available from PATH")
+        exit(1)
+    os.environ["ZIG_BIN"] = zig_bin
+
+    afl_qemu_trace = shutil.which("afl-qemu-trace")
+    if afl_qemu_trace is None:
+        default_afl_qemu_trace = "/home/zzj/opt/aflplusplus/bin/afl-qemu-trace"
+        if os.path.exists(default_afl_qemu_trace):
+            afl_qemu_trace = default_afl_qemu_trace
+    if afl_qemu_trace is None:
+        print("Error: afl-qemu-trace is not available from PATH")
+        print("Set AFL_PATH to the directory containing afl-qemu-trace.")
+        exit(1)
+    os.environ["AFL_PATH"] = os.path.dirname(afl_qemu_trace)
+    capstone_home = os.environ.get("CAPSTONE_HOME", "/home/zzj/opt/src/AFLplusplus/nyx_mode/QEMU-Nyx/capstone_v4")
+    if os.path.exists(capstone_home):
+        os.environ["LD_LIBRARY_PATH"] = capstone_home + ":" + os.environ.get("LD_LIBRARY_PATH", "")
+
+    if not skip_tetris_build:
+        # Update InitFileDir in semantic.json before regenerating TeTRIS.
+        with open(semantic_json_path, "r+") as file:
+            data = json.load(file)
+            data["InitFileDir"] = INPUT_SEED_FOLDER
+
+            file.seek(0)
+            json.dump(data, file, indent=4)
+            file.truncate()
 
     # Check if the fuzzing directory exists, if not, create it
     parent_fuzz_dir = os.path.join(original_dir, "fuzzing")
@@ -38,14 +70,19 @@ def main(trial_number):
         print(f"Directory {campaign_out_dir} already exists. Please provide a new trial number.")
         exit(1)
 
-    #Build TeTRIS
-    print("Building TeTRIS...")
-    os.chdir(f"{root_dir}/generator")
-    run_command("make clean")
-    run_command("make LAN=c")
-    os.chdir(original_dir)
+    if skip_tetris_build:
+        print("Skipping TeTRIS build because SKIP_TETRIS_BUILD=1")
+        if not os.path.exists(f"{root_dir}/core/afl-fuzz-tetris"):
+            print("Error: core/afl-fuzz-tetris does not exist; unset SKIP_TETRIS_BUILD to build it.")
+            exit(1)
+    else:
+        print("Building TeTRIS...")
+        os.chdir(f"{root_dir}/generator")
+        run_command("make clean")
+        run_command("make LAN=c")
+        os.chdir(original_dir)
 
-    print("Building pre-transpilation script...") 
+    print("Building pre-transpilation script...")
     run_command("g++ -std=c++17 -O3 -funroll-loops -fpermissive scripts/instrument_testcase.cc -o scripts/instrument_testcase")
 
     # Set up the campaign output directory
@@ -54,9 +91,15 @@ def main(trial_number):
     os.makedirs(CAMPAIGN_OUT_DIR)
     os.makedirs(os.path.join(CAMPAIGN_OUT_DIR, "LOGS"))
     os.makedirs(os.path.join(CAMPAIGN_OUT_DIR, "build_failure"))
-    os.makedirs(os.path.join(CAMPAIGN_OUT_DIR, "outputdiff_c"))
-    os.makedirs(os.path.join(CAMPAIGN_OUT_DIR, "outputdiff_zig"))
+    os.makedirs(os.path.join(CAMPAIGN_OUT_DIR, "output_diff_c"))
+    os.makedirs(os.path.join(CAMPAIGN_OUT_DIR, "output_diff_zig"))
     os.makedirs(os.path.join(CAMPAIGN_OUT_DIR, "faulty"))
+    zig_global_cache_dir = os.path.join(CAMPAIGN_OUT_DIR, "zig-global-cache")
+    zig_local_cache_dir = os.path.join(CAMPAIGN_OUT_DIR, "zig-local-cache")
+    os.makedirs(zig_global_cache_dir)
+    os.makedirs(zig_local_cache_dir)
+    os.environ["ZIG_GLOBAL_CACHE_DIR"] = zig_global_cache_dir
+    os.environ["ZIG_LOCAL_CACHE_DIR"] = zig_local_cache_dir
 
     # Copy and prepare the fuzz environment
     print("Setting up the fuzz environment...")
@@ -68,20 +111,27 @@ def main(trial_number):
 
     # Define paths and scripts
     TeTRIS_FUZZER = f"{root_dir}/core/afl-fuzz-tetris"
-    
-    AFL_FLAGS = "-Q -t 1000000+ -m none -f mutated_code.c"
+
+    AFL_FLAGS = "-Q -t 120000+ -m none -f mutated_code.c"
     INSTRUMENT_SCRIPT = f"{original_dir}/scripts/instrument_testcase mutated_code.c runner.c new_runner.c"
     VERIFIER_SCRIPT = f"{original_dir}/scripts/checker.py --check_compiler_warnings --status_file {CAMPAIGN_OUT_DIR}/verification_results --log_dir={CAMPAIGN_OUT_DIR}/LOGS"
-    
+
     # Run the fuzzer with the verifier and instrumenter scripts
     print("Running the fuzzer...")
     AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES = "1"
     AFL_SKIP_CPUFREQ = "1"
+    AFL_NO_FORKSRV = "1"
+    AFL_NO_UI = "1"
     os.environ['AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES'] = AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES
     os.environ['AFL_SKIP_CPUFREQ'] = AFL_SKIP_CPUFREQ
- 
-    fuzz_command = f"{TeTRIS_FUZZER} -i {INPUT_SEED_FOLDER} -o {CAMPAIGN_OUT_DIR} {AFL_FLAGS} -V \"{VERIFIER_SCRIPT}\" -I \"{INSTRUMENT_SCRIPT}\" -- ./c2zig_fuzz runner.c"
-    run_command(fuzz_command)
+    os.environ['AFL_NO_FORKSRV'] = AFL_NO_FORKSRV
+    os.environ['AFL_NO_UI'] = AFL_NO_UI
+
+    # Run translate-c itself under AFL/QEMU.  The instrumenter also materializes
+    # runner.zig for the verifier because translate-c writes its output to
+    # stdout and AFL redirects the target's stdout to /dev/null.
+    fuzz_command = f"{TeTRIS_FUZZER} -i {INPUT_SEED_FOLDER} -o {CAMPAIGN_OUT_DIR} {AFL_FLAGS} -V \"{VERIFIER_SCRIPT}\" -I \"{INSTRUMENT_SCRIPT}\" -- zig translate-c -j1 runner.c -I /usr/include -I /usr/include/x86_64-linux-gnu"
+    run_campaign(CAMPAIGN_OUT_DIR, "zig-tc", fuzz_command)
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:

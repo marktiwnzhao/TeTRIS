@@ -1,5 +1,5 @@
 {
-    "InitFileDir": "",
+    "InitFileDir": "/home/zzj/TeTRIS/transpilers/c2rust/seeds/",
     "IsWeakType": 0,
     "FixIRType": [
         "kAssignmentExpression"

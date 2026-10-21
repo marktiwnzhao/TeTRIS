@@ -1,0 +1,19 @@
+[
+  {
+    "category": "output_diff_c",
+    "case": "id:000086,src:000023,time:03-55-31,op:(null),pos:01790201283_OUTPUT_DIFF_C",
+    "file": "transpilers/c2rust/fuzzing/output_paper_tmux_20260924_021229/output_diff_c/id:000086,src:000023,time:03-55-31,op:(null),pos:01790201283_OUTPUT_DIFF_C",
+    "queue_name": "id:000086,src:000023,time:03-55-31,op:(null),pos:",
+    "log": "transpilers/c2rust/fuzzing/output_paper_tmux_20260924_021229/LOGS/py_checker.gjx-Super-Server.zzj.log.INFO.20260924-060802.1264929",
+    "matched_by": "saved-name",
+    "verify_path": "/home/zzj/TeTRIS/transpilers/c2rust/fuzzing/output_paper_tmux_20260924_021229/queuegg/id:000086,src:000023,time:03-55-31,op:(null),pos:0",
+    "build_stdout": "",
+    "build_stderr": "",
+    "clang_tidy": "",
+    "expected_from_c": "{'stdout': b'-190108:-nan:2\\n', 'status': 'OK'}",
+    "actual_from_transpiled": "{'stdout': b'-190108:NaN:2\\n', 'status': 'OK'}",
+    "execution_results": "{'stdout': b'-190108:-nan:2\\n', 'status': 'OK'}; {'stdout': b'-190108:NaN:2\\n', 'status': 'OK'}",
+    "related_files": "output_diff_c=transpilers/c2rust/fuzzing/output_paper_tmux_20260924_021229/output_diff_c/id:000086,src:000023,time:03-55-31,op:(null),pos:01790201283_OUTPUT_DIFF_C; output_diff_rust=transpilers/c2rust/fuzzing/output_paper_tmux_20260924_021229/output_diff_rust/id:000086,src:000023,time:03-55-31,op:(null),pos:01790201283_OUTPUT_DIFF_R",
+    "error_summary": "VERIFYING: /home/zzj/TeTRIS/transpilers/c2rust/fuzzing/output_paper_tmux_20260924_021229/queuegg/id:000086,src:000023,time:03-55-31,op:(null),pos:0\nChecking C source file with clang-tidy\nExpected from C: {'stdout': b'-190108:-nan:2\\n', 'status': 'OK'}\nActual from Rust: {'stdout': b'-190108:NaN:2\\n', 'status': 'OK'}\n['cp', 'mutated_code.c', '../output_diff_c/id:000086,src:000023,time:03-55-31,op:(null),pos:01790201283_OUTPUT_DIFF_C']\n['cp', 'transpiled_code/src/runner.rs', '../output_diff_rust/id:000086,src:000023,time:03-55-31,op:(null),pos:01790201283_OUTPUT_DIFF_R']"
+  }
+]

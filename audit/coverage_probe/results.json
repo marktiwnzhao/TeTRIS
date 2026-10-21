@@ -1,0 +1,166 @@
+[
+  {
+    "mode": "wrapper",
+    "source": "simple.c",
+    "returncode": 0,
+    "edges": 18,
+    "map": "/home/zzj/TeTRIS/audit/coverage_probe/0_wrapper.map",
+    "cmd": [
+      "/home/zzj/opt/aflplusplus/bin/afl-showmap",
+      "-Q",
+      "-m",
+      "none",
+      "-t",
+      "20000",
+      "-o",
+      "/home/zzj/TeTRIS/audit/coverage_probe/0_wrapper.map",
+      "--",
+      "/home/zzj/TeTRIS/audit/coverage_probe/wrapper",
+      "simple.c"
+    ]
+  },
+  {
+    "mode": "wrapper",
+    "source": "complex.c",
+    "returncode": 0,
+    "edges": 18,
+    "map": "/home/zzj/TeTRIS/audit/coverage_probe/1_wrapper.map",
+    "cmd": [
+      "/home/zzj/opt/aflplusplus/bin/afl-showmap",
+      "-Q",
+      "-m",
+      "none",
+      "-t",
+      "20000",
+      "-o",
+      "/home/zzj/TeTRIS/audit/coverage_probe/1_wrapper.map",
+      "--",
+      "/home/zzj/TeTRIS/audit/coverage_probe/wrapper",
+      "complex.c"
+    ]
+  },
+  {
+    "mode": "wrapper",
+    "source": "invalid.c",
+    "returncode": 0,
+    "edges": 18,
+    "map": "/home/zzj/TeTRIS/audit/coverage_probe/2_wrapper.map",
+    "cmd": [
+      "/home/zzj/opt/aflplusplus/bin/afl-showmap",
+      "-Q",
+      "-m",
+      "none",
+      "-t",
+      "20000",
+      "-o",
+      "/home/zzj/TeTRIS/audit/coverage_probe/2_wrapper.map",
+      "--",
+      "/home/zzj/TeTRIS/audit/coverage_probe/wrapper",
+      "invalid.c"
+    ]
+  },
+  {
+    "mode": "wrapper",
+    "source": "simple.c",
+    "returncode": 0,
+    "edges": 18,
+    "map": "/home/zzj/TeTRIS/audit/coverage_probe/3_wrapper.map",
+    "cmd": [
+      "/home/zzj/opt/aflplusplus/bin/afl-showmap",
+      "-Q",
+      "-m",
+      "none",
+      "-t",
+      "20000",
+      "-o",
+      "/home/zzj/TeTRIS/audit/coverage_probe/3_wrapper.map",
+      "--",
+      "/home/zzj/TeTRIS/audit/coverage_probe/wrapper",
+      "simple.c"
+    ]
+  },
+  {
+    "mode": "direct",
+    "source": "simple.c",
+    "returncode": 0,
+    "edges": 65074,
+    "map": "/home/zzj/TeTRIS/audit/coverage_probe/4_direct.map",
+    "cmd": [
+      "/home/zzj/opt/aflplusplus/bin/afl-showmap",
+      "-Q",
+      "-m",
+      "none",
+      "-t",
+      "20000",
+      "-o",
+      "/home/zzj/TeTRIS/audit/coverage_probe/4_direct.map",
+      "--",
+      "/home/zzj/opt/zig/zig",
+      "translate-c",
+      "simple.c"
+    ]
+  },
+  {
+    "mode": "direct",
+    "source": "complex.c",
+    "returncode": 0,
+    "edges": 65088,
+    "map": "/home/zzj/TeTRIS/audit/coverage_probe/5_direct.map",
+    "cmd": [
+      "/home/zzj/opt/aflplusplus/bin/afl-showmap",
+      "-Q",
+      "-m",
+      "none",
+      "-t",
+      "20000",
+      "-o",
+      "/home/zzj/TeTRIS/audit/coverage_probe/5_direct.map",
+      "--",
+      "/home/zzj/opt/zig/zig",
+      "translate-c",
+      "complex.c"
+    ]
+  },
+  {
+    "mode": "direct",
+    "source": "invalid.c",
+    "returncode": 0,
+    "edges": 65039,
+    "map": "/home/zzj/TeTRIS/audit/coverage_probe/6_direct.map",
+    "cmd": [
+      "/home/zzj/opt/aflplusplus/bin/afl-showmap",
+      "-Q",
+      "-m",
+      "none",
+      "-t",
+      "20000",
+      "-o",
+      "/home/zzj/TeTRIS/audit/coverage_probe/6_direct.map",
+      "--",
+      "/home/zzj/opt/zig/zig",
+      "translate-c",
+      "invalid.c"
+    ]
+  },
+  {
+    "mode": "direct",
+    "source": "simple.c",
+    "returncode": 0,
+    "edges": 65078,
+    "map": "/home/zzj/TeTRIS/audit/coverage_probe/7_direct.map",
+    "cmd": [
+      "/home/zzj/opt/aflplusplus/bin/afl-showmap",
+      "-Q",
+      "-m",
+      "none",
+      "-t",
+      "20000",
+      "-o",
+      "/home/zzj/TeTRIS/audit/coverage_probe/7_direct.map",
+      "--",
+      "/home/zzj/opt/zig/zig",
+      "translate-c",
+      "simple.c"
+    ]
+  }
+]

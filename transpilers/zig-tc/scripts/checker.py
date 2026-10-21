@@ -24,6 +24,9 @@ from absl import logging
 import os
 import math
 import time
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from oracle_events import record_event
 
 FLAGS = flags.FLAGS
 flags.DEFINE_boolean('replay', False, 'Instruments and Transpiles library before checking.')
@@ -65,7 +68,9 @@ ZIG = "zig"
 ZIG_BUILD = [
     ZIG,
     "build-exe",
-    TRANSPILED_SOURCE_CODE
+    TRANSPILED_SOURCE_CODE,
+    "-lc",
+    "-femit-bin=runner",
 ]
 
 ################## [BEGIN] KEEP IN SYNC WITH ERROR CODES IN AFL-FUZZ.C #################
@@ -96,6 +101,11 @@ def modify_zig_file(file_path):
             lines = file.readlines()
     except Exception as e:
         #print(f"An error occurred: {e}")
+        return TRANSPILED_FILE_MISSING
+
+    # translate-c can fail after truncating its stdout file. Treat an empty
+    # translation like a missing translation instead of indexing lines[0].
+    if not lines:
         return TRANSPILED_FILE_MISSING
  
     # Define the line to be added at the beginning
@@ -141,7 +151,14 @@ def execute_driver(exe_name):
         return output
 
     except subprocess.CalledProcessError as e:
+        stdout = e.stdout.decode('utf-8', errors='replace').strip() if e.stdout else ""
+        stderr = e.stderr.decode('utf-8', errors='replace').strip() if e.stderr else ""
+        logging.info("EXECUTION FAILURE: %s exited with %s", exe_name, e.returncode)
+        logging.info("EXECUTION FAILURE STDOUT: %s", stdout)
+        logging.info("EXECUTION FAILURE STDERR: %s", stderr)
         return {
+            "stdout": stdout,
+            "stderr": stderr,
             "status": TRANSPILED_BUILD_FAILURE
         }
     except subprocess.TimeoutExpired:
@@ -174,10 +191,12 @@ def build_transpiled():
     try:
         p = subprocess.run(ZIG_BUILD, capture_output=True, text=True, timeout=BUILD_TIMEOUT)
         if p.returncode != 0:
+            logging.info("ZIG BUILD STDOUT: %s", p.stdout)
+            logging.info("ZIG BUILD STDERR: %s", p.stderr)
             return TRANSPILED_BUILD_FAILURE
         return TRANSPILE_BUILD_OK
     except subprocess.TimeoutExpired:
-        logging.info("Cargo build timeout!")
+        logging.info("Zig build timeout!")
         return TRANSPILED_BUILD_FAILURE
     
     
@@ -238,12 +257,13 @@ def convert_and_split(stdout_bytes):
     return stdout_bytes.split(":")
 
 
-def main(argv):
+def check_case(argv):
     setup_logging()
     logging.info("VERIFYING: " + argv[1])
     modify_result = modify_zig_file(TRANSPILED_SOURCE_CODE)
     
     if modify_result == TRANSPILED_FILE_MISSING:
+        record_event(FLAGS.status_file, 'zig-tc', argv[1], C_MUTATED, modify_result)
         with open(FLAGS.status_file, 'a') as f:
             f.write("%s %s\n" % (argv[1], modify_result))
             f.write("\n==========================================****=========================================\n")
@@ -252,6 +272,7 @@ def main(argv):
         return
     
     transpile_status = verify_transpilation()
+    record_event(FLAGS.status_file, 'zig-tc', argv[1], C_MUTATED, transpile_status)
     # Will overwrite status.txt with latest run.
     with open(FLAGS.status_file, 'a') as f:
         f.write("%s %s\n" % (argv[1], transpile_status))
@@ -280,6 +301,15 @@ def main(argv):
     
     clean_artifacts()
     
+
+def main(argv):
+    try:
+        return check_case(argv)
+    except Exception as exc:
+        record_event(FLAGS.status_file, 'zig-tc', argv[1] if len(argv) > 1 else '',
+                     C_MUTATED, 'CHECKER_ERROR ' + repr(exc))
+        raise
+
 
 if __name__ == "__main__":
     app.run(main)

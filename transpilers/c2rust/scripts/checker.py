@@ -21,6 +21,9 @@ import os
 import shutil
 import math
 import time
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from oracle_events import record_event
 
 from absl import app
 from absl import flags
@@ -52,9 +55,9 @@ C_EXE = "c_src/new_runner.out"
 TRANSPILED_PACKAGE = "transpiled_code"
 TRANSPILED_PACKAGE_MANIFEST = "transpiled_code/Cargo.toml"
 TRANSPILED_SOURCE_CODE = "transpiled_code/src/runner.rs"
-tail_rust = """unsafe fn main_0() -> libc::c_int {
+tail_rust = """unsafe fn main_0() -> ::core::ffi::c_int {
     func1();
-    println!("{}:{:.2}:{:}", global_int, global_float as libc::c_double, global_char as libc::c_int);
+    println!("{}:{:.2}:{:}", global_int, global_float as ::core::ffi::c_double, global_char as ::core::ffi::c_int);
     return 0;
 }
 pub fn main() {
@@ -79,7 +82,7 @@ CARGO_CMD = [
     CARGO,
     "build",
     "--release",
-    "--manifest-path=%s" % TRANSPILED_PACKAGE_MANIFEST,
+    "--manifest-path=Cargo.toml",
 ]
 
 ################## [BEGIN] KEEP IN SYNC WITH ERROR CODES IN AFL-FUZZ.C #################
@@ -195,8 +198,9 @@ def compile_c_file(c_file, output_c_exe_name, check_warnings):
 
 def build_transpiled():
     try:
-        p = subprocess.run(CARGO_CMD, capture_output="True", text="True", timeout=BUILD_TIMEOUT)
+        p = subprocess.run(CARGO_CMD, cwd=TRANSPILED_PACKAGE, capture_output=True, text=True, timeout=BUILD_TIMEOUT)
         if p.returncode != 0:
+            logging.info("Cargo build stderr: %s", p.stderr)
             for ignore_rust_check in RUST_WARNINGS_TO_IGNORE:
                 if ignore_rust_check in p.stderr:
                     return UNSAFE_C_CODE
@@ -230,6 +234,9 @@ def verify_transpilation():
     actual_output = execute_driver(TRANSPILED_EXE)
     logging.info("Expected from C: "+str(expected_output))
     logging.info("Actual from Rust: "+str(actual_output))
+
+    if actual_output['status'] != 'OK':
+        return actual_output['status']
 
     expected_array = convert_and_split(expected_output['stdout'])
     actual_array = convert_and_split(actual_output['stdout'])
@@ -272,12 +279,13 @@ def convert_and_split(stdout_bytes):
     return stdout_str.split(":")
 
 
-def main(argv):
+def check_case(argv):
     setup_logging()
     logging.info("VERIFYING: " + argv[1])
     modify_result = append_tail_to_file(TRANSPILED_SOURCE_CODE, tail_rust)
 
     if modify_result == TRANSPILED_FILE_MISSING:
+        record_event(FLAGS.status_file, 'c2rust', argv[1], C_MUTATED, modify_result)
         with open(FLAGS.status_file, 'a') as f:
             f.write("%s %s\n" % (argv[1], modify_result))
             f.write("\n==========================================****=========================================\n")
@@ -287,6 +295,7 @@ def main(argv):
         
 
     transpile_status = verify_transpilation()
+    record_event(FLAGS.status_file, 'c2rust', argv[1], C_MUTATED, transpile_status)
     # Will overwrite status.txt with latest run.
     with open(FLAGS.status_file, 'a') as f:
         f.write("%s %s\n" % (argv[1], transpile_status))
@@ -296,6 +305,8 @@ def main(argv):
     if transpile_status.startswith(COMPILE_WARNINGS) or transpile_status.startswith(COMPILE_FAILURE):
         copy_c_lib(C_MUTATED, os.path.join(FLAGS.faulty, os.path.basename(argv[1])) + str(math.floor(time.time())) +"_COMPILE_FAIL")
         print(IGNORE_TEST_CASE) #0
+    if transpile_status in ("NZEC", "UNDETERMINISTIC"):
+        print(IGNORE_TEST_CASE)
     if transpile_status.startswith(TIMED_OUT):
         copy_c_lib(C_MUTATED, os.path.join(FLAGS.faulty, os.path.basename(argv[1])) + str(math.floor(time.time())) +"_TIMED_OUT")
         print(IGNORE_TEST_CASE)
@@ -320,6 +331,15 @@ def main(argv):
     
     clean_artifacts()
     
+
+def main(argv):
+    try:
+        return check_case(argv)
+    except Exception as exc:
+        record_event(FLAGS.status_file, 'c2rust', argv[1] if len(argv) > 1 else '',
+                     C_MUTATED, 'CHECKER_ERROR ' + repr(exc))
+        raise
+
 
 if __name__ == "__main__":
     app.run(main)

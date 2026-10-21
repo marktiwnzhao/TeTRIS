@@ -1,0 +1,34 @@
+{
+  "run1_c2go": {
+    "VERIFIED": 3155,
+    "TRANSPILE_BUILD_FAILURE": 1318,
+    "OUTPUT_DIFF": 81
+  },
+  "run1_c2rust": {
+    "VERIFIED": 1355,
+    "TIDY_WARNINGS": 95,
+    "OUTPUT_DIFF": 1
+  },
+  "run1_zig-tc": {
+    "VERIFIED": 629,
+    "TIDY_WARNINGS": 22,
+    "OUTPUT_DIFF": 19,
+    "TRANSPILE_BUILD_FAILURE": 7
+  },
+  "run2_c2go": {
+    "VERIFIED": 2652,
+    "TRANSPILE_BUILD_FAILURE": 989,
+    "OUTPUT_DIFF": 46
+  },
+  "run2_c2rust": {
+    "VERIFIED": 1463,
+    "TIDY_WARNINGS": 134,
+    "OUTPUT_DIFF": 8
+  },
+  "run2_zig-tc": {
+    "VERIFIED": 628,
+    "TIDY_WARNINGS": 20,
+    "TRANSPILE_BUILD_FAILURE": 13,
+    "OUTPUT_DIFF": 13
+  }
+}

@@ -398,6 +398,8 @@ static u64 get_cur_time_us(void) {
 
 static inline u32 UR(u32 limit) {
 
+  if (unlikely(!limit)) return 0;
+
   if (unlikely(!rand_cnt--)) {
 
     u32 seed[2];
@@ -4878,6 +4880,8 @@ static void show_stats(void) {
       u32 min_value, max_value;
       u32 rlim = MIN(queue_cycle, 3);
 
+      if (!limit) return 0;
+
       if (!run_over10m) rlim = 1;
 
       switch (UR(rlim)) {
@@ -6491,7 +6495,11 @@ static void do_libary_initialize(){
   g_mutator.int_types_.insert(kIntLiteral);
   g_mutator.string_types_.insert(kStringLiteral);
 
-  const char* init_file_path = INIT_FILE_DIR;
+  /* Keep the generated parser shared across campaigns.  The original build
+     baked one campaign's seed directory into define.h, which made parallel
+     runs silently initialize from the wrong seed corpus. */
+  const char* init_file_path = getenv("TETRIS_INIT_FILE_DIR");
+  if (!init_file_path || !*init_file_path) init_file_path = INIT_FILE_DIR;
   vector<string> file_list = get_all_files_in_dir(init_file_path);
 
   for(auto &f : file_list){

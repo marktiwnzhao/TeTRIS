@@ -11,8 +11,9 @@ float why, dis;
  int func1 () {
     int local_int = 1;
     float local_float = 1.0;
-    char local_char = 2;
+    char local_char = 1;
     
+    char p_p = 1;
 
     float* ft_ptr = &why;
     int* int_ptr= &minee.integerMember;
@@ -30,10 +31,11 @@ float why, dis;
     
     local_int = global_char+1;
 
-    whatif.important =  (*ft_ptr) + (float)minee.important + 2.45;
+    whatif.important =  (*ft_ptr) + (float)minee.important + 5.45;
 
     local_float = (*ft_ptr) + 2.01 + whatif.important + global_float;
 
 
     return 0;
 }
+

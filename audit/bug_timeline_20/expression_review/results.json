@@ -1,0 +1,44 @@
+{
+  "discarded": {
+    "C": {
+      "code": 0,
+      "stderr": "runner.c:1:26: warning: expression result unused [-Wunused-value]\n    1 | int main(void){int c=1; c*2; return c-1;}\n      |                         ~^~\n1 warning generated.\n"
+    },
+    "translate": {
+      "code": 0,
+      "stderr": ""
+    },
+    "Go": {
+      "code": 1,
+      "stderr": "# command-line-arguments\n./runner.go:15:2: c * int32(2) (value of type int32) is not used\n"
+    }
+  },
+  "comma": {
+    "C": {
+      "code": 0,
+      "stderr": "runner.c:1:33: warning: left operand of comma operator has no effect [-Wunused-value]\n    1 | int main(void){int c=1; int r=(c*2,c); return r-1;}\n      |                                ~^~\n1 warning generated.\n"
+    },
+    "translate": {
+      "code": 0,
+      "stderr": ""
+    },
+    "Go": {
+      "code": 1,
+      "stderr": "# command-line-arguments\n./runner.go:16:3: c * int32(2) (value of type int32) is not used\n"
+    }
+  },
+  "pointer_compound": {
+    "C": {
+      "code": 0,
+      "stderr": ""
+    },
+    "translate": {
+      "code": 0,
+      "stderr": ""
+    },
+    "Go": {
+      "code": 1,
+      "stderr": "# command-line-arguments\n./runner.go:11:8: \"unsafe\" imported and not used\n./runner.go:22:10: cannot use &p (value of type **int32) as int32 value in return statement\n"
+    }
+  }
+}

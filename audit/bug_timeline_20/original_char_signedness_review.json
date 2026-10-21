@@ -1,0 +1,27 @@
+{
+  "review_date": "2026-10-22",
+  "campaign": "output_20",
+  "root_family": "char_signedness",
+  "status": "confirmed",
+  "first_time_seconds": 32,
+  "time_basis": "AFL saved-candidate filename, not oracle completion",
+  "case": "id:000007,src:000000,time:00-00-32,op:(null),pos:0,+cov1780935999_OUTPUT_DIFF_C",
+  "source": "transpilers/c2go/fuzzing/output_20/output_diff_c/id:000007,src:000000,time:00-00-32,op:(null),pos:0,+cov1780935999_OUTPUT_DIFF_C",
+  "log": "/home/zzj/TeTRIS/transpilers/c2go/fuzzing/output_20/LOGS/py_checker.607-4090.zzj.log.INFO.20260609-002638.1901793",
+  "recorded_c": "56:335.22:1",
+  "recorded_go": "824:335.22:1",
+  "signed_char_control": "56:335.22:1",
+  "unsigned_char_control": "824:335.22:1",
+  "source_sha256": "b127380c572a2177f0df47b26a10dfee469b069bacf58f6564647ac241125d59",
+  "scan": {
+    "total": 51,
+    "unsigned_char_matches": 17,
+    "normalized_no_difference": 6,
+    "unsequenced_warning": 15,
+    "not_isolated": 13
+  },
+  "count_if_only_adding_char": 7,
+  "count_if_also_including_previously_excluded_pointer_return": 8,
+  "chart_regenerated": false,
+  "upstream_issue_mapping": "Related #590, exact root equivalence not established"
+}

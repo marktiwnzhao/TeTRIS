@@ -1,0 +1,18 @@
+{
+  "case": "id:001425,src:000220,time:08-04-46,op:(null),pos:01780965053_OUTPUT_DIFF_C",
+  "transpile": {
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "build": {
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "run": {
+    "returncode": 0,
+    "stdout": "-148:1.00:254\n",
+    "stderr": ""
+  }
+}

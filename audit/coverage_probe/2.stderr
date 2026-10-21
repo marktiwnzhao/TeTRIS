@@ -1,0 +1,10 @@
+error: translation failure
+invalid.c:1:12: error: expected parameter declaration
+int probe( { NOT_VALID }
+           ^
+invalid.c:1:12: error: expected ')', found '{'
+int probe( { NOT_VALID }
+           ^
+invalid.c:1:10: note: to match this '('
+int probe( { NOT_VALID }
+         ^

@@ -1,0 +1,38 @@
+Index,Program Element,Specific C,Syntax Pattern,Translation Rule,Semantic Tags,Coverage Basis
+3,Variable,char type,char,char becomes core::ffi::c_char,character,Observed in 24h queue samples under conservative syntactic estimate
+6,Variable,signed integer types,short / int / long / long long,short/int/long/long long become core::ffi::c_short/c_int/c_long/c_longlong,"integer, signed",Observed in 24h queue samples under conservative syntactic estimate
+7,Variable,unsigned integer types,unsigned short / unsigned int / unsigned long / unsigned long long,unsigned short/int/long/long long become core::ffi::c_ushort/c_uint/c_ulong/c_ulonglong,"integer, unsigned",Observed in 24h queue samples under conservative syntactic estimate
+8,Variable,floating-point types,float / double,float/double become core::ffi::c_float/c_double,floating,Observed in 24h queue samples under conservative syntactic estimate
+14,Variable,pointer type,T *p,T* becomes *mut T or *const T depending on const qualification,pointer,Observed in 24h queue samples under conservative syntactic estimate
+16,Variable,fixed-size array,T[N],T[N] becomes [T; N],fixed_size_array,Observed in 24h queue samples under conservative syntactic estimate
+19,Variable,struct type,struct S { ... },struct S becomes S (path type),"aggregate, record",Observed in 24h queue samples under conservative syntactic estimate
+20,Variable,union type,union U { ... },union U becomes U (path type),"aggregate, variant",Observed in 24h queue samples under conservative syntactic estimate
+22,Function,function type,R f(...),"R f(...) becomes unsafe extern ""C"" fn(...) -> R",function_type,Observed in 24h queue samples under conservative syntactic estimate
+23,Expression,array subscript,a[b],"a[b] becomes a[b] for fixed arrays, or pointer offset operations for variable arrays and pointers.",array_access,Observed in 24h queue samples under conservative syntactic estimate
+24,Expression,pointer dereference,*a,"*a becomes *a, with special handling for function pointers (unwrap_function_pointer) and volatile reads when dereferencing volatile types as rvalues.",pointer_dereference,Observed in 24h queue samples under conservative syntactic estimate
+25,Expression,address-of operator,&a,"&a becomes &a, with special handling for function pointers (wrapped in Some) and optimizations for &*a -> a",address_of,Observed in 24h queue samples under conservative syntactic estimate
+26,Expression,member access,a.b,a.b becomes a.b,member_access,Observed in 24h queue samples under conservative syntactic estimate
+29,Expression,logical AND,a && b,C logical AND (&&) becomes Rust && operator,logical_and,Observed in 24h queue samples under conservative syntactic estimate
+31,Expression,comparison operators,a == b / a != b / a < b / a > b / a <= b / a >= b,ptr == NULL becomes ptr.is_none() for function pointers or ptr.is_null() for regular pointers; ptr != NULL becomes !ptr.is_none() or !ptr.is_null(),comparison,Observed in 24h queue samples under conservative syntactic estimate
+32,Expression,assignment operator,a = b,"a = b becomes a = b, with special handling for volatile and bitfield assignments",assignment,Observed in 24h queue samples under conservative syntactic estimate
+33,Expression,compound assignment operators,a += b / a -= b / ...,a += b becomes a += b (or other compound assignment operators),compound_assignment,Observed in 24h queue samples under conservative syntactic estimate
+34,Expression,arithmetic operators,a + b / a - b / a * b / a / b / a % b,C arithmetic operators become corresponding Rust binary operators,arithmetic,Observed in 24h queue samples under conservative syntactic estimate
+37,Expression,unary minus,-a,-a becomes -a,negation,Observed in 24h queue samples under conservative syntactic estimate
+38,Expression,bitwise NOT,~a,~a becomes !a,bitwise_not,Observed in 24h queue samples under conservative syntactic estimate
+39,Expression,bitwise operators,a & b / a | b / a ^ b / a << b / a >> b,C bitwise operators become corresponding Rust bitwise operators,bitwise,Observed in 24h queue samples under conservative syntactic estimate
+40,Expression,increment/decrement operators,++a / --a / a++ / a--,"++a becomes a += 1, --a becomes a -= 1, using compound assignment operators.",increment_decrement,Observed in 24h queue samples under conservative syntactic estimate
+43,Expression,type cast,(type) a,"Casts are translated to Rust 'as' casts, transmute for function pointers, or specialized conversions based on CastKind",type_cast,Observed in 24h queue samples under conservative syntactic estimate
+46,Expression,integer constant,123,Integer literals become Rust integer literals with appropriate type suffix,integer_literal,Observed in 24h queue samples under conservative syntactic estimate
+47,Expression,floating constant,3.14,float/double become f32/f64 literals; long double becomes f128::f128::new() call,floating_literal,Observed in 24h queue samples under conservative syntactic estimate
+50,Statement,if statement,if (expr) stmt;,if (expr) stmt1 else stmt2 becomes if expr { stmt1 } else { stmt2 },branch,Observed in 24h queue samples under conservative syntactic estimate
+51,Statement,switch statement,switch (expr) { case ...: stmt; },"switch (expr) { case val: stmt; default: stmt; } becomes match expr { val => { stmt }, _ => { stmt } }",branch,Observed in 24h queue samples under conservative syntactic estimate
+52,Statement,for loop,for (init; cond; iter) stmt;,for (init; cond; iter) stmt becomes { init; while cond { stmt; iter } },loop,Observed in 24h queue samples under conservative syntactic estimate
+53,Statement,while loop,while (expr) stmt;,while (expr) stmt becomes while expr { stmt },loop,Observed in 24h queue samples under conservative syntactic estimate
+54,Statement,do-while loop,do { stmt; } while (expr);,do { stmt; } while (expr); becomes loop { stmt; if !expr { break; } },do,Observed in 24h queue samples under conservative syntactic estimate
+56,Statement,break statement,break;,break; becomes break,break,Observed in 24h queue samples under conservative syntactic estimate
+57,Statement,goto statement,goto label;,goto label; becomes manual control flow to label,goto,Observed in 24h queue samples under conservative syntactic estimate
+58,Statement,return statement,return expr; / return;,return expr; becomes return expr,return,Observed in 24h queue samples under conservative syntactic estimate
+59,Variable,scalar initialization,T x = expr,Local variable declarations become let statements with optional type annotations and initializers,scalar_initialization,Observed in 24h queue samples under conservative syntactic estimate
+60,Variable,array initialization,T a[N] = { ... },"T a[N] = { ... } becomes [expr1, expr2, ...] or [default_value; N] for empty/zero initializers",array_initialization,Observed in 24h queue samples under conservative syntactic estimate
+61,Variable,struct and union initialization,struct S s = { ... },struct S s = { ... } becomes S { ... } with padding fields and bitfield setters,aggregate_initialization,Observed in 24h queue samples under conservative syntactic estimate
+72,Function,function definition,R f(args) { ... },"R f(args) { ... } becomes unsafe extern ""C"" fn f(args) -> R { ... }","callable, definition",Observed in 24h queue samples under conservative syntactic estimate

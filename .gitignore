@@ -33,3 +33,18 @@ go-cache/
 
 # OS metadata
 .DS_Store
+
+# Compiled audit reproductions and Rust build outputs
+/audit/**/target/
+/audit/**/runner
+/audit/**/c_runner
+/audit/**/go_runner
+/audit/**/zig_runner
+/audit/coverage_probe/wrapper
+/audit/parser_probe/probe
+/audit/repeat_runs_review/char_probe_*
+/audit/repeat_runs_review/pp_probe/raw
+/audit/repeat_runs_review/pp_probe/processed
+*.a
+*.rlib
+*.rmeta

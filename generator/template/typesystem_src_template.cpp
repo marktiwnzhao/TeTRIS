@@ -2124,6 +2124,7 @@ string generateRandomArrayExpression(const string& arrayName, const vector<int>&
 
     for (size_t i = 0; i < arraySize.size(); ++i) {
         int maxIndex = arraySize[i];
+        if (maxIndex <= 0) return "";
         int randomIndex = rand() % maxIndex;
         expression += "[" + to_string(randomIndex) + "]";
     }
@@ -2136,7 +2137,8 @@ string TypeSystem::array_exp_gen_handler(map<int, vector<string>> &array_var_map
         auto ptr = get_array_type_by_type_type_id(pair.first);
         if(ptr->array_base_type == type_base){
             //return generateRandomArrayExpression(ptr->type_name_,ptr->array_size);
-            possible_exp.push_back(generateRandomArrayExpression(ptr->type_name_,ptr->array_size));
+            auto candidate = generateRandomArrayExpression(ptr->type_name_,ptr->array_size);
+            if(!candidate.empty()) possible_exp.push_back(candidate);
         }  
     }
     if(!possible_exp.empty()) return *random_pick(possible_exp);
@@ -2760,4 +2762,3 @@ OPRule TypeSystem::parse_op_rule(string s)
         return move(res);
     }
 }
-
