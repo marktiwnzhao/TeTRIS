@@ -5,3 +5,31 @@ include/
 parser/
 .vscode/
 **/**/.DS_Store
+
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local experiment outputs and logs
+/transpilers/*/fuzzing/
+/transpilers/*/reduce_work/
+*.log
+
+# Compiled instrumentation and compiler caches
+/transpilers/*/scripts/instrument_testcase
+.zig-cache/
+zig-cache/
+zig-local-cache/
+zig-global-cache/
+go-cache/
+*.o
+*.so
+
+# Generated audit replay workspaces (keep curated reports and scripts)
+/audit/repeat_runs_review/replays/
+/audit/repeat_runs_review/hang_replays/
+
+# OS metadata
+.DS_Store
